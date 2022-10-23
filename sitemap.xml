@@ -2,6 +2,11 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   ><url>
-      <loc>http://example.org/categories/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>http://example.org/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>http://example.org/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
+      <loc>https://release.blog-12x.pages.dev/categories/</loc><lastmod>2022-10-22T12:41:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://release.blog-12x.pages.dev/tags/cloudflare/</loc><lastmod>2022-10-22T12:41:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://release.blog-12x.pages.dev/deploy/</loc><lastmod>2022-10-22T12:41:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://release.blog-12x.pages.dev/tags/hugo/</loc><lastmod>2022-10-22T12:41:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://release.blog-12x.pages.dev/posts/</loc><lastmod>2022-10-22T12:41:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://release.blog-12x.pages.dev/tags/</loc><lastmod>2022-10-22T12:41:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://release.blog-12x.pages.dev/</loc><lastmod>2022-10-22T12:41:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://release.blog-12x.pages.dev/categories/%E6%95%99%E7%A8%8B/</loc><lastmod>2022-10-22T12:41:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url></urlset>
