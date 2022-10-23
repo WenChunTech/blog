@@ -52,9 +52,10 @@ mv public/* .
 
 ```bash
 # 使用git推送到远程仓库
-
+git switch master
 git push -u origin master
 
+git switch release
 git push -u origin release
 
 # 将远程仓库默认分支设置为release
@@ -67,7 +68,7 @@ git push -u origin release
 
 - 点击Pages，选择创建项目下连接到Git，然后根据需要配置相应信息
 
-![创建项目](../../resources/_gen/images/create.png)
+![创建项目](https://pic1.imgdb.cn/item/635506ab16f2c2beb1369fba.jpg)
 
 ---
 
