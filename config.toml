@@ -1,5 +1,5 @@
 title = "技术小窝"
-baseURL = "http://example.org/"
+baseURL = "https://release.blog-12x.pages.dev/"
 # 设置默认的语言 ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "zh-cn"
 # 网站语言, 仅在这里 CN 大写 ["en", "zh-CN", "fr", "pl", ...]
@@ -178,7 +178,7 @@ theme = "FixIt"
 
   #  作者的社交信息设置
   [params.social]
-    GitHub = "https://github.com/fwc-git"
+    GitHub = "github.com/fwc-git"
     Linkedin = ""
     Twitter = ""
     Instagram = ""
