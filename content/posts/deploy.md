@@ -94,9 +94,10 @@ mv public/* .
 
 ```bash
 # 使用git推送到远程仓库
-
+git switch master
 git push -u origin master
 
+git switch release
 git push -u origin release
 
 # 将远程仓库默认分支设置为release
