@@ -1,47 +1,5 @@
----
-title: "Deploy"
-subtitle: ""
-date: 2022-10-22T12:41:33+08:00
-draft: false
-author: ""
-authorLink: ""
-authorEmail: ""
-description: ""
-keywords: ""
-license: ""
-comment: false
-weight: 0
+# Hugo静态博客部署
 
-tags:
-- hugo
-- cloudflare
-categories:
-- 教程
-
-hiddenFromHomePage: false
-hiddenFromSearch: false
-
-summary: ""
-resources:
-- name: featured-image
-  src: featured-image.jpg
-- name: featured-image-preview
-  src: featured-image-preview.jpg
-
-toc:
-  enable: true
-math:
-  enable: false
-lightgallery: false
-seo:
-  images: []
-
-repost:
-  enable: true
-  url: ""
-
-# See details front matter: https://fixit.lruihao.cn/theme-documentation-content/#front-matter
----
 
 <!--more-->
 
@@ -111,3 +69,9 @@ git push -u origin release
 - 点击Pages，选择创建项目下连接到Git，然后根据需要配置相应信息
 
 ![创建项目](https://pic1.imgdb.cn/item/635506ab16f2c2beb1369fba.jpg)
+
+---
+
+> 作者:   
+> URL: https://release.blog-12x.pages.dev/hugo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/  
+
