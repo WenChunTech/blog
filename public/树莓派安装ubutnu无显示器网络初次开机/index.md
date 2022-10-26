@@ -83,6 +83,12 @@ sudo apt update
 sudo apt upgrade -y
 ```
 
+**参考链接：**
+
+- [树莓派折腾记（一）-- 安装系统（Ubuntu Server 20.04.1） | 修行的技术阁 (mrxiuxing.com)](https://mrxiuxing.com/posts/2f81a42d.html)
+
+
+
 ---
 
 > 作者:   
