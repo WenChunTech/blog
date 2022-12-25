@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Git for Windows 安装 Pacman - 技术小窝</title><meta name="author" content="xxxx">
+<meta name="author-link" content="">
+<meta name="description" content="分享技术，记录技术成长过程" /><meta name="keywords" content='git, pacman, msys2' /><meta itemprop="name" content="Git for Windows 安装 Pacman">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2022-12-24T18:30:33+08:00" />
+<meta itemprop="dateModified" content="2022-12-24T18:30:33+08:00" />
+<meta itemprop="wordCount" content="458"><meta itemprop="image" content="https://release.blog-12x.pages.dev/logo.png"/>
+<meta itemprop="keywords" content="git,pacman,msys2," /><meta property="og:title" content="Git for Windows 安装 Pacman" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://release.blog-12x.pages.dev/git_for_windows/" /><meta property="og:image" content="https://release.blog-12x.pages.dev/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-12-24T18:30:33+08:00" />
+<meta property="article:modified_time" content="2022-12-24T18:30:33+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://release.blog-12x.pages.dev/logo.png"/>
+
+<meta name="twitter:title" content="Git for Windows 安装 Pacman"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://release.blog-12x.pages.dev/git_for_windows/" /><link rel="prev" href="https://release.blog-12x.pages.dev/cmake%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Git for Windows 安装 Pacman",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/release.blog-12x.pages.dev\/git_for_windows\/"
+    },"genre": "posts","keywords": "git, pacman, msys2","wordcount":  458 ,
+    "url": "https:\/\/release.blog-12x.pages.dev\/git_for_windows\/","datePublished": "2022-12-24T18:30:33+08:00","dateModified": "2022-12-24T18:30:33+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "xxxx"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="技术小窝"><span class="header-title-text"></span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="技术小窝"><span class="header-title-text"></span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Git for Windows 安装 Pacman</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      </span></span>
+          <span class="post-category">收录于 <a href="/categories/git/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Git</a>&ensp;<a href="/categories/windows/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Windows</a></span></div>
+      <div class="post-meta-line"><span title=2022-12-24&#32;18:30:33><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-24">2022-12-24</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 458 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 1 分钟</span>&nbsp;</div>
+    </div><div class="content" id="content"><h1 id="git-for-windows-安装-pacman">Git for Windows 安装 Pacman</h1>
+<p><strong>下载:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -o pacman-6.0.1-9-x86_64.pkg.tar.zst -L https://repo.msys2.org/msys/x86_64/pacman-6.0.1-9-x86_64.pkg.tar.zst
+</span></span><span class="line"><span class="cl">curl -o pacman-mirrors-20221016-1-any.pkg.tar.zst -L https://repo.msys2.org/msys/x86_64/pacman-mirrors-20221016-1-any.pkg.tar.zst
+</span></span><span class="line"><span class="cl">curl -o msys2-keyring-1~20221024-1-any.pkg.tar.zst -L https://repo.msys2.org/msys/x86_64/msys2-keyring-1~20221024-1-any.pkg.tar.zst
+</span></span><span class="line"><span class="cl"><span class="c1"># 正常来说只需要上面三个包但是由于缺少 zstd 解压工具还需要 zstd 包</span>
+</span></span><span class="line"><span class="cl">curl -o zstd-1.5.2-2-x86_64.pkg.tar.zst -L https://repo.msys2.org/msys/x86_64/zstd-1.5.2-2-x86_64.pkg.tar.zst
+</span></span><span class="line"><span class="cl"><span class="c1"># 但是又因为 zstd 包也是 zstd 打包又需要另一个不是 zstd 打包的解压工具来解压</span>
+</span></span><span class="line"><span class="cl">curl -o zstd-v1.5.2-win64.zip -L https://github.com/facebook/zstd/releases/download/v1.5.2/zstd-v1.5.2-win64.zip
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>解压并安装:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">unzip zstd-v1.5.2-win64.zip <span class="s2">&#34;zstd-v1.5.2-win64/zstd.exe&#34;</span> -d .
+</span></span><span class="line"><span class="cl">./zstd-v1.5.2-win64/zstd.exe -d -o zstd-1.5.2-2-x86_64.pkg.tar zstd-1.5.2-2-x86_64.pkg.tar.zst
+</span></span><span class="line"><span class="cl">tar -xvf zstd-1.5.2-2-x86_64.pkg.tar -C /
+</span></span><span class="line"><span class="cl">tar -xvf msys2-keyring-1~20221024-1-any.pkg.tar.zst -C /
+</span></span><span class="line"><span class="cl">tar -xvf pacman-mirrors-20221016-1-any.pkg.tar.zst -C /
+</span></span><span class="line"><span class="cl">tar -xvf pacman-6.0.1-9-x86_64.pkg.tar.zst -C /
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>添加密钥并更新数据库:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pacman-key --init <span class="o">&amp;&amp;</span> pacman-key --populate msys2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">pacman -Sy
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>更新元数据:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pacman -S pacman-mirrors-20221016-1 msys2-keyring-1~20221024-1 zstd-1.5.2-2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">pacman -S <span class="k">$(</span>cut -d <span class="s1">&#39; &#39;</span> -f <span class="m">1</span> /etc/package-versions.txt<span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">URL</span><span class="o">=</span>https://github.com/git-for-windows/git-sdk-64/raw/main
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat /etc/package-versions.txt <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> p v<span class="p">;</span> <span class="k">do</span> <span class="nv">d</span><span class="o">=</span>/var/lib/pacman/local/<span class="nv">$p</span>-<span class="nv">$v</span><span class="p">;</span> mkdir -p <span class="nv">$d</span><span class="p">;</span> <span class="nb">echo</span> <span class="nv">$d</span><span class="p">;</span> <span class="k">for</span> f in desc files install mtree<span class="p">;</span> <span class="k">do</span> curl -sSL <span class="s2">&#34;</span><span class="nv">$URL$d</span><span class="s2">/</span><span class="nv">$f</span><span class="s2">&#34;</span> -o <span class="nv">$d</span>/<span class="nv">$f</span><span class="p">;</span> <span class="k">done</span><span class="p">;</span> <span class="k">done</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/pacman-6.0.1-9/desc -o /var/lib/pacman/local/pacman-6.0.1-9/desc
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/pacman-6.0.1-9/files -o /var/lib/pacman/local/pacman-6.0.1-9/files
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/pacman-6.0.1-9/install -o /var/lib/pacman/local/pacman-6.0.1-9/install
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/pacman-6.0.1-9/mtree -o /var/lib/pacman/local/pacman-6.0.1-9/mtree
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/pacman-mirrors-20221016-1/desc -o /var/lib/pacman/local/pacman-mirrors-20221016-1/desc
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/pacman-mirrors-20221016-1/files -o /var/lib/pacman/local/pacman-mirrors-20221016-1/files
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/pacman-mirrors-20221016-1/install -o /var/lib/pacman/local/pacman-mirrors-20221016-1/install
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/pacman-mirrors-20221016-1/mtree -o /var/lib/pacman/local/pacman-mirrors-20221016-1/mtree
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/msys2-keyring-1~20221024-1/desc -o /var/lib/pacman/local/msys2-keyring-1~20221024-1/desc
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/msys2-keyring-1~20221024-1/files -o /var/lib/pacman/local/msys2-keyring-1~20221024-1/files
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/msys2-keyring-1~20221024-1/install -o /var/lib/pacman/local/msys2-keyring-1~20221024-1/install
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/msys2-keyring-1~20221024-1/mtree -o /var/lib/pacman/local/msys2-keyring-1~20221024-1/mtree
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/zstd-1.5.2-2/desc -o /var/lib/pacman/local/zstd-1.5.2-2/desc
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/zstd-1.5.2-2/files -o /var/lib/pacman/local/zstd-1.5.2-2/files
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/zstd-1.5.2-2/install -o /var/lib/pacman/local/zstd-1.5.2-2/install
+</span></span><span class="line"><span class="cl">curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/zstd-1.5.2-2/mtree -o /var/lib/pacman/local/zstd-1.5.2-2/mtree
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>参考资料:</strong></p>
+<ul>
+<li><a href="https://hustlei.github.io/2018/11/msys2-pacman.html"target="_blank" rel="external nofollow noopener noreferrer">pacman常用命令-昨夜星辰 (hustlei.github.io)</a></li>
+<li><a href="https://github.com/git-for-windows/git/wiki/Install-inside-MSYS2-proper"target="_blank" rel="external nofollow noopener noreferrer">Install inside MSYS2 proper · git-for-windows/git Wiki (github.com)</a></li>
+<li><a href="https://magicjackting.pixnet.net/blog/post/222933984"target="_blank" rel="external nofollow noopener noreferrer">Git:給 git for windows 裝個翅膀 (安裝 pacman 及其他工具) @ 傑克! 真是太神奇了! :: 痞客邦 :: (pixnet.net)</a></li>
+<li><a href="https://blog.ginshio.org/2022/git_bash_with_pacman_on_windows/#%e5%ae%89%e8%a3%85-pacman-%e5%8f%8a%e5%85%b6%e4%be%9d%e8%b5%96"target="_blank" rel="external nofollow noopener noreferrer">在 Windows 的 Git Bash 中使用包管理器 - iris (ginshio.org)</a></li>
+<li><a href="https://repo.msys2.org/msys/x86_64/"target="_blank" rel="external nofollow noopener noreferrer">Index of /msys/x86_64/ (msys2.org)</a></li>
+<li><a href="https://github.com/facebook/zstd/releases"target="_blank" rel="external nofollow noopener noreferrer">Releases · facebook/zstd (github.com)</a></li>
+<li><a href="https://blog.zeromake.com/pages/windows-terminal-configuration/"target="_blank" rel="external nofollow noopener noreferrer">Windows 的终端配置(给 git-windows 添加 msys2 包管理器) - zeromake 的个人博客</a></li>
+<li><a href="https://creaink.github.io/post/Computer/Windows/win-msys2.html"target="_blank" rel="external nofollow noopener noreferrer">MSYS2 和 mintty 打造 Windows 下 Linux 工具体验 - Creaink - Build something for life</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2022-12-24&#32;18:30:33>更新于 2022-12-24&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/git_for_windows/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://release.blog-12x.pages.dev/git_for_windows/" data-title="Git for Windows 安装 Pacman" data-hashtags="git,pacman,msys2"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://release.blog-12x.pages.dev/git_for_windows/" data-hashtag="git"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://release.blog-12x.pages.dev/git_for_windows/" data-title="Git for Windows 安装 Pacman" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://release.blog-12x.pages.dev/git_for_windows/" data-title="Git for Windows 安装 Pacman"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://release.blog-12x.pages.dev/git_for_windows/" data-title="Git for Windows 安装 Pacman"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://release.blog-12x.pages.dev/git_for_windows/" data-title="Git for Windows 安装 Pacman" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://release.blog-12x.pages.dev/git_for_windows/" data-title="Git for Windows 安装 Pacman" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://release.blog-12x.pages.dev/git_for_windows/" data-title="Git for Windows 安装 Pacman"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/git/">git</a>,&nbsp;<a href="/tags/pacman/">pacman</a>,&nbsp;<a href="/tags/msys2/">msys2</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/cmake%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B/" class="post-nav-item" rel="prev" title="Cmake简易教程"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Cmake简易教程</a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.104.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.17-RC"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">
+              <a href="/">xxxx</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line ibruce">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lazysizes/lazysizes.min.js" async defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>
