@@ -50,14 +50,8 @@ target_link_libraries(<target> [item1 [item2 [...]]]
 
 **语法：**
 
-[![复制代码](https://common.cnblogs.com/images/copycode.gif)](javascript:void(0);)
-
 ```cmake
-A short-hand signature is:
-
 find_library (<VAR> name1 [path1 path2 ...])
-The general signature is:
-
 find_library (
           <VAR>
           name | NAMES name1 [name2 ...] [NAMES_PER_DIR]
