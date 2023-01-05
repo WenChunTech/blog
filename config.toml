@@ -1,5 +1,5 @@
 title = "技术小窝"
-baseURL = "https://release.blog-12x.pages.dev/"
+baseURL = "https://blog-12x.pages.dev/"
 # 设置默认的语言 ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "zh-cn"
 # 网站语言, 仅在这里 CN 大写 ["en", "zh-CN", "fr", "pl", ...]
@@ -406,7 +406,7 @@ theme = "FixIt"
         maxNesting = 3
         # 当 `params.page.lightgallery` 启用时生效
         lightgallery = false
-        locale = "" # 
+        locale = "" #
       #  Disqus 评论系统设置 (https://disqus.com)
       [params.page.comment.disqus]
         enable = false
@@ -440,24 +440,24 @@ theme = "FixIt"
         # 可以在你的项目下相同路径存放你自己的数据文件：
         # "assets/data/emoji/"
         emoji = ""
-        commentCount = true # 
+        commentCount = true #
       #  Waline 评论系统设置 (https://waline.js.org)
       [params.page.comment.waline]
         enable = false
         serverURL = ""
-        pageview = false # 
+        pageview = false #
         emoji = ["//unpkg.com/@waline/emojis@1.1.0/weibo"]
         meta = ["nick", "mail", "link"]
         requiredMeta = []
         login = "enable"
         wordLimit = 0
         pageSize = 10
-        imageUploader = false # 
-        highlighter = false # 
-        comment = false # 
-        texRenderer = false # 
-        search = false # 
-        recaptchaV3Key = "" # 
+        imageUploader = false #
+        highlighter = false #
+        comment = false #
+        texRenderer = false #
+        search = false #
+        recaptchaV3Key = "" #
       # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]
         enable = false
@@ -547,12 +547,12 @@ theme = "FixIt"
   [params.mermaid]
     # 取值详见 https://mermaid-js.github.io/mermaid/#/Setup?id=theme
     themes = ["neutral", "dark"]
-  
+
   #  盘古之白配置
   [params.pangu]
     # 适用于中文写作用户
     enable = false
-  
+
   #  水印配置
   # 详细参数见 https://github.com/Lruihao/watermark#readme
   [params.watermark]
@@ -694,7 +694,7 @@ theme = "FixIt"
     codeFences = true
     lineNos = true
     lineNumbersInTable = true
-    noClasses = false 
+    noClasses = false
     ################## 必要的配置 ##################
     guessSyntax = true
   # Goldmark 是 Hugo 0.60 以来的默认 Markdown 解析库
@@ -739,7 +739,7 @@ theme = "FixIt"
   [privacy.youtube]
     privacyEnhanced = true
 
-# 
+#
 [mediaTypes]
   # 用于输出 Markdown 格式文档的设置
   [mediaTypes."text/markdown"]
@@ -748,7 +748,7 @@ theme = "FixIt"
   [mediaTypes."text/plain"]
     suffixes = ["txt"]
 
-# 
+#
 [outputFormats]
   # 用于输出 Markdown 格式文档的设置
   [outputFormats.MarkDown]
