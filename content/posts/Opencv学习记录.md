@@ -201,8 +201,33 @@ $$
 f(P) \approx \frac{y_2-y}{y_2-y_1}f(R_1) + \frac{y-y_1}{y_2-y_1}f(R_2)
 $$
 
-
 ### 平移
+
+1. 函数签名:
+2. 原理:
+
+$$
+\begin{align}
+    \begin{bmatrix}
+    x_0 & y_0 & 0
+    \end{bmatrix} &= 
+    \begin{bmatrix} x & y & 1 
+    \end{bmatrix} \cdot 
+    \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    d_x & d_y & 1 \\
+    \end{bmatrix} \\
+    &=\begin{bmatrix}
+        x \times 1 + y \times 0 + 1 \times d_x, & x \times 0 + y \times 1 + 1 \times d_y, & x 	  \times 0 + y \times 0 + 1 \times 1
+    \end{bmatrix}\\
+    &= \begin{bmatrix}
+    	x + d_x, & y + d_y, & 1
+    \end{bmatrix}
+\end{align}
+$$
+
+
 
 ### 旋转
 
@@ -225,6 +250,9 @@ $$
 **参考资料：**
 
 - [OpenCV中文官方文档 (woshicver.com)](http://woshicver.com/)
-- [https://opencv.apachecn.org](https://opencv.apachecn.org/#/)
+- gg[https://opencv.apachecn.org](https://opencv.apachecn.org/#/)
 - [HSL和HSV色彩空间 - 维基百科，自由的百科全书 (wikipedia.org)](https://zh.wikipedia.org/wiki/HSL和HSV色彩空间)
 - [cv2.resize()原理详解_AI bro的博客-CSDN博客_cv2.resize](https://blog.csdn.net/weixin_41466575/article/details/113058802)
+- [opencv——几何变换原理与实现 - 唯有自己强大 - 博客园 (cnblogs.com)](https://www.cnblogs.com/xyf327/p/14769474.html)
+- [《OpenCv视觉之眼》Python图像处理十五 :Opencv图像处理之图像缩放、旋转和平移原理及实现 - CodeAntenna](https://codeantenna.com/a/bGFYU0PDSo)
+
