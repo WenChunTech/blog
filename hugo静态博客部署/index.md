@@ -73,5 +73,5 @@ git push -u origin release
 ---
 
 > 作者:   
-> URL: https://release.blog-12x.pages.dev/hugo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/  
+> URL: https://blog-12x.pages.dev/hugo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/  
 

@@ -164,5 +164,5 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 > 作者:   
-> URL: https://release.blog-12x.pages.dev/opencv%E6%8A%A0%E5%9B%BE%E5%92%8C%E8%A3%81%E5%89%AA%E5%9B%BE%E7%89%87/  
+> URL: https://blog-12x.pages.dev/opencv%E6%8A%A0%E5%9B%BE%E5%92%8C%E8%A3%81%E5%89%AA%E5%9B%BE%E7%89%87/  
 

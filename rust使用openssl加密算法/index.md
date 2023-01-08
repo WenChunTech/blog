@@ -57,5 +57,5 @@ fn pkcs7_padding(data: &mut Vec<u8>, block_size: usize) {
 ---
 
 > 作者:   
-> URL: https://release.blog-12x.pages.dev/rust%E4%BD%BF%E7%94%A8openssl%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/  
+> URL: https://blog-12x.pages.dev/rust%E4%BD%BF%E7%94%A8openssl%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/  
 

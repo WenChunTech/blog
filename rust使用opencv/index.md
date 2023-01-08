@@ -93,5 +93,5 @@ cargo run
 ---
 
 > 作者:   
-> URL: https://release.blog-12x.pages.dev/rust%E4%BD%BF%E7%94%A8opencv/  
+> URL: https://blog-12x.pages.dev/rust%E4%BD%BF%E7%94%A8opencv/  
 

@@ -85,5 +85,5 @@ curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/zstd-1.5.2-2/mt
 ---
 
 > 作者:   
-> URL: https://release.blog-12x.pages.dev/git_for_windows/  
+> URL: https://blog-12x.pages.dev/git_for_windows/  
 
