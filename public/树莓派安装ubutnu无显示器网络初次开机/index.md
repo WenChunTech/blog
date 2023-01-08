@@ -92,5 +92,5 @@ sudo apt upgrade -y
 ---
 
 > 作者:   
-> URL: https://release.blog-12x.pages.dev/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85ubutnu%E6%97%A0%E6%98%BE%E7%A4%BA%E5%99%A8%E7%BD%91%E7%BB%9C%E5%88%9D%E6%AC%A1%E5%BC%80%E6%9C%BA/  
+> URL: https://blog-12x.pages.dev/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85ubutnu%E6%97%A0%E6%98%BE%E7%A4%BA%E5%99%A8%E7%BD%91%E7%BB%9C%E5%88%9D%E6%AC%A1%E5%BC%80%E6%9C%BA/  
 

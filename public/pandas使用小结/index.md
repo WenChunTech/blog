@@ -256,5 +256,5 @@ def append_excel(filepath: str):
 ---
 
 > 作者:   
-> URL: https://release.blog-12x.pages.dev/pandas%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/  
+> URL: https://blog-12x.pages.dev/pandas%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/  
 

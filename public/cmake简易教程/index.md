@@ -107,5 +107,5 @@ add_library (MathFunctions ${DIR_LIB_SRCS})
 ---
 
 > 作者:   
-> URL: https://release.blog-12x.pages.dev/cmake%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B/  
+> URL: https://blog-12x.pages.dev/cmake%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B/  
 
