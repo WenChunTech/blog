@@ -383,11 +383,66 @@ fn main() {
 
 ```
 
+## once_cell和lazy_static
+
+once_cell 和 lazy_static 都是 Rust 中用于实现单例模式（Singleton）的库。
+
+```rust
+#![feature(once_cell)]
+use std::cell;
+use std::collections::HashMap;
+use std::sync;
+use std::sync::Once;
+
+static INIT: Once = sync::Once::new();
+static mut SUM: u64 = 0;
+
+fn init_sum() -> u64 {
+    unsafe {
+        INIT.call_once(|| {
+            println!("this is first init");
+            SUM = (1..100000).sum();
+        });
+        SUM
+    }
+}
+
+fn main() {
+    let split_line = "*".repeat(100);
+    let first_result = init_sum();
+    println!("first result: {first_result}");
+    let second_result = init_sum();
+    println!("second result: {second_result}");
+
+    println!("{split_line}");
+
+    let once = cell::OnceCell::<HashMap<&str, &str>>::new();
+    let dict = once.get_or_init(|| {
+        println!("this is hash map init once");
+        let mut map = HashMap::new();
+        map.insert("lang", "rust");
+        map.insert("edition", "2021");
+        map
+    });
+
+    println!("once dict: {dict:?}");
+
+    let dict_twice = once.get_or_init(|| {
+        println!("this is hash map init twice");
+        let mut map = HashMap::new();
+        map.insert("lang", "python");
+        map.insert("version", "1.10");
+        map
+    });
+    println!("twice dict: {dict_twice:?}");
+
+    println!("{split_line}");
+
+    let lazy_init = cell::LazyCell::new(|| env!("PATH"));
+}
+```
 
 
-## once_cell
-
-## lazy_static
 
 ## impl A and T: A
 
