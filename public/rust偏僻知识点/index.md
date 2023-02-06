@@ -1,46 +1,5 @@
----
-title: "Rust偏僻知识点"
-subtitle: ""
-date: 2022-12-13T17:41:57+08:00
-draft: false
-author: ""
-authorLink: ""
-authorEmail: ""
-description: ""
-keywords: ""
-license: ""
-comment: false
-weight: 0
+# Rust偏僻知识点
 
-tags:
-- Rust
-categories:
-- Rust
-
-hiddenFromHomePage: false
-hiddenFromSearch: false
-
-summary: ""
-resources:
-- name: featured-image
-  src: featured-image.jpg
-- name: featured-image-preview
-  src: featured-image-preview.jpg
-
-toc:
-  enable: true
-math:
-  enable: false
-lightgallery: false
-seo:
-  images: []
-
-repost:
-  enable: true
-  url: ""
-
-# See details front matter: https://fixit.lruihao.cn/theme-documentation-content/#front-matter
----
 
 <!--more-->
 # Rust偏僻知识点
@@ -466,3 +425,9 @@ fn main() {
 - [【Rust】幽灵数据（PhantomData） | MichaelFu (fudenglong.site)](https://blog.fudenglong.site/2022/05/17/Rust/phantom-data/)
 - [3.10 PhantomData（幽灵数据） | 第三章、所有权 |《Rust 高级编程 2018》| Rust 技术论坛 (learnku.com)](https://learnku.com/docs/nomicon/2018/310-phantom-data/4721)
 - [Rust高阶生命周期绑定 (xiaopengli89.github.io)](https://xiaopengli89.github.io/posts/rust-hrtbs/)
+
+---
+
+> 作者:   
+> URL: https://blog-12x.pages.dev/rust%E5%81%8F%E5%83%BB%E7%9F%A5%E8%AF%86%E7%82%B9/  
+
