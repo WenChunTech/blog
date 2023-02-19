@@ -2,7 +2,7 @@
 title: "Markdown使用mermaid"
 subtitle: ""
 date: 2023-02-19T12:51:39+08:00
-draft: true
+draft: false
 author: ""
 authorLink: ""
 authorEmail: ""
@@ -13,9 +13,10 @@ comment: false
 weight: 0
 
 tags:
-- draft
+- markdown
+- mermaid
 categories:
-- draft
+- Markdown
 
 hiddenFromHomePage: false
 hiddenFromSearch: false

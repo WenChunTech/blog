@@ -2,16 +2,20 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   ><url>
-      <loc>https://blog-12x.pages.dev/categories/</loc><lastmod>2022-12-24T18:30:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/</loc><lastmod>2023-02-19T12:51:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/markdown/</loc><lastmod>2023-02-19T12:51:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/markdown/</loc><lastmod>2023-02-19T12:51:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/</loc><lastmod>2023-02-19T12:51:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/mermaid/</loc><lastmod>2023-02-19T12:51:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/posts/</loc><lastmod>2023-02-19T12:51:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/</loc><lastmod>2023-02-19T12:51:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/</loc><lastmod>2023-02-19T12:51:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/git/</loc><lastmod>2022-12-24T18:30:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/categories/git/</loc><lastmod>2022-12-24T18:30:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/git_for_windows/</loc><lastmod>2022-12-24T18:30:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/msys2/</loc><lastmod>2022-12-24T18:30:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/pacman/</loc><lastmod>2022-12-24T18:30:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/posts/</loc><lastmod>2022-12-24T18:30:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/tags/</loc><lastmod>2022-12-24T18:30:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/categories/windows/</loc><lastmod>2022-12-24T18:30:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/</loc><lastmod>2022-12-24T18:30:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/rust/</loc><lastmod>2022-12-13T17:41:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/categories/rust/</loc><lastmod>2022-12-13T17:41:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/rust%E5%81%8F%E5%83%BB%E7%9F%A5%E8%AF%86%E7%82%B9/</loc><lastmod>2022-12-13T17:41:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
