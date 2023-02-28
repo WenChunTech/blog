@@ -1,47 +1,5 @@
----
-title: "强大的GAN网络"
-subtitle: ""
-date: 2023-02-25T22:54:43+08:00
-draft: false
-author: ""
-authorLink: ""
-authorEmail: ""
-description: ""
-keywords: ""
-license: ""
-comment: false
-weight: 0
+# 强大的GAN网络
 
-tags:
-- deeplearning
-- gan
-categories:
-- Python
-
-hiddenFromHomePage: false
-hiddenFromSearch: false
-
-summary: ""
-resources:
-- name: featured-image
-  src: featured-image.jpg
-- name: featured-image-preview
-  src: featured-image-preview.jpg
-
-toc:
-  enable: true
-math:
-  enable: false
-lightgallery: false
-seo:
-  images: []
-
-repost:
-  enable: true
-  url: ""
-
-# See details front matter: https://fixit.lruihao.cn/theme-documentation-content/#front-matter
----
 
 <!--more-->
 
@@ -409,3 +367,10 @@ torch.save(G, './model/generator.pt')
 
 1. [GAN入门理解及公式推导 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/28853704)
 1. [lyeoni/pytorch-mnist-GAN (github.com)](https://github.com/lyeoni/pytorch-mnist-GAN)
+
+
+---
+
+> 作者:   
+> URL: https://blog-12x.pages.dev/%E5%BC%BA%E5%A4%A7%E7%9A%84gan%E7%BD%91%E7%BB%9C/  
+
