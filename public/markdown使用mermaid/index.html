@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Markdown使用mermaid - 技术小窝</title><meta name="author" content="技术小窝">
+<meta name="author-link" content="">
+<meta name="description" content="分享技术，记录技术成长过程" /><meta name="keywords" content='markdown, mermaid' /><meta itemprop="name" content="Markdown使用mermaid">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2023-02-19T12:51:39+08:00" />
+<meta itemprop="dateModified" content="2023-02-19T12:51:39+08:00" />
+<meta itemprop="wordCount" content="625"><meta itemprop="image" content="https://blog-12x.pages.dev/logo.png"/>
+<meta itemprop="keywords" content="markdown,mermaid," /><meta property="og:title" content="Markdown使用mermaid" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/" /><meta property="og:image" content="https://blog-12x.pages.dev/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-19T12:51:39+08:00" />
+<meta property="article:modified_time" content="2023-02-19T12:51:39+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog-12x.pages.dev/logo.png"/>
+
+<meta name="twitter:title" content="Markdown使用mermaid"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/" /><link rel="prev" href="https://blog-12x.pages.dev/git_for_windows/" /><link rel="next" href="https://blog-12x.pages.dev/%E5%BC%BA%E5%A4%A7%E7%9A%84gan%E7%BD%91%E7%BB%9C/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Markdown使用mermaid",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/blog-12x.pages.dev\/markdown%E4%BD%BF%E7%94%A8mermaid\/"
+    },"genre": "posts","keywords": "markdown, mermaid","wordcount":  625 ,
+    "url": "https:\/\/blog-12x.pages.dev\/markdown%E4%BD%BF%E7%94%A8mermaid\/","datePublished": "2023-02-19T12:51:39+08:00","dateModified": "2023-02-19T12:51:39+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "技术小窝"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Markdown使用mermaid</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      </span></span>
+          <span class="post-category">收录于 <a href="/categories/markdown/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Markdown</a></span></div>
+      <div class="post-meta-line"><span title=2023-02-19&#32;12:51:39><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-19">2023-02-19</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 625 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 2 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="Markdown使用mermaid">
+            <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#0-符号表示">0. 符号表示</a></li>
+    <li><a href="#1-泛化">1. 泛化</a></li>
+    <li><a href="#2-实现">2. 实现</a></li>
+    <li><a href="#3-组合">3. 组合</a></li>
+    <li><a href="#4-聚合">4. 聚合</a></li>
+    <li><a href="#5-关联">5. 关联</a></li>
+    <li><a href="#6-依赖">6. 依赖</a></li>
+    <li><a href="#7-各种关系强弱顺序">7. 各种关系强弱顺序</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h1 id="markdown使用mermaid">Markdown使用mermaid</h1>
+<h2 id="0-符号表示">0. 符号表示</h2>
+<ul>
+<li>
+<p>类元素的可见范围</p>
+<table>
+<thead>
+<tr>
+<th>可见范围</th>
+<th>表示方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>private</td>
+<td>-</td>
+</tr>
+<tr>
+<td>public</td>
+<td>+</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>#</td>
+</tr>
+<tr>
+<td>package</td>
+<td>~</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>类的修饰</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;&lt;Interface&gt;&gt;</code></td>
+<td>接口</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;abstract&gt;&gt;</code></td>
+<td>抽象类</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;Service&gt;&gt;</code></td>
+<td>service类</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;enumeration&gt;&gt;</code></td>
+<td>枚举</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p><img loading="lazy" src="https://pic.imgdb.cn/item/63f1d2d2f144a01007a06678.jpg" srcset="https://pic.imgdb.cn/item/63f1d2d2f144a01007a06678.jpg, https://pic.imgdb.cn/item/63f1d2d2f144a01007a06678.jpg 1.5x, https://pic.imgdb.cn/item/63f1d2d2f144a01007a06678.jpg 2x" sizes="auto" data-title="https://pic.imgdb.cn/item/63f1d2d2f144a01007a06678.jpg" data-alt="https://pic.imgdb.cn/item/63f1d2d2f144a01007a06678.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<h2 id="1-泛化">1. 泛化</h2>
+<ul>
+<li>定义: 表示继承关系(子类和父类).</li>
+<li>表示:三角实线,指向父类.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">classDiagram
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Animal{
+</span></span><span class="line"><span class="cl">  -age: int
+</span></span><span class="line"><span class="cl">  +sleep(): void
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">class Dog
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Animal &lt;|-- Dog
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-实现">2. 实现</h2>
+<ul>
+<li>定义: 表示类和接口之间的关系.</li>
+<li>表示: 三角虚线,指向接口.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">classDiagram
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Person {
+</span></span><span class="line"><span class="cl">  + say(): void
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">class Man
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Person &lt;|.. Man
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-组合">3. 组合</h2>
+<ul>
+<li>定义: 整体与局部的关系,部分不能离开整体单独存在,称为强聚合,属于关联关系的一种.</li>
+<li>表示: 实心菱形实线,实心菱形指向整体.</li>
+<li>代码体现: 成员变量</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">classDiagram
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Person{
+</span></span><span class="line"><span class="cl">  -brain
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Brain {
+</span></span><span class="line"><span class="cl">  - weight
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Person *-- Brain
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-聚合">4. 聚合</h2>
+<ul>
+<li>定义: 整体与局部的关系,部分能离开整体单独存在,称为强聚合,属于关联关系的一种.</li>
+<li>表示: 空心菱形实线,空心菱形指向整体.</li>
+<li>代码体现: 成员变量</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">classDiagram
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Computer {
+</span></span><span class="line"><span class="cl">  -keyboard
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Keyboard {
+</span></span><span class="line"><span class="cl">  -type
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Computer o-- Keyboard
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-关联">5. 关联</h2>
+<ul>
+<li>定义: 一种拥有的关系, 使一个类知道另一个类的属性和方法,关联可以是单向的,也可以是双向的.双向的关联可以有两个箭头或者没有箭头，单向的关联有一个箭头.</li>
+<li>表示: 普通箭头的实心线,指向被拥有者.</li>
+<li>代码体现: 成员变量</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">classDiagram
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Teacher {
+</span></span><span class="line"><span class="cl">  -students: List&lt;Student&gt;
+</span></span><span class="line"><span class="cl">  +teach(): void
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Student {
+</span></span><span class="line"><span class="cl">  -teacher: List&lt;Teacher&gt;
+</span></span><span class="line"><span class="cl">  +learn(): void
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Teacher &lt;--&gt; Student
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="6-依赖">6. 依赖</h2>
+<ul>
+<li>定义: 一种使用关系.</li>
+<li>表示: 普通箭头的虚线,箭头指向被使用者</li>
+<li>代码体现: 局部变量, 方法的形参, 方法返回值静态方法的调用</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">classDiagram
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Person {
+</span></span><span class="line"><span class="cl">  +draw(tool: DrawTool): void
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class DrawTool {
+</span></span><span class="line"><span class="cl">  -color
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Person &lt;.. DrawTool
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="7-各种关系强弱顺序">7. 各种关系强弱顺序</h2>
+<ul>
+<li>泛化 = 实现 &gt; 组合 &gt; 聚合 &gt; 关联 &gt; 依赖</li>
+</ul></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2023-02-19&#32;12:51:39>更新于 2023-02-19&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/markdown%E4%BD%BF%E7%94%A8mermaid/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/" data-title="Markdown使用mermaid" data-hashtags="markdown,mermaid"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/" data-hashtag="markdown"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/" data-title="Markdown使用mermaid" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/" data-title="Markdown使用mermaid"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/" data-title="Markdown使用mermaid"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/" data-title="Markdown使用mermaid" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/" data-title="Markdown使用mermaid" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/" data-title="Markdown使用mermaid"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/markdown/' class="post-tag">markdown</a><a href='/tags/mermaid/' class="post-tag">mermaid</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/git_for_windows/" class="post-nav-item" rel="prev" title="Git for Windows 安装 Pacman"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Git for Windows 安装 Pacman</a>
+      <a href="/%E5%BC%BA%E5%A4%A7%E7%9A%84gan%E7%BD%91%E7%BB%9C/" class="post-nav-item" rel="next" title="强大的GAN网络">强大的GAN网络<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.104.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-RC"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
+              <a href="/">技术小窝</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>
