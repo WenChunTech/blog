@@ -44,7 +44,7 @@ repost:
 
 1. diffusion整体思路如下:
 
-![](https://pic.imgdb.cn/item/642706d1a682492fcc74e9bd.jpg)
+![](https://pic.imgdb.cn/item/6429a893a682492fcc103461.jpg)
 
 说明: 整个过程主要分为正向过程和逆向过程.正向过程主要是将图像转化为纯噪声的过程,而逆向过程正好相反,是将纯噪声还原为原图像的过程.
 
@@ -60,11 +60,15 @@ repost:
 
 2. 实现细节如下:
 
-    - 正向过程:可以思考一下在$x_1$时刻的图像受到那些因素影响呢?答案很明显,受到前一刻图像和所加噪声的影响.从公式:
+    - 正向过程:可以思考一下在$x_1$时刻的图像受到那些因素影响呢?答案很明显,受到前一刻图像和所加噪声的影响.
 
-        $\alpha_t = 1 - \beta_t$ 
+        从公式:
     
-        $x_t = \sqrt{\alpha_t}x_{t-1} + \sqrt{1-\alpha_t} z_t$, 可以明显看出来.按照这个思路我们可以一步一步从$x_0 \rightarrow x_1 \rightarrow x_2 \rightarrow ... \rightarrow x_n$生成.那这样是不是计算量很大呢?有没有简单的方法直接从$x_0$生成到$x_n$呢?答案是可以的.下面详细推导一下.
+        $\alpha_t = 1 - \beta_t$ 
+        
+        $x_t = \sqrt{\alpha_t}x_{t-1} + \sqrt{1-\alpha_t} z_t$
+        
+        可以明显看出来.按照这个思路我们可以一步一步从$x_0 \rightarrow x_1 \rightarrow x_2 \rightarrow ... \rightarrow x_n$生成.那这样是不是计算量很大呢?有没有简单的方法直接从$x_0$生成到$x_n$呢?答案是可以的.下面详细推导一下.
         
         已知:
         
@@ -100,13 +104,88 @@ repost:
         ​    $\sqrt{1-\alpha_t \alpha_{t-1}} \hat {z}) \sim \mathcal N(0, 1-\alpha_t \alpha_{t-1})$
         
         由此可知$\hat z $也是服从标准正态分布.
+        
+    - 逆向过程:需要从服从标准正态分布的噪声$x_t$还原成原始图片,现在我们已知条件有什么呢?只有$x_t$.那我们能像正向过程哪样从$x_t$直接推导出$x_0$我们需要的图像吗?答案是不行的,那我们只有一步一步的向前推导,直到推导出$x_t$.那现在我们需要怎么从$x_t$推导出$x_{t-1}$.
     
+        需要用到的方法是贝叶斯公式:
+    
+        $P(A|B) = \frac {P(B|A) \cdot {P(A)}} {P(B)}$
+    
+        那么我们用贝叶斯公式表示$x_{t-1}$就是:
+    
+        $q(x_{t-1}| x_t) = q(x_{t}|x_{t-1}) \frac {q(x_{t-1})} {q(x_t)}$ 
+    
+        其中$q(x_{t}|x_{t-1})$我们可以从正向过程推导出的公式可以求出.但是$q(x_{t-1})$和$q(x_t)$我们是不知道的.但是由正向过程推导的公式可知可以由$x_0$推导任意时刻的$x_t$,所以可以为上式添加一个条件作为一个已知条件,即:
+    
+        $q(x_{t-1}| x_t, x_0) = q(x_{t}|x_{t-1}) \frac {q(x_{t-1}|x_0)} {q(x_t|x_0)}$ 
+    
+        现在我们可以由上式可以推导出:
+    
+        $q(x_{t-1}|x_0) = \sqrt {\bar \alpha_{t-1}}x_0 + \sqrt {1- \bar \alpha_{t-1}}z \sim \mathcal N(\sqrt {\bar \alpha_{t-1}}x_0, 1- \bar\alpha_{t-1})$
+    
+        $q(x_{t}|x_0) = \sqrt {\bar \alpha_{t}}x_0 + \sqrt {1- \bar \alpha_{t}}z \sim \mathcal N(\sqrt {\bar \alpha_{t}}x_0, 1- \bar\alpha_{t})$
+    
+        $q(x_{t}|x_{t-1},x_0) = \sqrt {\alpha_{t}}x_{t-1} + \sqrt {1-\alpha_{t}}z \sim \mathcal N(\sqrt {\alpha_{t}}x_{t-1}, 1-\alpha_{t})$
+    
+        我们已知正态分布的表达式为:
+    
+        $f(x) = \frac {1} {\sqrt {2 \pi \sigma}} e^{-\frac{(x-\mu)^2} {2\sigma^2}}$
+    
+        所以:
+    
+        $q(x_{t-1}|x_0) = \frac{1} {\sqrt{2\pi \sqrt{1-\bar \alpha_{t-1}}}} e^{-\frac{(x-\sqrt{\bar \alpha_{t-1}}x_0)^2} {2(1-\bar\alpha_{t-1})}}$
+    
+        $q(x_{t}|x_0) = \frac{1} {\sqrt{2\pi \sqrt{1-\bar \alpha_{t}}}} e^{-\frac{(x-\sqrt{\bar \alpha_{t}}x_0)^2} {2(1-\bar\alpha_{t})}}$
+    
+        $q(x_{t}|x_{t-1},x_0) = \frac{1} {\sqrt{2\pi \sqrt{1-\alpha_{t}}}} e^{-\frac{(x-\sqrt{\alpha_{t}}x_{t-1})^2} {2(1-\alpha_{t})}}$
+    
+        由上面3个公式可得:
+    
+        $q(x_{t-1}| x_t, x_0) = \frac { \frac{1} {\sqrt{2\pi \sqrt{1-\bar \alpha_{t-1}}}} \cdot  \frac{1} {\sqrt{2\pi \sqrt{1-\bar \alpha_{t}}}}} {\frac{1} {\sqrt{2\pi \sqrt{1-\alpha_{t}}}} } e^{-\frac{1}{2} (-\frac{(x-\sqrt{\bar \alpha_{t-1}}x_0)^2} {1-\bar\alpha_{t-1}} + \frac{(x-\sqrt{\bar \alpha_{t}}x_0)^2} {1-\bar\alpha_{t}} - \frac{(x-\sqrt{\alpha_{t}}x_{t-1})^2} {1-\alpha_{t}}) }$ 
+    
+        我们记$e$左边的值为$M$,则:
+    
+        $$\begin{split}
+    	q(x_{t-1}| x_t, x_0) &= M e^{-\frac{1}{2} (-\frac{(x-\sqrt{\bar \alpha_{t-1}}x_0)^2} {1-\bar\alpha_{t-1}} + \frac{(x-\sqrt{\bar \alpha_{t}}x_0)^2} {1-\bar\alpha_{t}} - \frac{(x-\sqrt{\alpha_{t}}x_{t-1})^2} {1-\alpha_{t}}) }\\
+        &=Me^{-\frac{1}{2}[(\frac{\alpha_t}{\beta{t}}+ \frac{1}{1-\bar\alpha_{t-1}})x_{t-1}^2-(\frac{2\sqrt{\bar\alpha_t}}{1-\bar\alpha}x_0)x_{t-1}+c(x_t,x_0)]} \end{split}$$ 
+        
+        因为我们不关心$x_t,x_0$的值,我们直接用$c(x_t,x_0)$表示,我们推导出这个公式主要就是**求出均值($\mu$)和方差($\sigma$)**,我们知道**正态分布进行乘除运算仍然符合正态分布**,也就是说$q(x_{t-1}|x_t)$符合正态分布,则:
+        $$\begin{split}
+        f(x) &= \frac {1} {\sqrt {2 \pi \sigma}} e^{-\frac{(x-\mu)^2} {2\sigma^2}} \\
+        &= \frac {1} {\sqrt {2 \pi \sigma}} e^{-\frac{1}{2}(\frac{x^2}{\sigma^2} - \frac{2\mu x} {\sigma^2} + \frac{\mu^2}{\sigma^2})}
+        \end{split}$$
+        
+        由此可以建立方程组:
+        
+        $$\begin{cases}
+        \frac{\alpha_t}{\beta{t}}+ \frac{1}{1-\bar\alpha_{t-1}} = \frac{1}{\sigma^2} \\
+        \frac{2\sqrt{\bar\alpha_t}}{1-\bar\alpha}x_0 = \frac{2\mu}{\sigma^2}
+        \end{cases}$$
+        
+        解得:
+        
+        $$\begin{cases}
+        \sigma^2 &= \frac{\beta_t(1-\bar\alpha_{t-1})} {1-\bar\alpha_t} \\
+        \mu &= \frac{\sqrt{\alpha_t(1-\bar\alpha_{t-1})}} {1-\bar\alpha_t}x_t + \frac{\sqrt{\bar\alpha_{t-1}}\beta_t} {1-\bar\alpha_t}x_0
+        \end{cases}$$
+        
+        现在我们求出了均值($\mu$)和方差($\sigma$),就可以根据这2个值求出$x_{t-1}$时刻的图像,但是现在有一个问题,那就是$x_0$我们是不知道的,它就是我们最后需要求出的值,这里我们可以从正向过程推导出的公式中反推$x_0$,即:
+        
+        $x_0 = \sqrt{\bar\alpha_t}(x_t - \sqrt{1-\bar\alpha} \hat z_t)$
+        
+        这样可以得到**$x_0$的估计值,计算后得到估计的$\hat\mu$,**最后可以得到:
+        
+        $$\begin{cases}
+        \sigma^2 &= \frac{\beta_t(1-\bar\alpha_{t-1})} {1-\bar\alpha_t} \\
+        \hat\mu &= \frac{1} {\sqrt{\alpha_t}} (x_t - \frac{\beta_t} {\sqrt{1-\bar\alpha_t}}\hat z_t)
+        \end{cases}$$
     
 
-## 二. 示例
+## 二. 代码示例
 
-
+TODO
 
 **参考链接:**
 
 - [Diffusion Model原理详解及源码解析_秃头小苏的博客-CSDN博客](https://blog.csdn.net/qq_47233366/article/details/128508412)
+- [dome272/Diffusion-Models-pytorch: Pytorch implementation of Diffusion Models (https://arxiv.org/pdf/2006.11239.pdf) (github.com)](https://github.com/dome272/Diffusion-Models-pytorch)
