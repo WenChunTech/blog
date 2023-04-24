@@ -183,18 +183,35 @@ repost:
         \end{cases}$$
 
 
+
 ## 二. 代码示例
+
+**代码流程:**
+
+![](https://img-blog.csdnimg.cn/img_convert/2d6c01c0cba8e6bb18891a7a2288f95f.png)
+
+
+
+
+
+
 
 ```python
 class Diffusion:
     def __init__(self, noise_steps=1000, beta_start=1e-4, beta_end=0.02, img_size=256, device="cuda"):
+        # define the noise steps, and that is the number of the standard normal distribution
         self.noise_steps = noise_steps
+        # define the beta start value
         self.beta_start = beta_start
+        # define the beta end value
         self.beta_end = beta_end
+        # define generate the image size
         self.img_size = img_size
+        # define the device to running
         self.device = device
-
+        # define the noise schedule for per step
         self.beta = self.prepare_noise_schedule().to(device)
+        # define the alpha value
         # $\alpha = 1 - \beta$
         self.alpha = 1. - self.beta
         # \hat \alpha = \alpha_0 \ctime \alpha_1 \ctime \alpha_2 ... \alpha_t
@@ -209,6 +226,7 @@ class Diffusion:
         Ɛ = torch.randn_like(x)
         return sqrt_alpha_hat * x + sqrt_one_minus_alpha_hat * Ɛ, Ɛ
 
+    # define random the sample for per step
     def sample_timesteps(self, n):
         return torch.randint(low=1, high=self.noise_steps, size=(n,))
 
@@ -216,6 +234,7 @@ class Diffusion:
         logging.info(f"Sampling {n} new images....")
         model.eval()
         with torch.no_grad():
+            # generate the random noise image
             x = torch.randn((n, 3, self.img_size, self.img_size)).to(self.device)
             for i in tqdm(reversed(range(1, self.noise_steps)), position=0):
                 t = (torch.ones(n) * i).long().to(self.device)
