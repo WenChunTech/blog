@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>async - 标签 - 技术小窝</title>
+    <link>https://blog-12x.pages.dev/tags/async/</link>
+    <description>async - 标签 - 技术小窝</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 28 May 2023 18:33:40 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/async/" rel="self" type="application/rss+xml" /><item>
+  <title>Asyncio使用</title>
+  <link>https://blog-12x.pages.dev/asyncio%E4%BD%BF%E7%94%A8/</link>
+  <pubDate>Sun, 28 May 2023 18:33:40 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/asyncio%E4%BD%BF%E7%94%A8/</guid>
+  <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

@@ -2,15 +2,20 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   ><url>
-      <loc>https://blog-12x.pages.dev/categories/</loc><lastmod>2023-02-28T23:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-      <loc>https://blog-12x.pages.dev/tags/deeplearning/</loc><lastmod>2023-02-28T23:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-      <loc>https://blog-12x.pages.dev/categories/deeplearning/</loc><lastmod>2023-02-28T23:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-      <loc>https://blog-12x.pages.dev/posts/</loc><lastmod>2023-02-28T23:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-      <loc>https://blog-12x.pages.dev/tags/</loc><lastmod>2023-02-28T23:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-      <loc>https://blog-12x.pages.dev/</loc><lastmod>2023-02-28T23:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-      <loc>https://blog-12x.pages.dev/%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%A4%E5%8F%89%E7%86%B5/</loc><lastmod>2023-02-28T23:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/async/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/asyncio%E4%BD%BF%E7%94%A8/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/posts/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/python/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/draft/</loc><lastmod>2023-05-07T11:38:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/draft/</loc><lastmod>2023-05-07T11:38:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+      <loc>https://blog-12x.pages.dev/selfattention%E5%92%8Cmultiheadattention%E6%B5%81%E7%A8%8B%E7%AE%80%E8%BF%B0/</loc><lastmod>2023-05-07T11:38:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/deeplearning/</loc><lastmod>2023-02-28T23:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/deeplearning/</loc><lastmod>2023-02-28T23:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%A4%E5%8F%89%E7%86%B5/</loc><lastmod>2023-02-28T23:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/gan/</loc><lastmod>2023-02-25T22:54:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/categories/python/</loc><lastmod>2023-02-25T22:54:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/%E5%BC%BA%E5%A4%A7%E7%9A%84gan%E7%BD%91%E7%BB%9C/</loc><lastmod>2023-02-25T22:54:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/markdown/</loc><lastmod>2023-02-19T12:51:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/categories/markdown/</loc><lastmod>2023-02-19T12:51:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

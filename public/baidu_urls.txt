@@ -1,3 +1,5 @@
+https://blog-12x.pages.dev/asyncio%E4%BD%BF%E7%94%A8/
+https://blog-12x.pages.dev/selfattention%E5%92%8Cmultiheadattention%E6%B5%81%E7%A8%8B%E7%AE%80%E8%BF%B0/
 https://blog-12x.pages.dev/%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%A4%E5%8F%89%E7%86%B5/
 https://blog-12x.pages.dev/%E5%BC%BA%E5%A4%A7%E7%9A%84gan%E7%BD%91%E7%BB%9C/
 https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/
