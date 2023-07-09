@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>C语言常用函数 - 技术小窝</title><meta name="author" content="技术小窝">
+<meta name="author-link" content="">
+<meta name="description" content="分享技术，记录技术成长过程" /><meta name="keywords" content='c/c&#43;&#43;' /><meta itemprop="name" content="C语言常用函数">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2023-07-09T11:31:11+08:00" />
+<meta itemprop="dateModified" content="2023-07-09T11:31:11+08:00" />
+<meta itemprop="wordCount" content="2918"><meta itemprop="image" content="https://blog-12x.pages.dev/logo.png"/>
+<meta itemprop="keywords" content="c/c&#43;&#43;," /><meta property="og:title" content="C语言常用函数" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" /><meta property="og:image" content="https://blog-12x.pages.dev/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-09T11:31:11+08:00" />
+<meta property="article:modified_time" content="2023-07-09T11:31:11+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog-12x.pages.dev/logo.png"/>
+
+<meta name="twitter:title" content="C语言常用函数"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" /><link rel="prev" href="https://blog-12x.pages.dev/asyncio%E4%BD%BF%E7%94%A8/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "C语言常用函数",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/blog-12x.pages.dev\/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0\/"
+    },"genre": "posts","keywords": "c\/c\u002b\u002b","wordcount":  2918 ,
+    "url": "https:\/\/blog-12x.pages.dev\/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0\/","datePublished": "2023-07-09T11:31:11+08:00","dateModified": "2023-07-09T11:31:11+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>C语言常用函数</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      </span></span>
+          <span class="post-category">收录于 <a href="/categories/c/cpp/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> c/cpp</a></span></div>
+      <div class="post-meta-line"><span title=2023-07-09&#32;11:31:11><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-09">2023-07-09</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 2918 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 6 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="C语言常用函数">
+            <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1-strcpy">1 strcpy</a></li>
+            <li><a href="#2-strncpy">2 strncpy</a></li>
+            <li><a href="#3-strcat">3 strcat</a></li>
+            <li><a href="#4-strncat">4 strncat</a></li>
+            <li><a href="#5-strcmp">5 strcmp</a></li>
+            <li><a href="#6-strncmp">6 strncmp</a></li>
+            <li><a href="#7-strchr">7 strchr</a></li>
+            <li><a href="#8-strrchr">8 strrchr</a></li>
+            <li><a href="#9-strspn">9 strspn</a></li>
+            <li><a href="#10-strcspn">10 strcspn</a></li>
+            <li><a href="#11-strpbrk">11 strpbrk</a></li>
+            <li><a href="#12-strstr">12 strstr</a></li>
+            <li><a href="#13-strlen">13 strlen</a></li>
+            <li><a href="#14-strerror">14 strerror</a></li>
+            <li><a href="#15-strtok">15 strtok</a></li>
+            <li><a href="#16-memcpy">16 memcpy</a></li>
+            <li><a href="#17-memmove">17 memmove</a></li>
+            <li><a href="#18-memcmp">18 memcmp</a></li>
+            <li><a href="#19-memchr">19 memchr</a></li>
+            <li><a href="#20-memset">20 memset</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#example">example</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1-数字转化为字符串">1. 数字转化为字符串:</a></li>
+            <li><a href="#2-字符串转化为数字">2. 字符串转化为数字</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#进制互转">进制互转</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h1 id="一stringh中字符串处理函数">一、string.h中字符串处理函数</h1>
+<p>在头文件&lt;string.h&gt;中定义了两组字符串函数。第一组函数的名字以str开头；第二组函数的名字以mem开头。
+只有函数memmove对重叠对象间的拷贝进行了定义，而其他函数都未定义。比较类函数将其变量视为unsigned char类型的数组。</p>
+<h4 id="1-strcpy">1 strcpy</h4>
+<p><code>#include &lt;string.h&gt;</code>
+char *strcpy(char *str1, const char *str2);
+把字符串str2(包括&rsquo;\0&rsquo;)拷贝到字符串str1当中，并返回str1。</p>
+<h4 id="2-strncpy">2 strncpy</h4>
+<p><code>#include &lt;string.h&gt;</code>
+char *strncpy(char *str1, const char *str2, size_t count);
+把字符串str2中最多count个字符拷贝到字符串str1中，并返回str1。如果str2中少于count个字符，那么就用&rsquo;\0&rsquo;来填充，直到满足count个字符为止。</p>
+<h4 id="3-strcat">3 strcat</h4>
+<p><code>#include &lt;string.h&gt;</code>
+char *strcat(char *str1, const char *str2);
+把str2(包括&rsquo;\0&rsquo;)拷贝到str1的尾部(连接)，并返回str1。其中终止原str1的&rsquo;\0&rsquo;被str2的第一个字符覆盖。</p>
+<h4 id="4-strncat">4 strncat</h4>
+<p><code>#include &lt;string.h&gt;</code>
+char *strncat(char *str1, const char *str2, size_t count);
+把str2中最多count个字符连接到str1的尾部，并以&rsquo;\0&rsquo;终止str1，返回str1。其中终止原str1的&rsquo;\0&rsquo;被str2的第一个字符覆盖。
+注意，最大拷贝字符数是count+1。</p>
+<h4 id="5-strcmp">5 strcmp</h4>
+<p><code>#include &lt;string.h&gt;</code>
+int strcmp(const char *str1, const char *str2);
+按字典顺序比较两个字符串，返回整数值的意义如下：
+小于0，str1小于str2；
+等于0，str1等于str2；
+大于0，str1大于str2；</p>
+<h4 id="6-strncmp">6 strncmp</h4>
+<p><code>#include &lt;string.h&gt;</code>
+int strncmp(const char *str1, const char *str2, size_t count);
+同strcmp，除了最多比较count个字符。根据比较结果返回的整数值如下：
+小于0，str1小于str2；
+等于0，str1等于str2；
+大于0，str1大于str2；</p>
+<h4 id="7-strchr">7 strchr</h4>
+<p><code>#include &lt;string.h&gt;</code>
+char *strchr(const char *str, int ch);
+返回指向字符串str中字符ch第一次出现的位置的指针，如果str中不包含ch，则返回NULL。</p>
+<h4 id="8-strrchr">8 strrchr</h4>
+<p><code>#include &lt;string.h&gt;</code>
+char *strrchr(const char *str, int ch);
+返回指向字符串str中字符ch最后一次出现的位置的指针，如果str中不包含ch，则返回NULL。</p>
+<h4 id="9-strspn">9 strspn</h4>
+<p><code>#include &lt;string.h&gt;</code>
+size_t strspn(const char *str1, const char *str2);
+返回字符串str1中由字符串str2中字符构成的第一个子串的长度。</p>
+<h4 id="10-strcspn">10 strcspn</h4>
+<p><code>#include &lt;string.h&gt;</code>
+size_t strcspn(const char *str1, const char *str2);
+返回字符串str1中由不在字符串str2中字符构成的第一个子串的长度。</p>
+<h4 id="11-strpbrk">11 strpbrk</h4>
+<p><code>#include &lt;string.h&gt;</code>
+char *strpbrk(const char *str1, const char *str2);
+返回指向字符串str2中的任意字符第一次出现在字符串str1中的位置的指针；如果str1中没有与str2相同的字符，那么返回NULL。</p>
+<h4 id="12-strstr">12 strstr</h4>
+<p><code>#include &lt;string.h&gt;</code>
+char *strstr(const char *str1, const char *str2);
+返回指向字符串str2第一次出现在字符串str1中的位置的指针；如果str1中不包含str2，则返回NULL。</p>
+<h4 id="13-strlen">13 strlen</h4>
+<p><code>#include &lt;string.h&gt;</code>
+size_t strlen(const char *str);
+返回字符串str的长度，&rsquo;\0&rsquo;不算在内。</p>
+<h4 id="14-strerror">14 strerror</h4>
+<p><code>#include &lt;string.h&gt;</code>
+char *strerror(int errnum);
+返回指向与错误序号errnum对应的错误信息字符串的指针(错误信息的具体内容依赖于实现)。</p>
+<h4 id="15-strtok">15 strtok</h4>
+<p><code>#include &lt;string.h&gt;</code>
+char *strtok(char *str1, const char *str2);
+在str1中搜索由str2中的分界符界定的单词。
+对strtok()的一系列调用将把字符串str1分成许多单词，这些单词以str2中的字符为分界符。第一次调用时str1非空，它搜索str1，找出由非str2中的字符组成的第一个单词，将str1中的下一个字符替换为&rsquo;\0&rsquo;，并返回指向单词的指针。随后的每次strtok()调用(参数str1用NULL代替)，均从前一次结束的位置之后开始，返回下一个由非str2中的字符组成的单词。当str1中没有这样的单词时返回NULL。每次调用时字符串str2可以不同。
+如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">char</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="s">&#34;The summer soldier,the sunshine patriot&#34;</span><span class="p">,</span> <span class="s">&#34; &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">printf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\0</span><span class="s">&#34;</span><span class="p">,</span> <span class="s">&#34;, &#34;</span><span class="p">);</span> <span class="cm">/* 此处str2是逗号和空格 */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;|%s&#34;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>显示结果是：<code>The | summer | soldier | the | sunshine | patriot</code></p>
+<h4 id="16-memcpy">16 memcpy</h4>
+<p><code>#include &lt;string.h&gt;</code>
+void *memcpy(void *to, const void *from, size_t count);
+把from中的count个字符拷贝到to中。并返回to。</p>
+<h4 id="17-memmove">17 memmove</h4>
+<p><code>#include &lt;string.h&gt;</code>
+void *memmove(void *to, const void *from, size_t count);
+功能与memcpy类似，不同之处在于，当发生对象重叠时，函数仍能正确执行。</p>
+<h4 id="18-memcmp">18 memcmp</h4>
+<p><code>#include &lt;string.h&gt;</code>
+int memcmp(const void *buf1, const void *buf2, size_t count);
+比较buf1和buf2的前count个字符，返回值与strcmp的返回值相同。</p>
+<h4 id="19-memchr">19 memchr</h4>
+<p><code>#include &lt;string.h&gt;</code>
+void *memchr(const void *buffer, int ch, size_t count);
+返回指向ch在buffer中第一次出现的位置指针，如果在buffer的前count个字符当中找不到匹配，则返回NULL。</p>
+<h4 id="20-memset">20 memset</h4>
+<p><code>#include &lt;string.h&gt;</code>
+void *memset(void *buf, int ch, size_t count);
+把buf中的前count个字符替换为ch，并返回buf</p>
+<h2 id="example">example</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;malloc.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;stdint.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;stdio.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;stdlib.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;string.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// malloc and memset and strlen usage
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;origin strlen(s): %llu</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">memset</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="sc">&#39;i&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;after memset, strlen(s): %llu</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="o">*</span><span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;sizeof(i): %llu</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// strcpy usage
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">char</span> <span class="o">*</span><span class="n">s1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">s2</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;hello&#34;</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;strlen(s1): %llu</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;sizeof(s1): %llu</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">s1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;strlen(s2): %llu</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;sizeof(s2): %llu</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">s2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="n">strcpy_s</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">s2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// strncpy_s(s1, strlen(s2)+1, s2, 3);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s1=%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;*****************************</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">s3</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;world&#34;</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// strstr return pointer
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">strstr</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="s">&#34;ld&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;p=%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// calculate the offset
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%lld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="n">s3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">p</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="sc">&#39;o&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;strchr p=%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;strchr offset:%lld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="n">s3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">p</span> <span class="o">=</span> <span class="n">strrchr</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="sc">&#39;l&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;strrchr p=%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;strrchr offset:%lld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="n">s3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">p</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="s">&#34;or&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;strtok p=%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="s">&#34;or&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;after strtok, s3=%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="s">&#34;world&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;strcmp a=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">a</span> <span class="o">=</span> <span class="n">strncmp</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="s">&#34;world&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;strncmp a=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">s4</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;hello&#34;</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">memmove</span><span class="p">(</span><span class="n">s4</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">s4</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;memmove s4=%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">memcpy</span><span class="p">(</span><span class="n">s4</span><span class="p">,</span> <span class="s">&#34;hello&#34;</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;memccpy s4=%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// output:
+</span></span></span><span class="line"><span class="cl"><span class="c1">// origin strlen(s): 6
+</span></span></span><span class="line"><span class="cl"><span class="c1">// after memset, strlen(s): 14
+</span></span></span><span class="line"><span class="cl"><span class="c1">// sizeof(i): 8
+</span></span></span><span class="line"><span class="cl"><span class="c1">// strlen(s1): 6
+</span></span></span><span class="line"><span class="cl"><span class="c1">// sizeof(s1): 8
+</span></span></span><span class="line"><span class="cl"><span class="c1">// strlen(s2): 5
+</span></span></span><span class="line"><span class="cl"><span class="c1">// sizeof(s2): 6
+</span></span></span><span class="line"><span class="cl"><span class="c1">// s1=hello
+</span></span></span><span class="line"><span class="cl"><span class="c1">// *****************************
+</span></span></span><span class="line"><span class="cl"><span class="c1">// p=ld
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 3
+</span></span></span><span class="line"><span class="cl"><span class="c1">// strchr p=orld
+</span></span></span><span class="line"><span class="cl"><span class="c1">// strchr offset:1
+</span></span></span><span class="line"><span class="cl"><span class="c1">// strrchr p=ld
+</span></span></span><span class="line"><span class="cl"><span class="c1">// strrchr offset:3
+</span></span></span><span class="line"><span class="cl"><span class="c1">// strtok p=w
+</span></span></span><span class="line"><span class="cl"><span class="c1">// strtok p=ld
+</span></span></span><span class="line"><span class="cl"><span class="c1">// after strtok, s3=w
+</span></span></span><span class="line"><span class="cl"><span class="c1">// strcmp a=-1
+</span></span></span><span class="line"><span class="cl"><span class="c1">// strncmp a=0
+</span></span></span><span class="line"><span class="cl"><span class="c1">// memmove s4=hhllo
+</span></span></span><span class="line"><span class="cl"><span class="c1">// memccpy s4=hello
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="二stdlibh中字符串与数字相互转换处理函数">二、stdlib.h中字符串与数字相互转换处理函数</h1>
+<h4 id="1-数字转化为字符串">1. 数字转化为字符串:</h4>
+<p>● itoa()：将整型值转换为字符串。
+● ltoa()：将长整型值转换为字符串。
+● ultoa()：将无符号长整型值转换为字符串。
+● gcvt()：将浮点型数转换为字符串，取四舍五入。
+● ecvt()：将双精度浮点型值转换为字符串，转换结果中不包含十进制小数点。
+● fcvt()：指定位数为转换精度，其余同ecvt()。
+例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp"># include &lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cp"># include &lt;stdlib.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="kt">int</span> <span class="n">num_int</span> <span class="o">=</span> <span class="mi">435</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="kt">double</span> <span class="n">num_double</span> <span class="o">=</span> <span class="mf">435.10f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="kt">char</span> <span class="n">str_int</span><span class="p">[</span><span class="mi">30</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">   <span class="kt">char</span> <span class="n">str_double</span><span class="p">[</span><span class="mi">30</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">   <span class="n">itoa</span><span class="p">(</span><span class="n">num_int</span><span class="p">,</span> <span class="n">str_int</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>  <span class="c1">//把整数num_int转成字符串str_int
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">gcvt</span><span class="p">(</span><span class="n">num_double</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">str_double</span><span class="p">);</span>  <span class="c1">//把浮点数num_double转成字符串str_double
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">printf</span><span class="p">(</span><span class="s">&#34;str_int: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">str_int</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="n">printf</span><span class="p">(</span><span class="s">&#34;str_double: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">str_double</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>程序输出结果：
+str_int: 435
+str_double: 435.10001</p>
+<ul>
+<li>代码第11行中的参数10表示按十进制类型进行转换，转换后的结果是“435”，如果按二进制类型进行转换，则结果为“1101110011”。</li>
+<li>代码第12行中的参数8表示精确位数，这里得到的结果是“435.10001”。</li>
+</ul>
+<h4 id="2-字符串转化为数字">2. 字符串转化为数字</h4>
+<ul>
+<li>atof()：将字符串转换为双精度浮点型值。</li>
+<li>atoi()：将字符串转换为整型值。</li>
+<li>atol()：将字符串转换为长整型值。</li>
+<li>strtod()：将字符串转换为双精度浮点型值，并报告不能被转换的所有剩余数字。</li>
+<li>strtol()：将字符串转换为长整值，并报告不能被转换的所有剩余数字。</li>
+<li>strtoul()：将字符串转换为无符号长整型值，并报告不能被转换的所有剩余数字。
+例子：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp"># include &lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cp"># include &lt;stdlib.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">num_int</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">num_double</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">str_int</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;435&#34;</span><span class="p">;</span>         <span class="c1">//将要被转换为整型的字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">char</span> <span class="n">str_double</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;436.55&#34;</span><span class="p">;</span>  <span class="c1">//将要被转换为浮点型的字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">num_int</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">str_int</span><span class="p">);</span>          <span class="c1">//转换为整型值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">num_double</span> <span class="o">=</span> <span class="n">atof</span><span class="p">(</span><span class="n">str_double</span><span class="p">);</span>  <span class="c1">//转换为浮点型值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;num_int: %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">num_int</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;num_double: %lf</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">num_double</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 输出结果：
+</span></span></span><span class="line"><span class="cl"><span class="c1">// num_int: 435
+</span></span></span><span class="line"><span class="cl"><span class="c1">// num_double: 436.550000
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="进制互转">进制互转</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">  <span class="c1">// int to binary
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">char</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="o">*</span><span class="n">conv</span> <span class="o">=</span> <span class="n">itoa</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;itoa to 2: conv=%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">conv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// int to hex
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">conv</span> <span class="o">=</span> <span class="n">itoa</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;itoa to 16: conv=0x%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">conv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// hex to 10
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">hex</span> <span class="o">=</span> <span class="n">strtol</span><span class="p">(</span><span class="s">&#34;0x11&#34;</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;strtol: hex=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// binary to 10
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">bin</span> <span class="o">=</span> <span class="n">strtol</span><span class="p">(</span><span class="s">&#34;101&#34;</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;strtol: bin=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">bin</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// output
+</span></span></span><span class="line"><span class="cl"><span class="c1">// itoa to 2: conv=101
+</span></span></span><span class="line"><span class="cl"><span class="c1">// itoa to 16: conv=0x11
+</span></span></span><span class="line"><span class="cl"><span class="c1">// strtol: hex=17
+</span></span></span><span class="line"><span class="cl"><span class="c1">// strtol: bin=5?
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2023-07-09&#32;11:31:11>更新于 2023-07-09&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" data-title="C语言常用函数" data-hashtags="c/c&#43;&#43;"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" data-hashtag="c/c&#43;&#43;"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" data-title="C语言常用函数" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" data-title="C语言常用函数"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" data-title="C语言常用函数"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" data-title="C语言常用函数" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" data-title="C语言常用函数" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" data-title="C语言常用函数"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/c/c&#43;&#43;/' class="post-tag">c/c&#43;&#43;</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/asyncio%E4%BD%BF%E7%94%A8/" class="post-nav-item" rel="prev" title="Asyncio使用"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Asyncio使用</a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.104.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-RC"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
+              <a href="/">技术小窝</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>
