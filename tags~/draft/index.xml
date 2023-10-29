@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>draft - 标签 - 技术小窝</title>
+    <link>https://blog-12x.pages.dev/tags/draft/</link>
+    <description>draft - 标签 - 技术小窝</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 07 May 2023 11:38:09 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/draft/" rel="self" type="application/rss+xml" /><item>
+  <title>SelfAttention和MultiHeadAttention流程简述</title>
+  <link>https://blog-12x.pages.dev/selfattention%E5%92%8Cmultiheadattention%E6%B5%81%E7%A8%8B%E7%AE%80%E8%BF%B0/</link>
+  <pubDate>Sun, 07 May 2023 11:38:09 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/selfattention%E5%92%8Cmultiheadattention%E6%B5%81%E7%A8%8B%E7%AE%80%E8%BF%B0/</guid>
+  <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

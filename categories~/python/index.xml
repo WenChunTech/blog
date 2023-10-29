@@ -1,0 +1,47 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>python - 分类 - 技术小窝</title>
+    <link>https://blog-12x.pages.dev/categories/python/</link>
+    <description>python - 分类 - 技术小窝</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 28 May 2023 18:33:40 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/python/" rel="self" type="application/rss+xml" /><item>
+  <title>Asyncio使用</title>
+  <link>https://blog-12x.pages.dev/asyncio%E4%BD%BF%E7%94%A8/</link>
+  <pubDate>Sun, 28 May 2023 18:33:40 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/asyncio%E4%BD%BF%E7%94%A8/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>强大的GAN网络</title>
+  <link>https://blog-12x.pages.dev/%E5%BC%BA%E5%A4%A7%E7%9A%84gan%E7%BD%91%E7%BB%9C/</link>
+  <pubDate>Sat, 25 Feb 2023 22:54:43 &#43;0800</pubDate>
+  <author>作者</author>
+  <guid>https://blog-12x.pages.dev/%E5%BC%BA%E5%A4%A7%E7%9A%84gan%E7%BD%91%E7%BB%9C/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>Opencv抠图和裁剪图片</title>
+  <link>https://blog-12x.pages.dev/opencv%E6%8A%A0%E5%9B%BE%E5%92%8C%E8%A3%81%E5%89%AA%E5%9B%BE%E7%89%87/</link>
+  <pubDate>Sun, 04 Dec 2022 19:19:06 &#43;0800</pubDate>
+  <author>作者</author>
+  <guid>https://blog-12x.pages.dev/opencv%E6%8A%A0%E5%9B%BE%E5%92%8C%E8%A3%81%E5%89%AA%E5%9B%BE%E7%89%87/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>Pandas使用小结</title>
+  <link>https://blog-12x.pages.dev/pandas%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</link>
+  <pubDate>Sat, 12 Nov 2022 21:12:01 &#43;0800</pubDate>
+  <author>作者</author>
+  <guid>https://blog-12x.pages.dev/pandas%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>Numpy使用排序</title>
+  <link>https://blog-12x.pages.dev/numpy%E4%BD%BF%E7%94%A8%E6%8E%92%E5%BA%8F/</link>
+  <pubDate>Sat, 05 Nov 2022 21:37:49 &#43;0800</pubDate>
+  <author>作者</author>
+  <guid>https://blog-12x.pages.dev/numpy%E4%BD%BF%E7%94%A8%E6%8E%92%E5%BA%8F/</guid>
+  <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>
