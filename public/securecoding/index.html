@@ -1,0 +1,3812 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title> - 技术小窝</title><meta name="author" content="技术小窝">
+<meta name="author-link" content="">
+<meta name="description" content="Kunpeng Compute安全编程指南 本文档基于C语言提供一些安全编程建议，用于指导开发实践。 数据类型 确保有符号整数运算不溢出 【描述】 有符号整数溢出是" /><meta name="keywords" content='Rust, DeepLearning' /><meta itemprop="name" content="">
+<meta itemprop="description" content="Kunpeng Compute安全编程指南 本文档基于C语言提供一些安全编程建议，用于指导开发实践。 数据类型 确保有符号整数运算不溢出 【描述】 有符号整数溢出是">
+
+<meta itemprop="wordCount" content="22528"><meta itemprop="image" content="https://blog-12x.pages.dev/logo.png"/>
+<meta itemprop="keywords" content="" /><meta property="og:title" content="" />
+<meta property="og:description" content="Kunpeng Compute安全编程指南 本文档基于C语言提供一些安全编程建议，用于指导开发实践。 数据类型 确保有符号整数运算不溢出 【描述】 有符号整数溢出是" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog-12x.pages.dev/securecoding/" /><meta property="og:image" content="https://blog-12x.pages.dev/logo.png"/><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog-12x.pages.dev/logo.png"/>
+
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Kunpeng Compute安全编程指南 本文档基于C语言提供一些安全编程建议，用于指导开发实践。 数据类型 确保有符号整数运算不溢出 【描述】 有符号整数溢出是"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog-12x.pages.dev/securecoding/" /><link rel="next" href="https://blog-12x.pages.dev/hugo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/blog-12x.pages.dev\/securecoding\/"
+    },"genre": "posts","wordcount":  22528 ,
+    "url": "https:\/\/blog-12x.pages.dev\/securecoding\/","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "技术小窝"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span></span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><img loading="lazy" src="mstile-150x150.png" srcset="mstile-150x150.png, mstile-150x150.png 1.5x, mstile-150x150.png 2x" sizes="auto" data-title="技术小窝" data-alt="技术小窝" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/>&nbsp;技术小窝</span></span></div>
+      <div class="post-meta-line"><span title=0001-01-01&#32;00:00:00><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 22528 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 45 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="">
+            <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#确保有符号整数运算不溢出">确保有符号整数运算不溢出</a></li>
+    <li><a href="#确保无符号整数运算不回绕">确保无符号整数运算不回绕</a></li>
+    <li><a href="#确保除法和余数运算不会导致除零错误被零除">确保除法和余数运算不会导致除零错误(被零除)</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#禁止使用未经初始化的变量">禁止使用未经初始化的变量</a></li>
+    <li><a href="#指向资源句柄或描述符的变量在资源释放后立即赋予新值">指向资源句柄或描述符的变量，在资源释放后立即赋予新值</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#外部数据作为数组索引时必须确保在数组大小范围内">外部数据作为数组索引时必须确保在数组大小范围内</a></li>
+    <li><a href="#禁止通过对指针变量进行sizeof操作来获取数组大小">禁止通过对指针变量进行sizeof操作来获取数组大小</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#确保字符串存储有足够的空间容纳字符数据和null结束符">确保字符串存储有足够的空间容纳字符数据和null结束符</a></li>
+    <li><a href="#对字符串进行存储操作确保字符串有null结束符">对字符串进行存储操作，确保字符串有null结束符</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#禁止用断言检测程序在运行期间可能导致的错误可能发生的错误要用错误处理代码来处理">禁止用断言检测程序在运行期间可能导致的错误，可能发生的错误要用错误处理代码来处理</a></li>
+    <li><a href="#禁止在断言内改变运行环境">禁止在断言内改变运行环境</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#数组作为函数参数时必须同时将其长度作为函数的参数">数组作为函数参数时，必须同时将其长度作为函数的参数</a></li>
+    <li><a href="#函数的指针参数如果不是用于修改所指向的对象就应该声明为指向const的指针">函数的指针参数如果不是用于修改所指向的对象就应该声明为指向const的指针</a></li>
+    <li><a href="#调用格式化输入输出函数时禁止format参数受外部数据控制">调用格式化输入/输出函数时，禁止format参数受外部数据控制</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#调用格式化输入输出函数时使用有效的格式字符串">调用格式化输入/输出函数时，使用有效的格式字符串</a></li>
+    <li><a href="#禁止使用alloca函数申请栈上内存">禁止使用alloca()函数申请栈上内存</a></li>
+    <li><a href="#禁止使用realloc函数">禁止使用realloc()函数</a></li>
+    <li><a href="#禁止外部可控数据作为进程启动函数的参数">禁止外部可控数据作为进程启动函数的参数</a></li>
+    <li><a href="#禁止在信号处理例程中调用非异步安全函数">禁止在信号处理例程中调用非异步安全函数</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#内存分配后必须判断是否成功">内存分配后必须判断是否成功</a></li>
+    <li><a href="#外部输入作为内存操作相关函数的复制长度时需要校验其合法性">外部输入作为内存操作相关函数的复制长度时，需要校验其合法性</a></li>
+    <li><a href="#内存中的敏感信息使用完毕后立即清0">内存中的敏感信息使用完毕后立即清0</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#创建文件时必须显式指定合适的文件访问权限">创建文件时必须显式指定合适的文件访问权限</a></li>
+    <li><a href="#必须对文件路径进行规范化后再使用">必须对文件路径进行规范化后再使用</a></li>
+    <li><a href="#不要在共享目录中创建临时文件">不要在共享目录中创建临时文件</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#不要在信号处理函数中访问共享对象">不要在信号处理函数中访问共享对象</a></li>
+    <li><a href="#禁用rand函数产生用于安全用途的伪随机数">禁用rand函数产生用于安全用途的伪随机数</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#内核mmap接口实现中确保对映射起始地址和大小进行合法性校验">内核mmap接口实现中，确保对映射起始地址和大小进行合法性校验</a></li>
+    <li><a href="#内核程序中必须使用内核专用函数读写用户态缓冲区">内核程序中必须使用内核专用函数读写用户态缓冲区</a></li>
+    <li><a href="#必须对copy_from_user拷贝长度进行校验防止缓冲区溢出">必须对copy_from_user()拷贝长度进行校验，防止缓冲区溢出</a></li>
+    <li><a href="#必须对copy_to_user拷贝的数据进行初始化防止信息泄漏">必须对copy_to_user()拷贝的数据进行初始化，防止信息泄漏</a></li>
+    <li><a href="#禁止在异常处理中使用bug_on宏避免造成内核panic">禁止在异常处理中使用BUG_ON宏，避免造成内核panic</a></li>
+    <li><a href="#在中断处理程序或持有自旋锁的进程上下文代码中禁止使用会引起进程休眠的函数">在中断处理程序或持有自旋锁的进程上下文代码中，禁止使用会引起进程休眠的函数</a></li>
+    <li><a href="#合理使用内核栈防止内核栈溢出">合理使用内核栈，防止内核栈溢出</a></li>
+    <li><a href="#临时关闭地址校验机制后在操作完成后必须及时恢复">临时关闭地址校验机制后，在操作完成后必须及时恢复</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h1 id="kunpeng-compute安全编程指南">Kunpeng Compute安全编程指南</h1>
+<p>本文档基于C语言提供一些安全编程建议，用于指导开发实践。</p>
+<h1 id="数据类型">数据类型</h1>
+<h2 id="确保有符号整数运算不溢出">确保有符号整数运算不溢出</h2>
+<p><strong>【描述】</strong>
+有符号整数溢出是未定义的行为。出于安全考虑，对外部数据中的有符号整数值在如下场景中使用时，需要确保运算不会导致溢出：</p>
+<ul>
+<li>
+<p>指针运算的整数操作数(指针偏移值)</p>
+</li>
+<li>
+<p>数组索引</p>
+</li>
+<li>
+<p>变长数组的长度(及长度运算表达式)</p>
+</li>
+<li>
+<p>内存拷贝的长度</p>
+</li>
+<li>
+<p>内存分配函数的参数</p>
+</li>
+<li>
+<p>循环判断条件</p>
+</li>
+</ul>
+<p>在精度低于int的整数类型上进行运算时，需要考虑整数提升。程序员还需要掌握整数转换规则，包括隐式转换规则，以便设计安全的算术运算。</p>
+<p>1)加法</p>
+<p><strong>【错误代码示例】</strong>(加法)</p>
+<p>如下代码示例中，参与加法运算的整数是外部数据，在使用前未做校验，可能出现整数溢出。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num_a = ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int num_b = ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int sum = num_a + num_b;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong>(加法)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num_a = ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int num_b = ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int sum = 0;
+</span></span><span class="line"><span class="cl">if (((num_a &gt; 0) &amp;&amp; (num_b &gt; (INT_MAX - num_a))) ||
+</span></span><span class="line"><span class="cl">	((num_a &lt; 0) &amp;&amp; (num_b &lt; (INT_MIN - num_a)))) {
+</span></span><span class="line"><span class="cl"> 	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">sum = num_a + num_b;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2)减法</p>
+<p><strong>【错误代码示例】</strong>(减法)</p>
+<p>如下代码示例中，参与减法运算的整数是外部数据，在使用前未做校验，可能出现整数溢出，进而造成后续的内存复制操作出现缓冲区溢出。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">unsigned char  *content = ... // 指向报文头的指针
+</span></span><span class="line"><span class="cl">size_t content_size = ... // 缓冲区的总长度
+</span></span><span class="line"><span class="cl">int total_len = ... // 报文总长度
+</span></span><span class="line"><span class="cl">int skip_len = ... // 从消息中解析出来的需要忽略的数据长度
+</span></span><span class="line"><span class="cl">// 用total_len - skip_len 计算剩余数据长度，可能出现整数溢出
+</span></span><span class="line"><span class="cl">(void)memmove(content, content + skip_len, total_len - skip_len);
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong>(减法)</p>
+<p>如下代码示例中，重构为使用size_t类型的变量表示数据长度，并校验外部数据长度是否在合法范围内。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">unsigned char *content = ... //指向报文头的指针
+</span></span><span class="line"><span class="cl">size_t content_size = ... // 缓冲区的总长度
+</span></span><span class="line"><span class="cl">size_t total_len = ... // 报文总长度
+</span></span><span class="line"><span class="cl">size_t skip_len = ... // 从消息中解析出来的需要忽略的数据长度
+</span></span><span class="line"><span class="cl">if (skip_len &gt;= total_len || total_len &gt; content_size) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">(void)memmove(content, content + skip_len, total_len - skip_len);
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3)乘法</p>
+<p><strong>【错误代码示例】</strong>(乘法)</p>
+<p>如下代码示例中，内核代码对来自用户态的数值范围做了校验，但是由于opt是int类型，而校验条件中错误的使用了ULONG_MAX进行限制，导致整数溢出。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int opt = ... // 来自用户态
+</span></span><span class="line"><span class="cl">if ((opt &lt; 0) || (opt &gt; (ULONG_MAX / (60 * HZ)))) { // 错误的使用了ULONG_MAX做上限校验
+</span></span><span class="line"><span class="cl">	return -EINVAL;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">... = opt * 60 * HZ; // 可能出现整数溢出
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong>(乘法)</p>
+<p>一种改进方案是将opt的类型修改为unsigned long类型，这种方案适用于修改了变量类型更符合业务逻辑的场景。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">unsigned long opt = ... // 将类型重构为 unsigned long 类型。
+</span></span><span class="line"><span class="cl">if (opt &gt; (ULONG_MAX / (60 * HZ))) {
+</span></span><span class="line"><span class="cl">	return -EINVAL;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">... = opt * 60 * HZ;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>另一种改进方案是将数值上限修改为INT_MAX。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int opt = ... // 来自用户态
+</span></span><span class="line"><span class="cl">if ((opt &lt; 0) || (opt &gt; (INT_MAX / (60 * HZ)))) { // 修改使用INT_MAX作为上限值
+</span></span><span class="line"><span class="cl">	return -EINVAL;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">... = opt * 60 * HZ;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>4)除法</p>
+<p><strong>【错误代码示例】</strong>(除法)</p>
+<p>如下代码示例中，做除法运算前只检查了是否出现被零除的问题，缺少对数值范围的校验，可能出现整数溢出。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num_a =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int num_b =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int result = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if (num_b == 0) {
+</span></span><span class="line"><span class="cl">	... // 对除数为0的错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">result = num_a / num_b; // 可能出现整数溢出
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong>(除法)</p>
+<p>如下代码示例中，按照最大允许值进行校验，防止整数溢出，在编程时可根据具体业务场景做更严格的值域校验。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num_a = ... // 来自外部数据
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">int num_b = ... // 来自外部数据
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">int result = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 检查除数为0及除法溢出错误
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if ((num_b == 0) || ((num_a == INT_MIN) &amp;&amp; (num_b == -1))) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> ... // 错误处理
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">result = num_a / num_b;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>5)求余数</p>
+<p><strong>【错误代码示例】</strong>(求余数)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num_a = ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int num_b = ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int result = 0;
+</span></span><span class="line"><span class="cl">if (num_b == 0) {
+</span></span><span class="line"><span class="cl">	... // 对除数为0的错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">result = num_a % num_b; // 可能出现整数溢出
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong>(求余数)</p>
+<p>如下代码示例中，按照最大允许值进行校验，防止整数溢出。在编程时可根据具体业务场景做更严格的值域校验。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num_a =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int num_b =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int result = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 检查除数为0及除法溢出错误
+</span></span><span class="line"><span class="cl">if ((num_b == 0)  || ((num_a == INT_MIN) &amp;&amp; (num_b == -1))) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">result = num_a % num_b;
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>6)一元减</p>
+<p>当操作数等于有符号整数类型的最小值时，在二进制补码一元求反期间会发生溢出。</p>
+<p><strong>【错误代码示例】</strong>(一元减)</p>
+<p>如下代码示例中，计算前未校验数值范围，可能出现整数溢出。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num_a = ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int result = -num_a; // 可能出现整数溢出
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong>(一元减)</p>
+<p>如下代码示例中，按照最大允许值进行校验，防止整数溢出。在编程时可根据具体业务场景做更严格的值域校验。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num_a =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int result = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if (num_a == LNT_MIN) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">result = -num_a;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="确保无符号整数运算不回绕">确保无符号整数运算不回绕</h2>
+<p><strong>【描述】</strong></p>
+<p>涉及无符号操作数的计算永远不会溢出，因为超出无符号整数类型表示范围的计算结果会按照（结果类型可表示的最大值 + 1）的数值取模。</p>
+<p>这种行为更多时候被非正式地称为无符号整数回绕。</p>
+<p>在精度低于int的整数类型上进行运算时，需要考虑整数提升。程序员还需要掌握整数转换规则，包括隐式转换规则，以便设计安全的算术运算。</p>
+<p>出于安全考虑，对外部数据中的无符号整数值在如下场景中使用时，需要确保运算不会导致回绕：</p>
+<ul>
+<li>
+<p>指针运算的整数操作数(指针偏移值)</p>
+</li>
+<li>
+<p>数组索引</p>
+</li>
+<li>
+<p>变长数组的长度(及长度运算表达式)</p>
+</li>
+<li>
+<p>内存拷贝的长度</p>
+</li>
+<li>
+<p>内存分配函数的参数</p>
+</li>
+<li>
+<p>循环判断条件</p>
+</li>
+</ul>
+<p>1)加法</p>
+<p><strong>【错误代码示例】</strong>(加法)</p>
+<p>如下代码示例中，校验下一个子报文的长度加上已处理报文的长度是否超过了整体报文的最大长度，在校验条件中的加法运算可能会出现整数回绕，造成绕过该校验的问题。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">size_t total_len =  ... // 报文的总长度
+</span></span><span class="line"><span class="cl">size_t read_len = 0 // 记录已经处理报文的长度
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">size_t pkt_len = parse_pkt_len(); // 从网络报文中解析出来的下一个子报文的长度
+</span></span><span class="line"><span class="cl">if (read_len + pkt_len &gt; total_len) { // 可能出现整数回绕
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">read_len += pkt_len;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong>(加法)</p>
+<p>由于read_len变量记录的是已经处理报文的长度，必然会小于total_len，因此将代码中的加法运算修改为减法运算，导致条件绕过。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">size_t total_len = ... // 报文的总长度
+</span></span><span class="line"><span class="cl">size_t read_len = 0; // 记录已经处理报文的长度
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">size_t pkt_len = parse_pkt_len(); // 来自网络报文
+</span></span><span class="line"><span class="cl">if (pkt_len &gt; total_len - read_len) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">read_len += pkt_len;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2)减法</p>
+<p><strong>【错误代码示例】</strong>(减法)</p>
+<p>如下代码示例中，校验len合法范围的运算可能会出现整数回绕，导致条件绕过。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">size_t len = ... // 来自用户态输入
+</span></span><span class="line"><span class="cl">if (SCTP_SIZE_MAX - len &lt; sizeof(SctpAuthBytes)) { // 减法操作可能出现整数回绕
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">... = kmalloc(sizeof(SctpAuthBytes) + len, gfp); // 可能出现整数回绕
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong>(减法)</p>
+<p>如下代码示例中，调整减法运算的位置（需要确保编译期间减法表达式的值不翻转），避免整数回绕问题。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">size_t len = ... // 来自用户态输入
+</span></span><span class="line"><span class="cl">if (len &gt; SCTP_SIZE_MAX - sizeof(SctpAuthBytes)) { // 确保编译期间减法表达式的值不翻转
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">... = kmalloc(sizeof(SctpAuthBytes) + len, gfp);
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3)乘法</p>
+<p><strong>【错误代码示例】</strong>（乘法）</p>
+<p>如下代码示例中，使用外部数据计算申请内存长度时未校验，可能出现整数回绕。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">size_t width =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">size_t hight =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">unsigned char  *buf = (unsigned char  *)malloc(width  * hight);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>无符号整数回绕可能导致分配的内存不足。</p>
+<p><strong>【正确代码示例】</strong>（乘法）</p>
+<p>如下代码是一种解决方案，校验参与乘法运算的整数数值范围，确保不会出现整数回绕。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">size_t width =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">size_t hight =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">if (width == 0 || hight == 0) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if (width  &gt; SIZE_MAX / hight) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">unsigned char  *buf = (unsigned char  *)malloc(width  * hight);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【例外】</strong> 
+为正确执行程序，必要时无符号整数可能表现出模态（回绕）。建议将变量声明明确注释为支持模数行为，并且对该整数的每个操作也应明确注释为支持模数行为。</p>
+<p><strong>【相关软件CWE编号】</strong> CWE-190</p>
+<h2 id="确保除法和余数运算不会导致除零错误被零除">确保除法和余数运算不会导致除零错误(被零除)</h2>
+<p><strong>【描述】</strong></p>
+<p>整数的除法和取余运算的第二个操作数值为0会导致程序产生未定义的行为，因此使用时要确保整数的除法和余数运算不会导致除零错误(被零除，下同)。</p>
+<p>1)除法</p>
+<p><strong>【错误代码示例】</strong>(除法)</p>
+<p>有符号整数类型的除法运算如果限制不当，会导致溢出。</p>
+<p>如下示例对有符号整数进行的除法运算做了防止溢出限制，确保不会导致溢出，但不能防止有符号操作数num_a和num_b之间的除法过程中出现除零错误：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num_a =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int num_b =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int result = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if ((num_a == INT_MIN) &amp;&amp; (num_b == -1)) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">result = num_a / num_b; // 可能出现除零错误
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong>(除法)</p>
+<p>如下代码示例中，添加num_b是否为0的校验，防止除零错误。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num_a =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int num_b =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int result = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if ((num_b == 0)  | | ((num_a == INT_MIN) &amp;&amp; (num_b == -1))) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">result = num_a / num_b;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2)取余</p>
+<p><strong>【错误代码示例】</strong>(求余数)</p>
+<p>如下代码，同除法的错误代码示例一样，可能出现除零错误，因为许多平台以相同的指令实现求余数和除法运算。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num_a =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int num_b =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int result = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if ((num_a == INT_MIN) &amp;&amp; (num_b == -1)) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">result = num_a % num_b; // 可能出现除零错误
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong>(求余数)</p>
+<p>如下代码示例中，添加num_b是否为0的校验，防止除零错误。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num_a =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int num_b =  ... // 来自外部数据
+</span></span><span class="line"><span class="cl">int result = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if ((num_b == 0)  | | ((num_a == INT_MIN) &amp;&amp; (num_b == -1))) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">result = num_a % num_b;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="变量">变量</h1>
+<h2 id="禁止使用未经初始化的变量">禁止使用未经初始化的变量</h2>
+<p><strong>【描述】</strong> 
+这里的变量，指的是局部动态变量，并且还包括内存堆上申请的内存块。 
+因为他们的初始值都是不可预料的，所以禁止未经有效初始化就直接读取其值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void foo( ...)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	int data;
+</span></span><span class="line"><span class="cl">	bar(data); // 错误：未初始化就使用
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果有不同分支，要确保所有分支都得到初始化后才能使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#define CUSTOMIZED_SIZE 100
+</span></span><span class="line"><span class="cl">void foo( ...)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	int data;
+</span></span><span class="line"><span class="cl">	if (condition &gt; 0) {
+</span></span><span class="line"><span class="cl">		data = CUSTOMIZED_SIZE;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	bar(data); // 错误：部分分支该值未初始化
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="指向资源句柄或描述符的变量在资源释放后立即赋予新值">指向资源句柄或描述符的变量，在资源释放后立即赋予新值</h2>
+<p><strong>【描述】</strong> 
+指向资源句柄或描述符的变量包括指针、文件描述符、socket描述符以及其它指向资源的变量。 
+以指针为例，当指针成功申请了一段内存之后，在这段内存释放以后，如果其指针未立即设置为NULL，也未分配一个新的对象，那这个指针就是一个悬空指针。 
+如果再对悬空指针操作，可能会发生重复释放或访问已释放内存的问题，造成安全漏洞。 
+消减该漏洞的有效方法是将释放后的指针立即设置为一个确定的新值，例如设置为NULL。对于全局性的资源句柄或描述符，在资源释放后，应该马上设置新值，以避免使用其已释放的无效值；对于只在单个函数内使用的资源句柄或描述符，应确保资源释放后其无效值不被再次使用。</p>
+<p><strong>【错误代码示例】</strong> 
+如下代码示例中，根据消息类型处理消息，处理完后释放掉body或head指向的内存，但是释放后未将指针设置为NULL。如果还有其他函数再次处理该消息结构体时，可能出现重复释放内存或访问已释放内存的问题。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int foo(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	SomeStruct *msg = NULL;
+</span></span><span class="line"><span class="cl">	... // 初始化msg-&gt;type，分配 msg-&gt;body 的内存空间
+</span></span><span class="line"><span class="cl">	if (msg-&gt;type == MESSAGE_A) {
+</span></span><span class="line"><span class="cl">		...
+</span></span><span class="line"><span class="cl">		free(msg-&gt;body);
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">EXIT:
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	free(msg-&gt;body);
+</span></span><span class="line"><span class="cl">	return ret;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+如下代码示例中，立即对释放后的指针设置为NULL，避免重复放指针。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int foo(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	SomeStruct  *msg = NULL;
+</span></span><span class="line"><span class="cl">	... // 初始化msg-&gt;type，分配 msg-&gt;body 的内存空间
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	if (msg-&gt;type == MESSAGE_A) {
+</span></span><span class="line"><span class="cl">		...
+</span></span><span class="line"><span class="cl">		free(msg-&gt;body);
+</span></span><span class="line"><span class="cl">		msg-&gt;body = NULL;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">EXIT:
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	free(msg-&gt;body);
+</span></span><span class="line"><span class="cl">	return ret;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当free()函数的入参为NULL时，函数不执行任何操作。</p>
+<p><strong>【错误代码示例】</strong> 
+如下代码示例中文件描述符关闭后未赋新值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">SOCKET s = INVALID_SOCKET;
+</span></span><span class="line"><span class="cl">int fd = -1;
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">closesocket(s);
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">close(fd);
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+如下代码示例中，在资源释放后，对应的变量应该立即赋予新值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">SOCKET s = INVALID_SOCKET;
+</span></span><span class="line"><span class="cl">int fd = -1;
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">closesocket(s);
+</span></span><span class="line"><span class="cl">s = INVALID_SOCKET;
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">close(fd);
+</span></span><span class="line"><span class="cl">fd = -1;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="指针和数组">指针和数组</h1>
+<h2 id="外部数据作为数组索引时必须确保在数组大小范围内">外部数据作为数组索引时必须确保在数组大小范围内</h2>
+<p><strong>【描述】</strong> 
+外部数据作为数组索引对内存进行访问时，必须对数据的大小进行严格的校验，确保数组索引在有效范围内，否则会导致严重的错误。 
+当一个指针指向数组元素时，可以指向数组最后一个元素的下一个元素的位置，但是不能读写该位置的内存。</p>
+<p><strong>【错误代码示例】</strong> 
+如下代码示例中, set_dev_id()函数存在差一错误，当 index 等于 DEV_NUM 时，恰好越界写一个元素； 
+同样get_dev()函数也存在差一错误，虽然函数执行过程中没有问题，但是当解引用这个函数返回的指针时，行为是未定义的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#define DEV_NUM 10
+</span></span><span class="line"><span class="cl">#define MAX_NAME_LEN 128
+</span></span><span class="line"><span class="cl">typedef struct {
+</span></span><span class="line"><span class="cl">	int id;
+</span></span><span class="line"><span class="cl">	char name[MAX_NAME_LEN];
+</span></span><span class="line"><span class="cl">} Dev;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">static Dev devs[DEV_NUM];
+</span></span><span class="line"><span class="cl">int set_dev_id(size_t index, int id)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	if (index &gt; DEV_NUM) { // 错误：差一错误。
+</span></span><span class="line"><span class="cl"> 		... // 错误处理
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	devs[index].id = id;
+</span></span><span class="line"><span class="cl">	return 0;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">static Dev *get_dev(size_t index)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	if (index &gt; DEV_NUM) { // 错误：差一错误。
+</span></span><span class="line"><span class="cl"> 		... // 错误处理
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	return devs + index;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+如下代码示例中，修改校验索引的条件，避免差一错误。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#define DEV_NUM 10
+</span></span><span class="line"><span class="cl">#define MAX_NAME_LEN 128
+</span></span><span class="line"><span class="cl">typedef struct {
+</span></span><span class="line"><span class="cl">	int id;
+</span></span><span class="line"><span class="cl">	char name[MAX_NAME_LEN];
+</span></span><span class="line"><span class="cl">} Dev;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">static Dev devs[DEV_NUM];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">int set_dev_Id (size_t index, int id)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	if (index &gt;= DEV_NUM) {
+</span></span><span class="line"><span class="cl">		... // 错误处理
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	devs[index].id = id;
+</span></span><span class="line"><span class="cl">	return 0;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">static Dev *get_dev(size_t index)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	if (index &gt;= DEV_NUM) {
+</span></span><span class="line"><span class="cl"> 		... // 错误处理
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	return devs + index;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【相关软件CWE编号】</strong> CWE-119，CWE-123，CWE-125</p>
+<h2 id="禁止通过对指针变量进行sizeof操作来获取数组大小">禁止通过对指针变量进行sizeof操作来获取数组大小</h2>
+<p><strong>【描述】</strong> 
+将指针当做数组进行sizeof操作时，会导致实际的执行结果与预期不符。例如：变量定义 char *p = array，其中array的定义为char array[LEN]，表达式sizeof(p) 得到的结果与 sizeof(char *)相同，并非array的长度。</p>
+<p><strong>【错误代码示例】</strong> 
+如下代码示例中，buffer和path分别是指针和数组，程序员想对这2个内存进行清0操作，但由于程序员的疏忽，将内存大小误写成了sizeof(buffer)，与预期不符。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char path[MAX_PATH];
+</span></span><span class="line"><span class="cl">char *buffer = (char *)malloc(SIZE);
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">(void)memset(path, 0, sizeof(path));
+</span></span><span class="line"><span class="cl">// sizeof与预期不符，其结果为指针本身的大小而不是缓冲区大小
+</span></span><span class="line"><span class="cl">(void)memset(buffer, 0, sizeof(buffer));
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+如下代码示例中，将sizeof(buffer)修改为申请的缓冲区大小：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char path[MAX_PATH];
+</span></span><span class="line"><span class="cl">char *buffer = (char *)malloc(SIZE);
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">(void)memset(path, 0, sizeof(path));
+</span></span><span class="line"><span class="cl">(void)memset(buffer, 0, SIZE); // 使用申请的缓冲区大小
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="字符串">字符串</h1>
+<h2 id="确保字符串存储有足够的空间容纳字符数据和null结束符">确保字符串存储有足够的空间容纳字符数据和null结束符</h2>
+<p><strong>【描述】</strong> 
+将数据复制到不足以容纳数据的缓冲区，会导致缓冲区溢出。缓冲区溢出经常发生在字符串操作中。为了避免这种错误，截断拷贝的数据以限制字符串的字节长度是一种防御方法，但是最好的措施是确保目标缓冲区的大小足以容纳复制数据和null结束符。当字符串存储在堆空间时， 确保分配内存时已分配了足够的空间。</p>
+<p>部分字符串处理函数由于设计时安全考虑不足，或者存在一些隐含的目的缓冲区长度要求，容易被误用，导致缓冲区写溢出。此类典型函数包括不在C标准库函数中的itoa()，realpath()函数。</p>
+<p><strong>【错误代码示例】</strong>(itoa) 
+有些函数如itoa(), realpath()需要在对传入的缓冲区指针位置进行写入操作，但函数并没有提供缓冲区长度。因此，在调用这些函数前，必须提供足够的缓冲区。 
+如下代码示例中，试图将数字转为字符串，但是目标存储空间的预留长度不足：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num = ...
+</span></span><span class="line"><span class="cl">char str[8];
+</span></span><span class="line"><span class="cl">itoa(num, str, 10); // 10进制整数的最大存储长度是12个字节
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+如下代码示例中，在对外部数据进行解析并将内容保存到name中，考虑了name的大小：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int num = ...
+</span></span><span class="line"><span class="cl">char str[13];
+</span></span><span class="line"><span class="cl">itoa(num, str, 10); // 10进制整数的最大存储长度是12个字节
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>【错误代码示例】<strong>(realpath)</strong></p>
+<p>如下代码示例中，试图将路径标准化，但是目标存储空间的长度不足：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#define MAX_PATH_LEN 100
+</span></span><span class="line"><span class="cl">char resolved_path[MAX_PATH_LEN];
+</span></span><span class="line"><span class="cl">/ *
+</span></span><span class="line"><span class="cl">- realpath函数的存储缓冲区长度是由PATH_MAX常量定义，
+</span></span><span class="line"><span class="cl">- 或是由_PC_PATH_MAX系统值配置的，通常都大于100字节
+</span></span><span class="line"><span class="cl">*/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">char  *res = realpath(path, resolved_path);
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong></p>
+<p>可以将realpath的第二个参数传入NULL, 以让系统自动分配合适的内存。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char *resolved_path = NULL;
+</span></span><span class="line"><span class="cl">resolved_path = realpath(path, NULL);
+</span></span><span class="line"><span class="cl">if (resolved_path == NULL) {
+</span></span><span class="line"><span class="cl">	... // 处理错误
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">if (resolved_path != NULL) {
+</span></span><span class="line"><span class="cl">	free(resolved_path);
+</span></span><span class="line"><span class="cl">	resolved_path = NULL;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="对字符串进行存储操作确保字符串有null结束符">对字符串进行存储操作，确保字符串有null结束符</h2>
+<p><strong>【描述】</strong> 
+部分字符串处理函数操作字符串时，将截断超出指定长度的字符串，如strncpy()函数最多复制n个字符到目的缓冲区，如果源字符串长度大于n，则不会写入null结束符到目的缓冲区，目的缓冲区的内容为n个被复制的字符。使用这类函数时，可能会无意截断导致数据丢失，并在某些情况下会导致软件漏洞。 
+因此，对字符串进行存储操作，必须确保字符串有null结束符，否则在后续的调用strlen等操作中，可能会导致内存越界访问漏洞。</p>
+<p><strong>【错误代码示例】</strong> 
+在如下代码示例中，使用strncpy函数复制字符串时可能会发生截断（发生条件为：strlen(name) &gt; sizeof(file_name) - 1）。当发生截断时，file_name的内容是不完整的，并且缺少 &rsquo;  0 &lsquo;结束符，后续对file_name的操作可能会导致软件漏洞：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#define FILE_NAME_LEN 128
+</span></span><span class="line"><span class="cl">char file_name [FILE_NAME_LEN ];
+</span></span><span class="line"><span class="cl">(void)strncpy(file_name, name, sizeof(file_name) - 1);
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#define FILE_NAME_LEN 128
+</span></span><span class="line"><span class="cl">char file_name[FILE_NAME_LEN ];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if (strlen(name)  &gt; FILE_NAME_LEN - 1) {
+</span></span><span class="line"><span class="cl">	... // 处理错误
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">(void)strcpy(file_name, name);
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【例外】</strong></p>
+<p>程序员的目的是故意截断字符串。</p>
+<p><strong>【相关软件CWE编号】</strong> CWE-170，CWE-464</p>
+<h1 id="断言">断言</h1>
+<h2 id="禁止用断言检测程序在运行期间可能导致的错误可能发生的错误要用错误处理代码来处理">禁止用断言检测程序在运行期间可能导致的错误，可能发生的错误要用错误处理代码来处理</h2>
+<p><strong>【描述】</strong> 
+断言主要用于调试期间，在编译Release版本时将其关闭。因此，断言应该用于防止不正确的程序员假设，而不能用在Release版本上检查程序运行过程中发生的错误。</p>
+<p>断言永远不应用于验证是否存在运行时（与逻辑相对）错误，例如</p>
+<ul>
+<li>
+<p>无效的用户输入（包括命令行参数和环境变量）</p>
+</li>
+<li>
+<p>文件错误（例如，打开，读取或写入文件时出错）</p>
+</li>
+<li>
+<p>网络错误（包括网络协议错误）</p>
+</li>
+<li>
+<p>内存不足的情况（例如，malloc()类似的故障）</p>
+</li>
+<li>
+<p>系统资源耗尽（例如，文件描述符，进程，线程）</p>
+</li>
+<li>
+<p>系统调用错误（例如，执行文件，锁定或解锁互斥锁时出错）</p>
+</li>
+<li>
+<p>无效的权限（例如，文件，内存，用户）</p>
+</li>
+</ul>
+<p>例如，防止缓冲区溢出的代码不能使用断言实现，因为该代码必须编译到Release版本的可执行文件中。 
+如果服务器程序在网运行时由恶意用户触发断言失败，会导致拒绝服务攻击。在这种情况下，更适合使用软故障模式，例如写入日志文件和拒绝请求。</p>
+<p><strong>【错误代码示例】</strong> 
+以下代码的所有ASSERT的用法是错误的。例如，错误的使用ASSERT宏来验证内存分配是否成功，因为内存的可用性取决于系统的整体状态，并且在程序运行的任何时候都可能耗尽，所以必须以具有韧性的方式来妥善处理并将程序从内存耗尽中恢复。因此，使用ASSERT宏来验证内存分配是否成功将是不合适的，因为这样做可能导致进程突然终止，从而开启了拒绝服务攻击的可能性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">FILE  *fp = fopen(path,  &#34;r&#34;);
+</span></span><span class="line"><span class="cl">ASSERT(fp != NULL); // 错误用法：文件有可能打开失败
+</span></span><span class="line"><span class="cl">char  *str = (char *)malloc(MAX_LINE);
+</span></span><span class="line"><span class="cl">ASSERT(str != NULL); // 错误用法：内存有可能分配失败
+</span></span><span class="line"><span class="cl">ReadLine(fp, str);
+</span></span><span class="line"><span class="cl">char  *p = strstr(str, &#34;age=&#34;);
+</span></span><span class="line"><span class="cl">ASSERT(p != NULL); // 错误用法：文件中不一定存在该字符串
+</span></span><span class="line"><span class="cl">char  *end = NULL;
+</span></span><span class="line"><span class="cl">long age = strtol(p + 4, &amp;end, 10);
+</span></span><span class="line"><span class="cl">ASSERT(age &gt; 0); // 错误用法：文件内容不一定符合预期
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+下面代码演示了如何重构上面的错误代码:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">FILE  *fp = fopen(path,  &#34;r&#34;);
+</span></span><span class="line"><span class="cl">if (fp == NULL) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">char  *str = (char *)malloc(MAX_LINE);
+</span></span><span class="line"><span class="cl">if (str == NULL) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">read_line(fp, str);
+</span></span><span class="line"><span class="cl">char  *p = strstr(str,  &#34;age=&#34;);
+</span></span><span class="line"><span class="cl">if (p == NULL) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">char *end = NULL;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">long age = strtol(p + 4, &amp;end, 10);
+</span></span><span class="line"><span class="cl">if (age &lt;= 0) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="禁止在断言内改变运行环境">禁止在断言内改变运行环境</h2>
+<p><strong>【描述】</strong> 
+在程序正式发布阶段，断言不会被编译进去，为了确保调试版和正式版的功能一致性，严禁在断言中使用任何赋值、修改变量、资源操作、内存申请等操作。</p>
+<p>例如，以下的断言方式是错误的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ASSERT(p1 = p2); // p1被修改
+</span></span><span class="line"><span class="cl">ASSERT(i++  &gt; 1000); // i被修改
+</span></span><span class="line"><span class="cl">ASSERT(close(fd) == 0); // fd被关闭
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="函数设计">函数设计</h1>
+<h2 id="数组作为函数参数时必须同时将其长度作为函数的参数">数组作为函数参数时，必须同时将其长度作为函数的参数</h2>
+<p><strong>【描述】</strong> 
+通过函数参数传递数组函数参数必须同时传递数组可容纳元素的个数，而不是以字节为单位的数组最大大小；同样，通过函数参数传递一块内存进行读写操作时，必须同时传递内存块大小，否则函数在访问内存偏移时，无法判断偏移的合法范围，产生越界访问的漏洞。在本规则中所说的&quot;数组&quot;不仅局限为数组类型变量，还包括字符串或指向连续内存块的指针。</p>
+<p><strong>【错误代码示例】</strong> 
+如下代码示例中，函数pars_msg不知道msg的范围，容易产生内存越界访问漏洞。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int parse_msg(unsigned char *msg)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">void foo(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	size_t len = get_msg_len();
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	unsigned char *msg = (unsigned char  *)malloc(len);
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	parse_msg(msg);
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+正确的做法是将msg的大小作为参数传递到parse_msg中，如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int parse_msg(unsigned char *msg, size_t msg_len)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	ASSERT(msg != NULL);
+</span></span><span class="line"><span class="cl">	ASSERT(msg_len != 0);
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">void foo(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	size_t len = get_msg_len();
+</span></span><span class="line"><span class="cl"> 	...
+</span></span><span class="line"><span class="cl">	unsigned char *msg = (unsigned char *)malloc(len);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> 	...
+</span></span><span class="line"><span class="cl">	parse_msg(msg, len);
+</span></span><span class="line"><span class="cl"> 	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="函数的指针参数如果不是用于修改所指向的对象就应该声明为指向const的指针">函数的指针参数如果不是用于修改所指向的对象就应该声明为指向const的指针</h2>
+<p><strong>【描述】</strong> 
+const 指针参数，将限制函数通过该指针修改所指向对象，使代码更牢固、更安全。</p>
+<p>示例：如strncmp 的例子，指向的对象不变化的指针参数声明为const。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 正确：不变参数声明为const
+</span></span><span class="line"><span class="cl">int strncmp(const char *s1, const char *s2, size_t n);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意：</p>
+<p>指针参数要不要加const取决于函数设计，而不是看函数实体内有没有发生&quot;修改对象&quot;的动作。</p>
+<h2 id="调用格式化输入输出函数时禁止format参数受外部数据控制">调用格式化输入/输出函数时，禁止format参数受外部数据控制</h2>
+<p><strong>【描述】</strong> 
+调用格式化函数时，如果format参数由外部数据提供，或由外部数据拼接而来，会造成字符串格式化漏洞。</p>
+<p>攻击者如果能够完全或者部分控制格式字符串内容，可以使被攻击的进程崩溃、查看栈内容、查看内存内容或者在任意内存位置写入数据。结果是，攻击者能够以被攻击进程的权限执行任意代码。</p>
+<p>格式化输出函数特别危险，这是因为许多程序员没有意识到它们是具有攻击能力的。比如：格式化输出函数可以使用%n转换符，向指定地址写入一个整数值。</p>
+<p>这些格式化函数有： 
+格式化输出函数: xxxprintf; 
+格式化输入函数: xxxscanf; 
+格式化错误消息函数: err(), verr(), errx(), verrx(), warn(), vwarn(), warnx(), vwarnx(), error(), error_at_line(); 
+格式化日志函数: syslog(), vsyslog().</p>
+<p><strong>【错误代码示例】</strong> 
+如下代码示例中的incorrect_password()函数的功能是在身份验证无效时（指定用户没有找到或者密码不正确），显示一条错误信息。 
+该函数接受一个源自用户的字符串数据user，而user是未验证的，是外部可控的。 
+该函数将user构造一条错误信息，然后用C语言标准函数fprintf打印到stderr。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 调用者需保证入参user的长度被限制为256个字节或者更少
+</span></span><span class="line"><span class="cl">void incorrect_password(const char *user)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	int ret = -1;
+</span></span><span class="line"><span class="cl">	static const char msg_format[] = &#34;%s cannot be authenticated.\n&#34;;
+</span></span><span class="line"><span class="cl">	size_t len = strlen(user) + 1 + sizeof(msg_format);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	char *msg = (char *)malloc(len);
+</span></span><span class="line"><span class="cl">	if (msg == NULL) {
+</span></span><span class="line"><span class="cl"> 		... // 错误处理
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	ret = snprintf(msg, msg_format, user);
+</span></span><span class="line"><span class="cl">	if (ret == -1) {
+</span></span><span class="line"><span class="cl"> 		... // 错误处理
+</span></span><span class="line"><span class="cl">	} else {
+</span></span><span class="line"><span class="cl">		fprintf(stderr, msg); // msg中有来自未验证的外部数据，存在格式化漏洞
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	free(msg);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>示例代码中首先计算了消息的长度，然后分配内存，接着利用snprintf()函数拼接了消息内容。因此消息内容中包含了msg_format的内容和用户的内容。 
+当入参user中含有用户输入的格式符（如%s,%p,%n等后，fprintf()在执行时，会将msg作为一个格式化字符串来进行解析，而不是直接输出消息内容， 
+也就是说此时msg中的内容不会被直接打印到stderr中，反而会将一些未知的数据打印到stderr，引发程序未定义的行为。这是一个非常严重的格式化漏洞。</p>
+<p><strong>【正确代码示例】</strong> 
+下面是第一种推荐做法，代码中使用fputs()来代替fprintf()函数，fputs()会直接将msg的内容输出到stderr中，而不会去解析它。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 入参user的长度被限制为256个字节或者更少
+</span></span><span class="line"><span class="cl">void incorrect_password(const char *user)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	int ret = -1;
+</span></span><span class="line"><span class="cl">	static const char msg_format[] = &#34;%s cannot be authenticated.\n&#34;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	// 这里加法运算不会整数溢出，因为user有限制
+</span></span><span class="line"><span class="cl">	size_t len = strlen(user) + 1 + sizeof(msg_format);
+</span></span><span class="line"><span class="cl">	char *msg = (char *)malloc(len);
+</span></span><span class="line"><span class="cl">	if (msg == NULL) {
+</span></span><span class="line"><span class="cl"> 		... // 错误处理
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	ret = snprintf(msg, msg_format, user);
+</span></span><span class="line"><span class="cl">	if (ret == -1) {
+</span></span><span class="line"><span class="cl"> 		... // 错误处理
+</span></span><span class="line"><span class="cl">	} else {
+</span></span><span class="line"><span class="cl">		fputs(stderr, msg); // 使用fputs函数代替fprintf函数
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	free(msg);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+下面是第二种推荐做法，代码中将不受信任的用户输入user作为fprintf()的可选参数之一，用&quot;%s&quot;将user以字符串的形式固定下来，然后输出到stderr中，而不作为格式字符串的一部分，这样就消除了格式字符串漏洞出现的可能性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void incorrect_password(const char  *user)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	static const char msg_format[] = &#34;%s cannot be authenticated.\n&#34;;
+</span></span><span class="line"><span class="cl">	fprintf(stderr, msg_format, user);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【错误代码示例】</strong> 
+如下代码示例中，使用了POSIX函数syslog()，但是syslog()函数也可能出现格式字符串漏洞。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void foo(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	char  *msg = get_msg();
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	syslog(LOG_INFO, msg); // 存在格式化漏洞
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+下面是推荐做法，代码中将不受信任的用户输入msg作为syslog()的可选参数之一，用&quot;%s&quot;将msg以字符串的形式固定下来，然后输出到系统日志中，而不作为格式字符串的一部分，这样就消除了格式字符串漏洞出现的可能性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void foo(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	static const char msg_format[] =  &#34;%s cannot be authenticated.\n&#34;;
+</span></span><span class="line"><span class="cl">	char  *msg = get_msg();
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	syslog(LOG_INFO, msg_format, msg); // 这里没有格式化漏洞
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="函数使用">函数使用</h1>
+<h2 id="调用格式化输入输出函数时使用有效的格式字符串">调用格式化输入/输出函数时，使用有效的格式字符串</h2>
+<p><strong>【描述】</strong></p>
+<p>格式化输入/输出函数（如fscanf()/fprintf()及相关函数）在format字符串控制下进行转换、格式化、打印其实参。</p>
+<p>在创建格式化字符串时的常见错误包括：</p>
+<ul>
+<li>
+<p>format中参数个数与实参个数不一致；</p>
+</li>
+<li>
+<p>使用无效的转换指示符；</p>
+</li>
+<li>
+<p>使用与转换指示符不兼容的标志字符；</p>
+</li>
+<li>
+<p>使用与转换指示符不兼容的长度修饰符；</p>
+</li>
+<li>
+<p>format中转换指示符与实参类型不匹配；</p>
+</li>
+<li>
+<p>使用int以外类型的实参指定宽度或者精度；</p>
+</li>
+</ul>
+<p>不要为格式化输入/输出函数提供未知的或者无效的转换规格，以及标志字符、精度、长度修饰符、转换指示符的无效组合。同样，不要提供与格式化字符串中的转换指示符类型不匹配的实参。这可能会使程序产生未定义行为。</p>
+<p><strong>【错误代码示例】</strong></p>
+<p>如下代码示例中，printf()的实参infoLevel类型与对应的转换指示符 &rsquo;s &lsquo;不匹配，正确的转换指示符要使用 &rsquo;d &lsquo;。同样，实参infoMsg类型与对应的转换指示符 &rsquo;d &lsquo;不匹配，正确的转换指示符要使用 &rsquo;s &lsquo;。 
+这些用法会使程序产生未定义行为，比如：printf()将把infoLevel实参解释为指针，试图从infoLevel包含的地址中读取一个字符串，从而发生非法访问。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void foo(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	const char *info_msg = &#34;Information seed to user.&#34;;
+</span></span><span class="line"><span class="cl">	int info_level = 3;
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	printf(&#34;infoLevel: %s, infoMsg: %d\n&#34;, info_level, info_msg);
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong></p>
+<p>正确的做法是确保printf()函数的实参匹配format的转换指示符。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void foo(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	const char *info_msg = &#34;Information seed to user.&#34;;
+</span></span><span class="line"><span class="cl">	int info_level = 3;
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	printf(&#34;infoLevel: %d, infoMsg: %s\n&#34;, info_level, info_msg);
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【影响】</strong></p>
+<p>错误的格式串可能造成内存破坏或者程序异常终止。</p>
+<h2 id="禁止使用alloca函数申请栈上内存">禁止使用alloca()函数申请栈上内存</h2>
+<p><strong>【描述】</strong> 
+POSIX和C99均未定义alloca()的行为，在有些平台下不支持该函数，使用alloca会降低程序的兼容性和可移植性，该函数在栈帧里申请内存，申请的大小很可能超过栈的边界，影响后续的代码执行。</p>
+<p>请使用malloc从堆中动态分配内存。</p>
+<p>【影响】</p>
+<p>程序栈的大小非常有限，如果分配导致栈溢出，则程序产生未定义行</p>
+<h2 id="禁止使用realloc函数">禁止使用realloc()函数</h2>
+<p><strong>【描述】</strong> 
+realloc()是一个非常特殊的函数，原型如下：</p>
+<p>void *realloc(void *ptr, size_t size);</p>
+<p>随着参数的不同，其行为也是不同：</p>
+<ul>
+<li>
+<p>当ptr不为NULL，且size不为0时，该函数会重新调整内存大小，并将新的内存指针返回，并保证最小的size的内容不变；</p>
+</li>
+<li>
+<p>参数ptr为NULL，但size不为0，那么其行为等同于malloc(size)；</p>
+</li>
+<li>
+<p>参数size为0，则realloc的行为等同于free(ptr)。</p>
+</li>
+</ul>
+<p>由此可见，一个简单的C函数，却被赋予了3种行为，这不是一个设计良好的函数。虽然在编程中提供了一些便利性，如果认识不足，使用不当，是却极易引发各种bug。</p>
+<p><strong>【错误代码示例】</strong> 
+如下代码示例中，使用realloc不当导致内存泄漏。 
+代码中希望对ptr的空间进行扩充，当realloc()分配失败的时候，会返回NULL。但是参数中的ptr的内存是没有被释放的，如果直接将realloc()的返回值赋给ptr，那么ptr原来指向的内存就会丢失，造成内存泄漏。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 当realloc()分配内存失败时会返回NULL，导致内存泄漏
+</span></span><span class="line"><span class="cl">char *ptr = (char  *)realloc(ptr, NEW_SIZE);
+</span></span><span class="line"><span class="cl">if (ptr == NULL) {
+</span></span><span class="line"><span class="cl">	...// 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+使用malloc()函数代替realloc()函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 使用malloc()函数代替realloc()函数
+</span></span><span class="line"><span class="cl">char *new_ptr = (char *)malloc(NEW_SIZE);
+</span></span><span class="line"><span class="cl">if (new_ptr == NULL) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">(void)memcpy(new_ptr, old_ptr, old_size);
+</span></span><span class="line"><span class="cl">... // 返回前，释放old_Ptr
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【影响】</strong></p>
+<p>使用不当容易造成内存泄漏和双重释放问题。不正确的内存对齐可能导致对象访问异常。</p>
+<h2 id="禁止外部可控数据作为进程启动函数的参数">禁止外部可控数据作为进程启动函数的参数</h2>
+<p><strong>【描述】</strong> 
+本条款中进程启动函数包括system、popen、execl、execlp、execle、execv、execvp等。</p>
+<p>system()、popen()等函数会创建一个新的进程，如果外部可控数据作为这些函数的参数，会导致注入漏洞。</p>
+<p>使用execl()、execlp()等函数执行新进程时，如果使用shell启动的新进程，则同样存在命令注入风险。</p>
+<p>因此，总是优先考虑使用C标准函数实现需要的功能。如果确实需要使用这些函数，请使用白名单机制确保这些函数的参数不受任何外来数据的影响。</p>
+<p><strong>【错误代码示例】</strong> 
+如下代码示例中，使用 system() 函数执行 cmd 命令串来自外部，攻击者可以执行任意命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char  *cmd = get_cmd_from_remote();
+</span></span><span class="line"><span class="cl">if (cmd == NULL) {
+</span></span><span class="line"><span class="cl">	... // 处理错误
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">system(cmd);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如下代码示例中，使用 system() 函数执行 cmd 命令串的一部分来自外部，攻击者可能输入  &lsquo;some dir;useradd xxx &lsquo;字符串，创建一个xxx的用户：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char cmd[MAX_LEN ];
+</span></span><span class="line"><span class="cl">int ret;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">char  *name = get_dir_name_from_remote();
+</span></span><span class="line"><span class="cl">if (name == NULL) {
+</span></span><span class="line"><span class="cl">	... // 处理错误
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ret = sprintf(cmd, &#34;ls %s&#34;, name);
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">system(cmd);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用exec系列函数来避免命令注入时，注意exec系列函数中的path、file参数禁止使用命令解析器(如/bin/sh)。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int execl(const char *path, const char *arg,  ...);
+</span></span><span class="line"><span class="cl">int execlp(const char *file, const char *arg,  ...);
+</span></span><span class="line"><span class="cl">int execle(const char *path, const char *arg,  ..., char * const envp[]);
+</span></span><span class="line"><span class="cl">int execv(const char *path, char *const argv[]);
+</span></span><span class="line"><span class="cl">int execvp(const char *file, char *const argv[]);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>例如，禁止如下使用方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char *cmd = get_dir_name_from_remote();
+</span></span><span class="line"><span class="cl">execl(&#34;/bin/sh&#34;, &#34;sh&#34;,  &#34;-c&#34;, cmd, NULL);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> (使用库函数)</p>
+<p>在Linux下实现对当前目录下文件名的打印，可以使用opendir(), readdir(), stat()等函数直接实现ls-l命令的功能，不必使用system()函数。下面是一个简化的ls -l示例版本，列出一个由程序内部指定的文件的信息，该函数仅考虑了不需要重入的情况。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">static int OutputFileInfo(const char *file_name)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	const char priv[] = {&#39;x&#39;, &#39;w&#39;, &#39;r&#39;};
+</span></span><span class="line"><span class="cl">	ASSERT(file_name != NULL);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	struct stat st;
+</span></span><span class="line"><span class="cl">	int ret = stat(file_name, &amp;st);
+</span></span><span class="line"><span class="cl">	if (ret == -1) {
+</span></span><span class="line"><span class="cl">		return -1;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	const struct passwd *pw = getpwuid(st.st_uid);
+</span></span><span class="line"><span class="cl">	if (pw == NULL) {
+</span></span><span class="line"><span class="cl">		return -1;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	const struct group *gp = getgrgid(st.st_gid);
+</span></span><span class="line"><span class="cl">	if (gp == NULL) {
+</span></span><span class="line"><span class="cl">		return -1;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	if (S_ISREG(st.st_mode)) {
+</span></span><span class="line"><span class="cl">		printf(&#34;-&#34;);
+</span></span><span class="line"><span class="cl">	} else if (S_ISDIR(st.st_mode)) {
+</span></span><span class="line"><span class="cl">		printf(&#34;d&#34;);
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	for (int i = 8; i &gt;= 0; i --) {
+</span></span><span class="line"><span class="cl">		if ((st.st_mode &amp; (1 &lt; &lt; i)) != 0) {
+</span></span><span class="line"><span class="cl">			printf(&#34;%c&#34;, priv[i % 3]);
+</span></span><span class="line"><span class="cl">		} else {
+</span></span><span class="line"><span class="cl">			printf(&#34;-&#34;);
+</span></span><span class="line"><span class="cl">		}
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	printf(&#34;%s %s %ld %s\n&#34;,
+</span></span><span class="line"><span class="cl">	pw-&gt;pw_name,
+</span></span><span class="line"><span class="cl">	gp-&gt;gr_name,
+</span></span><span class="line"><span class="cl">	st.st_size,
+</span></span><span class="line"><span class="cl">	file_name);
+</span></span><span class="line"><span class="cl">	return 0;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> (使用exec系列函数)</p>
+<p>可以通过库函数简单实现的功能（如上例），需要避免调用命令处理器来执行外部命令。如果确实需要调用单个命令，应使用exec *函数来实现参数化调用，并对调用的命令实施白名单管理。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pid_t pid;
+</span></span><span class="line"><span class="cl">char * const envp[] = { NULL };
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">char *file_name = get_dir_name_from_remote();
+</span></span><span class="line"><span class="cl">if (file_name == NULL) {
+</span></span><span class="line"><span class="cl">	... // 处理错误
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">if ((pid = fork()) &lt; 0) {
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">} else if (pid == 0) {
+</span></span><span class="line"><span class="cl">	// 使用some_tool对指定文件进行加工
+</span></span><span class="line"><span class="cl">	execle( &#34;/bin/some_tool&#34;, &#34;some_tool&#34;, file_name, NULL, envp);
+</span></span><span class="line"><span class="cl">	_Exit(-1);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">int status;
+</span></span><span class="line"><span class="cl">waitpid(pid, &amp;status, 0);
+</span></span><span class="line"><span class="cl">FILE *fp = fopen(file_name, &#34;r&#34;);
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时，外部输入的file_name仅作为some_tool命令的参数，没有命令注入的风险。</p>
+<p><strong>【正确代码示例】</strong> (使用白名单)</p>
+<p>对输入的文件名基于合理的白名单检查，避免命令注入。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char *cmd = get_cmd_from_remote();
+</span></span><span class="line"><span class="cl">if (cmd == NULL) {
+</span></span><span class="line"><span class="cl">	... // 处理错误
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 使用白名单检查命令是否合法，仅允许 &#34;some_tool_a&#34;, &#34;some_tool_b&#34;命令，外部无法随意控制
+</span></span><span class="line"><span class="cl">if (!is_valid_cmd(cmd)) {
+</span></span><span class="line"><span class="cl">	... // 处理错误
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">system(cmd);
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【相关软件CWE编号】</strong> CWE-676，CWE-88</p>
+<h2 id="禁止在信号处理例程中调用非异步安全函数">禁止在信号处理例程中调用非异步安全函数</h2>
+<p><strong>【描述】</strong> 
+在信号处理程序中只调用异步安全函数。</p>
+<p>除了C语言标准函数以外，其他系统函数也提供了一些的异步安全函数，在信号处理程序中使用这些函数之前，应确保调用的函数在所有可能的执行环境下均是异步安全的。</p>
+<p><strong>【错误代码示例】</strong> 
+如下代码示例中，信号处理函数中调用了非异步安全函数printf()：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void handler(int num)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	printf(&#34;receive signal = %d \n&#34;, SIGINT);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">int main(int argc, char **argv)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	if (signal(SIGINT, handler) == SIG_ERR) {
+</span></span><span class="line"><span class="cl"> 		... // 错误处理
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	while (true) {
+</span></span><span class="line"><span class="cl"> 		... // 程序主循环代码
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	return 0;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+如下代码示例中，尽量不在信号处理函数中调用其他函数，仅在信号处理程序中修改volatile sig_atomic_t类型的变量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">static volatile sig_atomic_t g_flag = 0;
+</span></span><span class="line"><span class="cl">void handler(int num)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	g_flag = 1;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">int main(int argc, char **argv)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	if (signal(SIGINT, handler) == SIG_ERR) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	while (true) {
+</span></span><span class="line"><span class="cl">		if (g_flag != 0) {
+</span></span><span class="line"><span class="cl">			printf(&#34;receive signal = %d\n&#34;, SIGINT);
+</span></span><span class="line"><span class="cl">		}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		... // 程序主循环代码
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	return 0;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【相关软件CWE编号】</strong> CWE-479</p>
+<h1 id="内存">内存</h1>
+<h2 id="内存分配后必须判断是否成功">内存分配后必须判断是否成功</h2>
+<p><strong>【描述】</strong> 
+内存分配一旦失败，那么后续的操作会存在未定义的行为风险。比如malloc申请失败返回了空指针，对空指针的解引用是一种未定义行为。</p>
+<p><strong>【错误代码示例】</strong> 
+如下代码示例中，调用malloc分配内存之后，没有判断是否成功，直接引用了p。如果malloc失败，它将返回一个空指针并传递给p。当如下代码在内存拷贝中解引用了该空指针p时，程序会出现未定义行为。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">struct tm *make_tm(int year, int mon, int day, int hour, int min, int sec)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	struct tm *tmb = (struct tm*)malloc(sizeof(*tmb));
+</span></span><span class="line"><span class="cl">	tmb-&gt;year = year;
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	return tmb;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+如下代码示例中，在malloc分配内存之后，立即判断其是否成功，消除了上述的风险。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">struct tm  *make_tm(int year, int mon, int day, int hour, int min, int sec)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	struct tm  *tmb = (struct tm *)malloc(sizeof(*tmb));
+</span></span><span class="line"><span class="cl">	if (tmb == NULL) {
+</span></span><span class="line"><span class="cl">		... // 错误处理
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	tmb-&gt;year = year;
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	return tmb;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="外部输入作为内存操作相关函数的复制长度时需要校验其合法性">外部输入作为内存操作相关函数的复制长度时，需要校验其合法性</h2>
+<p><strong>【描述】</strong> 
+将数据复制到容量不足以容纳该数据的内存中会导致缓冲区溢出。为了防止此类错误，必须根据目标容量的大小限制被复制的数据大小，或者必须确保目标容量足够大以容纳要复制的数据。</p>
+<p><strong>【错误代码示例】</strong> 
+外部输入的数据不一定会直接作为内存复制长度使用，还可能会间接参与内存复制操作。 
+如下代码示例中，inputTable-&gt;count来自外部报文，虽然没有直接作为内存复制长度使用，而是作为for循环体的上限使用，间接参与了内存复制操作。由于没有校验其大小，可造成缓冲区溢出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">typedef struct {
+</span></span><span class="line"><span class="cl">	size_t count;
+</span></span><span class="line"><span class="cl">	int val[MAX_num_bERS];
+</span></span><span class="line"><span class="cl">} ValueTable;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ValueTable *value_table_dup(const ValueTable *input_table)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	ValueTable *output_table = ... // 分配内存
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	for (size_t i = 0; i  &lt; input_table-&gt;count; i++) {
+</span></span><span class="line"><span class="cl">		output_table-&gt;val[i] = input_table-&gt;val[i];
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl"> 	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+如下代码示例中，对input_table-&gt;count做了校验。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">typedef struct {
+</span></span><span class="line"><span class="cl">size_t count;
+</span></span><span class="line"><span class="cl">int val[MAX_num_bERS];
+</span></span><span class="line"><span class="cl">}ValueTable;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ValueTable *value_table_dup(const ValueTable *input_table)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	ValueTable *output_table = ... // 分配内存
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	/ *
+</span></span><span class="line"><span class="cl">	- 根据应用场景，对来自外部报文的循环长度input_table-&gt;count
+</span></span><span class="line"><span class="cl">	- 与output_table-&gt;val数组大小做校验，避免造成缓冲区溢出
+</span></span><span class="line"><span class="cl">	*/
+</span></span><span class="line"><span class="cl">	if (input_table-&gt;count  &gt; sizeof(output_table-&gt;val) / sizeof(output_table-&gt;val[0]){
+</span></span><span class="line"><span class="cl">		return NULL;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	for (size_t i = 0; i  &lt; input_table-&gt;count; i++) {
+</span></span><span class="line"><span class="cl">		output_table-&gt;val[i] = input_table-&gt;val[i];
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="内存中的敏感信息使用完毕后立即清0">内存中的敏感信息使用完毕后立即清0</h2>
+<p><strong>【描述】</strong> 
+内存中的口令、密钥等敏感信息使用完毕后立即清0，避免被攻击者获取或者无意间泄漏给低权限用户。这里所说的内存包括但不限于：</p>
+<ul>
+<li>
+<p>动态分配的内存</p>
+</li>
+<li>
+<p>静态分配的内存</p>
+</li>
+<li>
+<p>自动分配（堆栈）内存</p>
+</li>
+<li>
+<p>内存缓存</p>
+</li>
+<li>
+<p>磁盘缓存</p>
+</li>
+</ul>
+<p><strong>【错误代码示例】</strong> 
+通常内存在释放前不需要清除内存数据，因为这样在运行时会增加额外开销，所以在这段内存被释放之后，之前的数据还是会保留在其中。如果这段内存中的数据包含敏感信息，则可能会意外泄漏敏感信息。为了防止敏感信息泄漏，必须先清除内存中的敏感信息，然后再释放。 
+在如下代码示例中，存储在所引用的动态内存中的敏感信息secret被复制到新动态分配的缓冲区newSecret，最终通过free()释放。因为释放前未清除这块内存数据，这块内存可能被重新分配到程序的另一部分，之前存储在newSecret中的敏感信息可能会无意中被泄露。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char *secret = NULL;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/ *
+</span></span><span class="line"><span class="cl">- 假设 secret 指向敏感信息，敏感信息的内容是长度小于SIZE_MAX个字符，
+</span></span><span class="line"><span class="cl">- 并且以null终止的字节字符串
+</span></span><span class="line"><span class="cl">*/
+</span></span><span class="line"><span class="cl">size_t size = strlen(secret);
+</span></span><span class="line"><span class="cl">char *new_secret = NULL;
+</span></span><span class="line"><span class="cl">new_secret = (char *)malloc(size + 1);
+</span></span><span class="line"><span class="cl">if (new_secret == NULL) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">} else {
+</span></span><span class="line"><span class="cl">	strcpy(new_secret, secret);
+</span></span><span class="line"><span class="cl">	... // 处理 new_secret ...
+</span></span><span class="line"><span class="cl">	free(new_secret);
+</span></span><span class="line"><span class="cl">	new_secret = NULL;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+如下代码示例中，为了防止信息泄漏，应先清除包含敏感信息的动态内存（用 &rsquo;  0 &lsquo;字符填充空间），然后再释放它。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char *secret = NULL;
+</span></span><span class="line"><span class="cl">/ *
+</span></span><span class="line"><span class="cl">- 假设 secret 指向敏感信息，敏感信息的内容是长度小于SIZE_MAX个字符，
+</span></span><span class="line"><span class="cl">- 并且以null终止的字节字符串
+</span></span><span class="line"><span class="cl">*/
+</span></span><span class="line"><span class="cl">size_t size = strlen(secret);
+</span></span><span class="line"><span class="cl">char *new_secret = NULL;
+</span></span><span class="line"><span class="cl">new_secret = (char *)malloc(size + 1);
+</span></span><span class="line"><span class="cl">if (new_secret == NULL) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">} else {
+</span></span><span class="line"><span class="cl">	strcpy(new_secret, secret);
+</span></span><span class="line"><span class="cl">	... // 处理 new_secret ...
+</span></span><span class="line"><span class="cl">	(void)memset(new_secret, 0, size + 1);
+</span></span><span class="line"><span class="cl">	free(new_secret);
+</span></span><span class="line"><span class="cl">	new_secret = NULL;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+下面是另外一个涉及敏感信息清理的场景，在代码获取到密码后，将密码保存到password中，进行密码验证，使用完毕后，通过memset对password清0。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int foo(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	char password [MAX_PWD_LEN ] = {0};
+</span></span><span class="line"><span class="cl">	if (!get_password(password, sizeof(password))) {
+</span></span><span class="line"><span class="cl">		...  // 处理错误 
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	if (!verify_password(password)) {
+</span></span><span class="line"><span class="cl">		... // 处理错误
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	(void)memset(password, 0, sizeof(password));
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="文件">文件</h1>
+<h2 id="创建文件时必须显式指定合适的文件访问权限">创建文件时必须显式指定合适的文件访问权限</h2>
+<p><strong>【描述】</strong> 
+创建文件时，如果不显式指定合适访问权限，可能会让未经授权的用户访问该文件，造成信息泄露，文件数据被篡改，文件中被注入恶意代码等风险。</p>
+<p>虽然文件的访问权限也依赖于文件系统，但是当前许多文件创建函数（例如POSIX open函数）都具有设置（或影响）文件访问权限的功能，所以当使用这些函数创建文件时，必须显式指定合适的文件访问权限，以防止意外访问。</p>
+<p><strong>【错误代码示例】</strong> 
+使用POSIX open()函数创建文件但未显示指定该文件的访问权限，可能会导致文件创建时具有过高的访问权限，这可能会导致漏洞。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void foo(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	int fd = -1;
+</span></span><span class="line"><span class="cl">	char *file_name = NULL;
+</span></span><span class="line"><span class="cl">	... // 初始化 file_name
+</span></span><span class="line"><span class="cl">	fd = open(file_name, O_CREAT | O_WRONLY); // 没有显式指定访问权限
+</span></span><span class="line"><span class="cl">	if (fd == -1) {
+</span></span><span class="line"><span class="cl">		... // 错误处理
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+应该在open的第三个参数中显式指定新创建文件的访问权限。可以根据文件实际的应用情况设置何种访问权限。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void foo(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	int fd = -1;
+</span></span><span class="line"><span class="cl">	char *file_name = NULL;
+</span></span><span class="line"><span class="cl">	... // 初始化 file_name 和指定其访问权限
+</span></span><span class="line"><span class="cl">	// 此处根据文件实际需要，显式指定其访问权限
+</span></span><span class="line"><span class="cl">	int fd = open(file_name, O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR);
+</span></span><span class="line"><span class="cl">	if (fd == -1) {
+</span></span><span class="line"><span class="cl">		... // 错误处理
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="必须对文件路径进行规范化后再使用">必须对文件路径进行规范化后再使用</h2>
+<p><strong>【描述】</strong> 
+当文件路径来自外部数据时，必须对其做合法性校验，如果不校验，可能造成系统文件的被任意访问。但是禁止直接对其进行校验，正确做法是在校验之前必须对其进行路径规范化处理，因为： 
+同一个文件可以通过多种形式的路径来描述和引用，例如既可以是绝对路径，也可以是相对路径；而且路径名、目录名和文件名可能包含使校验变得困难和不准确的字符（如：&quot;.&quot;、&quot;..&quot;）。此外，文件还可以是符号链接，这进一步模糊了文件的实际位置或标识，增加了校验的难度和校验准确性。所以必须先将文件路径规范化，从而更容易校验其路径、目录或文件名，增加校验准确性，如使用realpath函数。</p>
+<p>一个简单的案例说明如下：</p>
+<p>当文件路径来自外部数据时，需要先将文件路径规范化，如果没有作规范化处理，攻击者就有机会通过恶意构造文件路径进行文件的越权访问。</p>
+<p>例如，攻击者可以构造&quot;../../../etc/passwd&quot;的方式进行任意文件访问。</p>
+<p><strong>【错误代码示例】</strong> 
+在此错误的示例中，argv[1]包含一个源于受污染源的文件名，并且该文件名已打开以进行写入。在使用此文件名操作之前，应该对其进行验证，以确保它引用的是预期的有效文件。 
+不幸的是，argv[1]引用的文件名可能包含特殊字符，例如目录字符，这使验证变得困难，甚至不可能。而且，argv[1]中可能包含可以指向任意文件路径的符号链接，即使该文件名通过了验证，也会导致该文件名是无效的。 
+这种场景下，对文件名的直接验证即使被执行也是得不到预期的结果，对fopen()的调用可能会导致访问一个意外的文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">if (!verify_file(input_file_name) { // 没有对input_file_name做规范化，直接做校验
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if (fopen(input_file_name, &#34;w&#34;) == NULL) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+规范化文件名是具有一定难度的，因为这需要了解底层文件系统。 
+POSIX realpath()函数可以帮助将路径名转换为规范形式。</p>
+<p>对上面的错误代码示例，我们采用如下解决方案：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char *real_path_res = NULL;
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">// 在校验之前，先对input_file_name做规范化处理
+</span></span><span class="line"><span class="cl">real_path_res = realpath(input_file_name, NULL);
+</span></span><span class="line"><span class="cl">if (real_path_res == NULL) {
+</span></span><span class="line"><span class="cl">	... // 规范化的错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 规范化以后对路径进行校验
+</span></span><span class="line"><span class="cl">if (!verify_file(real_path_res) {
+</span></span><span class="line"><span class="cl">	... // 校验的错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 使用
+</span></span><span class="line"><span class="cl">if (fopen(real_path_res, &#34;w&#34;) == NULL) {
+</span></span><span class="line"><span class="cl">	... // 实际操作的错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">free(real_path_res);
+</span></span><span class="line"><span class="cl">real_path_res = NULL;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+根据我们的实际场景，我们还可以采用的第二套解决方案，说明如下：</p>
+<p>如果PATH_MAX被定义为中的一个常量，那么使用非空的resolved_path调用realpath()也是安全的。 
+在本例中realpath()函数期望resolved_path引用一个字符数组，该字符数组足够大，可以容纳规范化的路径。 
+如果定义了PATH_MAX，则分配一个大小为PATH_MAX的缓冲区来保存realpath()的结果。正确代码示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char *real_path_res = NULL;
+</span></span><span class="line"><span class="cl">char *canonical_file_name = NULL;
+</span></span><span class="line"><span class="cl">size_t path_size = 0;
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">path_size = (size_t)PATH_MAX;
+</span></span><span class="line"><span class="cl">if (verify_path_size(path_size) == TRUE) {
+</span></span><span class="line"><span class="cl">	canonical_file_name = (char *)malloc(path_size);
+</span></span><span class="line"><span class="cl">	if (canonical_file_name == NULL) {
+</span></span><span class="line"><span class="cl">		... // 错误处理
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	real_path_res = realpath(inputFilename, canonical_file_name);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if (real_path_res == NULL) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if (verify_file(real_path_res) == FALSE) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if (fopen(real_path_res, &#34;w&#34;) == NULL ) {
+</span></span><span class="line"><span class="cl">	... // 错误处理
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">free(canonical_file_name);
+</span></span><span class="line"><span class="cl">canonical_file_name = NULL;
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【错误代码示例】</strong> 
+下面的代码场景是从外部获取到文件名称，拼接成文件路径后，直接对文件内容进行读取，导致攻击者可以读取到任意文件的内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char *file_name = get_msg_from_remote();
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">sprintf(untrust_path, &#34;/tmp/%s&#34;, file_name);
+</span></span><span class="line"><span class="cl">char *text = read_file_content(untrust_path);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+正确的做法是，对路径进行规范化后，再判断路径是否是本程序所认为的合法的路径：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char *file_name = get_msg_from_remote();
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">sprintf(untrust_path, &#34;/tmp/%s&#34;, file_name);
+</span></span><span class="line"><span class="cl">char path[PATH_MAX] = {0};
+</span></span><span class="line"><span class="cl">if (realpath(untrust_path, path) == NULL) {
+</span></span><span class="line"><span class="cl">	... // 处理错误
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if (!is_valid_path(path)) { // 检查文件的位置是否正确
+</span></span><span class="line"><span class="cl">	... // 处理错误
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">char *text = read_file_content(path);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【例外】</strong></p>
+<p>运行于控制台的命令行程序，通过控制台手工输入文件路径，可以作为本条款例外。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int main(int argc, char **argv)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	int fd = -1;
+</span></span><span class="line"><span class="cl">	if (argc == 2) {
+</span></span><span class="line"><span class="cl">		fd = open(argv[1], O_RDONLY);
+</span></span><span class="line"><span class="cl">		...
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="不要在共享目录中创建临时文件">不要在共享目录中创建临时文件</h2>
+<p><strong>【描述】</strong> 
+程序的临时文件应当是程序自身独享的，任何将自身临时文件置于共享目录的做法，将导致其他共享用户获得该程序的额外信息，产生信息泄露。因此，不要在任何共享目录创建仅由程序自身使用的临时文件。</p>
+<p>程序员通常会在共享目录中(例如在/tmp和/var/tmp创建临时文件，并且还有可能会定期清除这些临时文件(例如，每晚或重新启动期间)，但也可能不注意清理。</p>
+<p>临时文件通常用于辅助保存不能驻留在内存中的数据或存储临时的数据，也可用作进程间通信的一种手段（通过文件系统传输数据）。例如，一个进程在共享目录中创建一个临时文件，该文件名可能使用了众所周知的名称或者一个临时的名称，然后就可以通过该文件在进程间共享信息。这种通过在共享目录中创建临时文件的方法实现进程间共享的做法很危险，因为共享目录中的这些文件很容易被攻击者劫持或操纵。这里有几种缓解策略：</p>
+<ul>
+<li>
+<p>1.使用其他低级IPC（进程间通信）机制，例如套接字或共享内存。</p>
+</li>
+<li>
+<p>2.使用更高级别的IPC机制，例如远程过程调用。</p>
+</li>
+<li>
+<p>3.使用仅能由程序本身访问的安全目录(多线程/进程下注意防止条件竞争)。</p>
+</li>
+</ul>
+<p>同时，下面列出了几项临时文件创建使用的方法，产品根据具体场景执行以下一项或者几项，同时产品也可以自定义合适的方法。</p>
+<ul>
+<li>
+<p>1.文件必须具有合适的权限，只有符合权限的用户才能访问</p>
+</li>
+<li>
+<p>2.创建的文件名是唯一的、或不可预测的</p>
+</li>
+<li>
+<p>3.仅当文件不存在时才创建打开(原子创建打开)</p>
+</li>
+<li>
+<p>4.使用独占访问打开，避免竞争条件</p>
+</li>
+<li>
+<p>5.在程序退出之前移除</p>
+</li>
+</ul>
+<p>同时也需要注意到，当某个目录被开放读/写权限给多个用户或者一组用户时，该共享目录潜在的安全风险远远大于访问该目录中临时文件这个功能的本身。</p>
+<p>如果想安全地在共享目录中创建临时文件，而不受威胁是不容易的。例如，用于本地挂载的文件系统的代码在与远程挂载的文件系统一起共享使用时可能会受到攻击。而且上面的函数安全版本还受限于所使用的C运行时库、操作系统和文件系统的版本。唯一安全的解决方案是不要在共享目录中创建临时文件。</p>
+<p><strong>【错误代码示例】</strong> 
+如下代码示例，程序在Linux系统的共享目录/tmp下创建临时文件来保存临时数据，且文件名是硬编码的。 
+由于文件名是硬编码的，因此是可预测的，攻击者只需用符号链接替换文件，然后链接所引用的目标文件就会被打开并写入新内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void proc_data(const char  *file_name)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	FILE  *fp = fopen(file_name, &#34;wb+&#34;);
+</span></span><span class="line"><span class="cl">	if (fp == NULL) {
+</span></span><span class="line"><span class="cl">		... // 错误处理
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	... // 写文件
+</span></span><span class="line"><span class="cl">	fclose(fp);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">int main(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	// 不合规：1.在系统共享目录中创建临时文件；2.临时文件名硬编码
+</span></span><span class="line"><span class="cl">	char  *real_file = &#34;/tmp/data&#34;;
+</span></span><span class="line"><span class="cl"> 	...
+</span></span><span class="line"><span class="cl">	proc_data(real_file);
+</span></span><span class="line"><span class="cl"> 	...
+</span></span><span class="line"><span class="cl">	return 0;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确案例】</strong></p>
+<p>Linux下的/tmp目录是一个所有用户都可以访问的共享目录，不应在该目录下创建仅由程序自身使用的临时文件。</p>
+<p>【业界典型漏洞】CVE-2004-2502</p>
+<h1 id="其它">其它</h1>
+<h2 id="不要在信号处理函数中访问共享对象">不要在信号处理函数中访问共享对象</h2>
+<p><strong>【描述】</strong> 
+在信号处理程序中访问和修改共享对象可能会造成竞争条件，使数据处于不确定的状态。 
+这条规则有两个不适用的场景（C11标准第5.1.2.3章节第5段）是：</p>
+<p>1） 读写不需要加锁的原子对象;</p>
+<p>2）读写volatile sig_atomic_t类型的对象，因为具有volatile sig_atomic_t类型的对象即使在出现异步中断的时候也可以作为一个原子实体访问，是异步安全的。</p>
+<p>此外，在信号处理程序中，如果要调用函数，请仅调用异步信号安全函数。</p>
+<p><strong>【错误代码示例】</strong> 
+在这个信号处理过程中，程序打算将p_msg作为共享对象，当产生SIGINT信号时更新共享对象的内容，但是该p_msg变量类型不是volatile sig_atomic_t，所以不是异步安全的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#define MAX_MSG_SIZE 32
+</span></span><span class="line"><span class="cl">static char g_msg_buf[MAX_MSG_SIZE] = {0};
+</span></span><span class="line"><span class="cl">static char *g_msg = g_msg_buf;
+</span></span><span class="line"><span class="cl">void signal_handler(int signum)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	// 下面代码操作g_msg不合规，因为不是异步安全的
+</span></span><span class="line"><span class="cl">	(void)memset(g_msg, 0, MAX_MSG_SIZE);
+</span></span><span class="line"><span class="cl">	strcpy(g_msg,  &#34;signal SIGINT received.&#34;);
+</span></span><span class="line"><span class="cl">	... //
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">int main(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	strcpy(g_msg,  &#34;No msg yet.&#34;); // 初始化消息内容
+</span></span><span class="line"><span class="cl">	signal(SIGINT, signal_handler); // 设置SIGINT信号对应的处理函数
+</span></span><span class="line"><span class="cl">	... // 程序主循环代码
+</span></span><span class="line"><span class="cl">	return 0;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong> 
+如下代码示例中，在信号处理函数中仅将volatile sig_atomic_t类型作为共享对象使用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#define MAX_MSG_SIZE 32
+</span></span><span class="line"><span class="cl">volatile sig_atomic_t g_sig_flag = 0;
+</span></span><span class="line"><span class="cl">void signal_handler(int signum)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	g_sig_flag = 1; // 合规
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">int main(void)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	signal(SIGINT, signal_handler);
+</span></span><span class="line"><span class="cl">	char msg_buf[MAX_MSG_SIZE];
+</span></span><span class="line"><span class="cl">	strcpy(msg_buf, &#34;No msg yet.&#34;); // 初始化消息内容
+</span></span><span class="line"><span class="cl">	... // 程序主循环代码
+</span></span><span class="line"><span class="cl">	if (g_sig_flag == 1) { // 在退出主循环之后，根据sigFlag状态再刷新消息内容
+</span></span><span class="line"><span class="cl">		strcpy(msgBuf, &#34;signal SIGINT received.&#34;);
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	return 0;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【相关软件CWE编号】</strong> CWE-662，CWE-828</p>
+<h2 id="禁用rand函数产生用于安全用途的伪随机数">禁用rand函数产生用于安全用途的伪随机数</h2>
+<p><strong>【描述】</strong> 
+C语言标准库rand()函数生成的是伪随机数，所以不能保证其产生的随机数序列质量。所以禁止使用rand()函数产生的随机数用于安全用途，必须使用安全的随机数产生方式，如： /dev/random文件。</p>
+<p>典型的安全用途场景包括(但不限于)以下几种：</p>
+<ul>
+<li>
+<p>会话标识SessionID的生成；</p>
+</li>
+<li>
+<p>挑战算法中的随机数生成；</p>
+</li>
+<li>
+<p>验证码的随机数生成；</p>
+</li>
+<li>
+<p>用于密码算法用途（例如用于生成IV、盐值、密钥等）的随机数生成。</p>
+</li>
+</ul>
+<p><strong>【错误代码示例】</strong> 
+程序员期望生成一个唯一的不可被猜测的HTTP会话ID，但该ID是通过调用rand()函数产生的数字随机数，它的ID是可猜测的，并且随机性有限。</p>
+<p><strong>【正确代码示例】(POSIX)</strong> 
+可以使用/dev/random文件得到随机数。</p>
+<p><strong>【影响】</strong></p>
+<p>使用rand()函数可能造成可预测的随机数。</p>
+<h1 id="内核操作">内核操作</h1>
+<h2 id="内核mmap接口实现中确保对映射起始地址和大小进行合法性校验">内核mmap接口实现中，确保对映射起始地址和大小进行合法性校验</h2>
+<p><strong>【描述】</strong></p>
+<p>**说明：**Linux内核 mmap接口中，经常使用remap_pfn_range()函数将设备物理内存映射到用户进程空间。如果映射起始地址等参数由用户态控制并缺少合法性校验，将导致用户态可通过映射读写任意内核地址。如果攻击者精心构造传入参数，甚至可在内核中执行任意代码。</p>
+<p><strong>【错误代码示例】</strong></p>
+<p>如下代码在使用remap_pfn_range()进行内存映射时，未对用户可控的映射起始地址和空间大小进行合法性校验，可导致内核崩溃或任意代码执行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">static int incorrect_mmap(struct file *file, struct vm_area_struct *vma)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	unsigned long size;
+</span></span><span class="line"><span class="cl">	size = vma-&gt;vm_end - vma-&gt;vm_start;
+</span></span><span class="line"><span class="cl">	vma-&gt;vm_page_prot = pgprot_noncached(vma-&gt;vm_page_prot);
+</span></span><span class="line"><span class="cl">	//错误：未对映射起始地址、空间大小做合法性校验
+</span></span><span class="line"><span class="cl">	if (remap_pfn_range(vma, vma-&gt;vm_start, vma-&gt;vm_pgoff, size, vma-&gt;vm_page_prot)) { 
+</span></span><span class="line"><span class="cl">		err_log(&#34;%s, remap_pfn_range fail&#34;, __func__);
+</span></span><span class="line"><span class="cl">		return EFAULT;
+</span></span><span class="line"><span class="cl">	} else {
+</span></span><span class="line"><span class="cl">		vma-&gt;vm_flags &amp;=  ~VM_IO;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	return EOK;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong></p>
+<p>增加对映射起始地址等参数的合法性校验。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">static int correct_mmap(struct file *file, struct vm_area_struct *vma)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	unsigned long size;
+</span></span><span class="line"><span class="cl">	size = vma-&gt;vm_end - vma-&gt;vm_start;
+</span></span><span class="line"><span class="cl">	//修改：添加校验函数，验证映射起始地址、空间大小是否合法
+</span></span><span class="line"><span class="cl">	if (!valid_mmap_phys_addr_range(vma-&gt;vm_pgoff, size)) { 
+</span></span><span class="line"><span class="cl">		return EINVAL;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	vma-&gt;vm_page_prot = pgprot_noncached(vma-&gt;vm_page_prot);
+</span></span><span class="line"><span class="cl">	if (remap_pfn_range(vma, vma-&gt;vm_start, vma-&gt;vm_pgoff, size, vma-&gt;vm_page_prot)) {
+</span></span><span class="line"><span class="cl">		err_log( &#34;%s, remap_pfn_range fail &#34;, __func__);
+</span></span><span class="line"><span class="cl">		return EFAULT;
+</span></span><span class="line"><span class="cl">	} else {
+</span></span><span class="line"><span class="cl">		vma-&gt;vm_flags &amp;=  ~VM_IO;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	return EOK;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="内核程序中必须使用内核专用函数读写用户态缓冲区">内核程序中必须使用内核专用函数读写用户态缓冲区</h2>
+<p><strong>【描述】</strong></p>
+<p>用户态与内核态之间进行数据交换时，如果在内核中不加任何校验（如校验地址范围、空指针）而直接引用用户态传入指针，当用户态传入非法指针时，可导致内核崩溃、任意地址读写等问题。因此，应当禁止使用memcpy()、sprintf()等危险函数，而是使用内核提供的专用函数：copy_from_user()、copy_to_user()、put_user()和get_user()来读写用户态缓冲区，这些函数内部添加了入参校验功能。</p>
+<p>所有禁用函数列表为：memcpy()、bcopy()、memmove()、strcpy()、strncpy()、strcat()、strncat()、sprintf()、vsprintf()、snprintf()、vsnprintf()、sscanf()、vsscanf()。</p>
+<p><strong>【错误代码示例】</strong></p>
+<p>内核态直接使用用户态传入的buf指针作为snprintf()的参数，当buf为NULL时，可导致内核崩溃。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ssize_t incorrect_show(struct file *file, char__user *buf, size_t size, loff_t *data)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	// 错误：直接引用用户态传入指针，如果buf为NULL，则空指针异常导致内核崩溃
+</span></span><span class="line"><span class="cl">	return snprintf(buf, size, &#34;%ld\n&#34;, debug_level); 
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong></p>
+<p>使用copy_to_user()函数代替snprintf()。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ssize_t correct_show(struct file *file, char __user *buf, size_t size, loff_t *data)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	int ret = 0;
+</span></span><span class="line"><span class="cl">	char level_str[MAX_STR_LEN] = {0};
+</span></span><span class="line"><span class="cl">	snprintf(level_str, MAX_STR_LEN, &#34;%ld \n&#34;, debug_level);
+</span></span><span class="line"><span class="cl">	if(strlen(level_str) &gt;= size) {
+</span></span><span class="line"><span class="cl">		return EFAULT;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	// 修改：使用专用函数copy_to_user()将数据写入到用户态buf，并注意防止缓冲区溢出
+</span></span><span class="line"><span class="cl">	ret = copy_to_user(buf, level_str, strlen(level_str)+1); 
+</span></span><span class="line"><span class="cl">	return ret;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【错误代码示例】</strong></p>
+<p>内核态直接使用用户态传入的指针user_buf作为数据源进行memcpy()操作，当user_buf为NULL时，可导致内核崩溃。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">size_t incorrect_write(struct file  *file, const char __user  *user_buf, size_t count, loff_t  *ppos)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	char buf [128] = {0};
+</span></span><span class="line"><span class="cl">	int buf_size = 0;
+</span></span><span class="line"><span class="cl">	buf_size = min(count, (sizeof(buf)-1));
+</span></span><span class="line"><span class="cl">	// 错误：直接引用用户态传入指针，如果user_buf为NULL，则可导致内核崩溃
+</span></span><span class="line"><span class="cl">	(void)memcpy(buf, user_buf, buf_size); 
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong></p>
+<p>使用copy_from_user()函数代替memcpy()。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ssize_t correct_write(struct file *file, const char __user *user_buf, size_t count, loff_t *ppos)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	char buf[128] = {0};
+</span></span><span class="line"><span class="cl">	int buf_size = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	buf_size = min(count, (sizeof(buf)-1));
+</span></span><span class="line"><span class="cl">	// 修改：使用专用函数copy_from_user()将数据写入到内核态buf，并注意防止缓冲区溢出
+</span></span><span class="line"><span class="cl">	if (copy_from_user(buf, user_buf, buf_size)) { 
+</span></span><span class="line"><span class="cl">		return EFAULT;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="必须对copy_from_user拷贝长度进行校验防止缓冲区溢出">必须对copy_from_user()拷贝长度进行校验，防止缓冲区溢出</h2>
+<p>**说明：**内核态从用户态拷贝数据时通常使用copy_from_user()函数，如果未对拷贝长度做校验或者校验不当，会造成内核缓冲区溢出，导致内核panic或提权。</p>
+<p><strong>【错误代码示例】</strong></p>
+<p>未校验拷贝长度。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">static long gser_ioctl(struct file  *fp, unsigned cmd, unsigned long arg)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	char smd_write_buf[GSERIAL_BUF_LEN];
+</span></span><span class="line"><span class="cl">	switch (cmd)
+</span></span><span class="line"><span class="cl">	{
+</span></span><span class="line"><span class="cl">		case GSERIAL_SMD_WRITE:
+</span></span><span class="line"><span class="cl">			if (copy_from_user(&amp;smd_write_arg, argp, sizeof(smd_write_arg))) {...}
+</span></span><span class="line"><span class="cl">			// 错误：拷贝长度参数smd_write_arg.size由用户输入，未校验
+</span></span><span class="line"><span class="cl">			copy_from_user(smd_write_buf, smd_write_arg.buf, smd_write_arg.size); 
+</span></span><span class="line"><span class="cl">			...
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong></p>
+<p>添加长度校验。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">static long gser_ioctl(struct file *fp, unsigned cmd, unsigned long arg)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	char smd_write_buf[GSERIAL_BUF_LEN];
+</span></span><span class="line"><span class="cl">	switch (cmd)
+</span></span><span class="line"><span class="cl">	{
+</span></span><span class="line"><span class="cl">		case GSERIAL_SMD_WRITE:
+</span></span><span class="line"><span class="cl">			if (copy_from_user(&amp;smd_write_arg, argp, sizeof(smd_write_arg))){...}
+</span></span><span class="line"><span class="cl">			// 修改：添加校验
+</span></span><span class="line"><span class="cl">			if (smd_write_arg.size  &gt;= GSERIAL_BUF_LEN) {......} 
+</span></span><span class="line"><span class="cl">			copy_from_user(smd_write_buf, smd_write_arg.buf, smd_write_arg.size);
+</span></span><span class="line"><span class="cl"> 			...
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="必须对copy_to_user拷贝的数据进行初始化防止信息泄漏">必须对copy_to_user()拷贝的数据进行初始化，防止信息泄漏</h2>
+<p><strong>【描述】</strong></p>
+<p>**说明：**内核态使用copy_to_user()向用户态拷贝数据时，当数据未完全初始化（如结构体成员未赋值、字节对齐引起的内存空洞等），会导致栈上指针等敏感信息泄漏。攻击者可利用绕过kaslr等安全机制。</p>
+<p><strong>【错误代码示例】</strong></p>
+<p>未完全初始化数据结构成员。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">static long rmnet_ctrl_ioctl(struct file *fp, unsigned cmd, unsigned long arg)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	struct ep_info info;
+</span></span><span class="line"><span class="cl">	switch (cmd) {
+</span></span><span class="line"><span class="cl">		case FRMNET_CTRL_EP_LOOKUP:
+</span></span><span class="line"><span class="cl">			info.ph_ep_info.ep_type = DATA_EP_TYPE_HSUSB;
+</span></span><span class="line"><span class="cl">			info.ipa_ep_pair.cons_pipe_num = port-&gt;ipa_cons_idx;
+</span></span><span class="line"><span class="cl">			info.ipa_ep_pair.prod_pipe_num = port-&gt;ipa_prod_idx;
+</span></span><span class="line"><span class="cl">			// 错误: info结构体有4个成员，未全部赋值
+</span></span><span class="line"><span class="cl">			ret = copy_to_user((void __user *)arg, &amp;info, sizeof(info)); 
+</span></span><span class="line"><span class="cl">			...
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong></p>
+<p>全部进行初始化。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">static long rmnet_ctrl_ioctl(struct file *fp, unsigned cmd, unsigned long arg)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	struct ep_info info;
+</span></span><span class="line"><span class="cl">	// 修改：使用memset初始化缓冲区，保证不存在因字节对齐或未赋值导致的内存空洞
+</span></span><span class="line"><span class="cl">	(void)memset(&amp;info, &#39;0&#39;, sizeof(ep_info)); 
+</span></span><span class="line"><span class="cl">	switch (cmd) {
+</span></span><span class="line"><span class="cl">		case FRMNET_CTRL_EP_LOOKUP:
+</span></span><span class="line"><span class="cl">			info.ph_ep_info.ep_type = DATA_EP_TYPE_HSUSB;
+</span></span><span class="line"><span class="cl">			info.ipa_ep_pair.cons_pipe_num = port-&gt;ipa_cons_idx;
+</span></span><span class="line"><span class="cl">			info.ipa_ep_pair.prod_pipe_num = port-&gt;ipa_prod_idx;
+</span></span><span class="line"><span class="cl">			ret = copy_to_user((void __user *)arg, &amp;info, sizeof(info));
+</span></span><span class="line"><span class="cl">			...
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="禁止在异常处理中使用bug_on宏避免造成内核panic">禁止在异常处理中使用BUG_ON宏，避免造成内核panic</h2>
+<p><strong>【描述】</strong></p>
+<p>BUG_ON宏会调用内核的panic()函数，打印错误信息并主动崩溃系统，在正常逻辑处理中（如ioctl接口的cmd参数不识别）不应当使系统崩溃，禁止在此类异常处理场景中使用BUG_ON宏，推荐使用WARN_ON宏。</p>
+<p><strong>【错误代码示例】</strong></p>
+<p>正常流程中使用了BUG_ON宏</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/ * 判断Q6侧设置定时器是否繁忙，1-忙，0-不忙 */
+</span></span><span class="line"><span class="cl">static unsigned int is_modem_set_timer_busy(special_timer *smem_ptr)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	int i = 0;
+</span></span><span class="line"><span class="cl">	if (smem_ptr == NULL) {
+</span></span><span class="line"><span class="cl">		printk(KERN_EMERG&#34;%s:smem_ptr NULL!\n&#34;, __FUNCTION__);
+</span></span><span class="line"><span class="cl">		// 错误：系统BUG_ON宏打印调用栈后调用panic()，导致内核拒绝服务，不应在正常流程中使用
+</span></span><span class="line"><span class="cl">		BUG_ON(1); 
+</span></span><span class="line"><span class="cl">		return 1;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong></p>
+<p>去掉BUG_ON宏。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/ * 判断Q6侧设置定时器是否繁忙，1-忙，0-不忙  */
+</span></span><span class="line"><span class="cl">static unsigned int is_modem_set_timer_busy(special_timer *smem_ptr)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	int i = 0;
+</span></span><span class="line"><span class="cl">	if (smem_ptr == NULL) {
+</span></span><span class="line"><span class="cl">		printk(KERN_EMERG&#34;%s:smem_ptr NULL!\n&#34;,  __FUNCTION__);
+</span></span><span class="line"><span class="cl">		// 修改：去掉BUG_ON调用，或使用WARN_ON
+</span></span><span class="line"><span class="cl">		return 1;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="在中断处理程序或持有自旋锁的进程上下文代码中禁止使用会引起进程休眠的函数">在中断处理程序或持有自旋锁的进程上下文代码中，禁止使用会引起进程休眠的函数</h2>
+<p><strong>【描述】</strong></p>
+<p>Linux以进程为调度单位，在Linux中断上下文中，只有更高优先级的中断才能将其打断，系统在中断处理的时候不能进行进程调度。如果中断处理程序处于休眠状态，就会导致内核无法唤醒，从而使得内核处于瘫痪。</p>
+<p>自旋锁在使用时，抢占是失效的。若自旋锁在锁住以后进入睡眠，由于不能进行处理器抢占，其它进程都将因为不能获得CPU（单核CPU）而停止运行，对外表现为系统将不作任何响应，出现挂死。</p>
+<p>因此，在中断处理程序或持有自旋锁的进程上下文代码中，应该禁止使用可能会引起休眠（如vmalloc()、msleep()等）、阻塞（如copy_from_user(),copy_to_user()等）或者耗费大量时间（如printk()等）的函数。</p>
+<h2 id="合理使用内核栈防止内核栈溢出">合理使用内核栈，防止内核栈溢出</h2>
+<p><strong>【描述】</strong></p>
+<p>Linux的内核栈大小是固定的（一般32位系统为8K，64位系统为16K，因此资源非常宝贵。不合理的使用内核栈，可能会导致栈溢出，造成系统挂死。因此需要做到以下几点：</p>
+<ul>
+<li>
+<p>在栈上申请内存空间不要超过内核栈大小；</p>
+</li>
+<li>
+<p>注意函数的嵌套使用次数；</p>
+</li>
+<li>
+<p>不要定义过多的变量。</p>
+</li>
+</ul>
+<p><strong>【错误代码示例】</strong></p>
+<p>以下代码中定义的变量过大，导致栈溢出。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">struct result
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	char name[4];
+</span></span><span class="line"><span class="cl">	unsigned int a;
+</span></span><span class="line"><span class="cl">	unsigned int b;
+</span></span><span class="line"><span class="cl">	unsigned int c;
+</span></span><span class="line"><span class="cl">	unsigned int d;
+</span></span><span class="line"><span class="cl">}; // 结构体result的大小为20字节
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">int foo()
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	struct result temp[512];
+</span></span><span class="line"><span class="cl">	// 错误: temp数组含有512个元素，总大小为10K，远超内核栈大小
+</span></span><span class="line"><span class="cl">	(void)memset(temp, 0, sizeof(result) * 512); 
+</span></span><span class="line"><span class="cl">	... // use temp do something
+</span></span><span class="line"><span class="cl">	return 0;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>代码中数组temp有512个元素，总共10K大小，远超内核的8K，明显的栈溢出。</p>
+<p><strong>【正确代码示例】</strong></p>
+<p>使用kmalloc()代替之。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">struct result
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	char name[4];
+</span></span><span class="line"><span class="cl">	unsigned int a;
+</span></span><span class="line"><span class="cl">	unsigned int b;
+</span></span><span class="line"><span class="cl">	unsigned int c;
+</span></span><span class="line"><span class="cl">	unsigned int d;
+</span></span><span class="line"><span class="cl">}; // 结构体result的大小为20字节
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">int foo()
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">	struct result  *temp = NULL;
+</span></span><span class="line"><span class="cl">	temp = (result *)kmalloc(sizeof(result) * 512, GFP_KERNEL); //修改：使用kmalloc()申请内存
+</span></span><span class="line"><span class="cl">	... // check temp is not NULL
+</span></span><span class="line"><span class="cl">	(void)memset(temp, 0, sizeof(result)  * 512);
+</span></span><span class="line"><span class="cl">	... // use temp do something
+</span></span><span class="line"><span class="cl">	... // free temp
+</span></span><span class="line"><span class="cl">	return 0;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="临时关闭地址校验机制后在操作完成后必须及时恢复">临时关闭地址校验机制后，在操作完成后必须及时恢复</h2>
+<p><strong>【描述】</strong></p>
+<p>SMEP安全机制是指禁止内核执行用户空间的代码（PXN是ARM版本的SMEP）。系统调用（如open()，write()等）本来是提供给用户空间程序访问的。默认情况下，这些函数会对传入的参数地址进行校验，如果入参是非用户空间地址则报错。因此，要在内核程序中使用这些系统调用，就必须使参数地址校验功能失效。set_fs()/get_fs()就用来解决该问题。详细说明见如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="nv">mmegment_t</span> <span class="nv">old_fs</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printk</span><span class="p">(</span><span class="s2">&#34;Hello, I&#39;m the module that intends to write message to file.</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">file</span> <span class="o">==</span> <span class="nc">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">file</span> <span class="o">=</span> <span class="nf">filp_open</span><span class="p">(</span><span class="nc">MY_FILE</span><span class="p">,</span> <span class="nc">O_RDWR</span> <span class="o">|</span> <span class="nc">O_APPEND</span> <span class="o">|</span> <span class="nc">O_CREAT</span><span class="p">,</span> <span class="mi">0664</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nc">IS_ERR</span><span class="p">(</span><span class="nv">file</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printk</span><span class="p">(</span><span class="s2">&#34;Error occured while opening file %s, exiting ...</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="nc">MY_FILE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">sprintf</span><span class="p">(</span><span class="nv">buf</span><span class="p">,</span> <span class="s2">&#34;%s&#34;</span><span class="p">,</span> <span class="s2">&#34;The Message.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">old_fs</span> <span class="o">=</span> <span class="nf">get_fs</span><span class="p">();</span> <span class="c1">// get_fs()的作用是获取用户空间地址上限值  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                   <span class="c1">// #define get_fs() (current-&gt;addr_limit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">set_fs</span><span class="p">(</span><span class="nc">KERNEL_DS</span><span class="p">);</span> <span class="c1">// set_fs的作用是将地址空间上限扩大到KERNEL_DS，这样内核代码可以调用系统函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">file</span><span class="o">-</span><span class="p">&gt;</span><span class="nv">f_op</span><span class="o">-</span><span class="p">&gt;</span><span class="nf">write</span><span class="p">(</span><span class="nv">file</span><span class="p">,</span> <span class="p">(</span><span class="nv">char</span> <span class="o">*</span><span class="p">)</span><span class="nv">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="nv">buf</span><span class="p">),</span> <span class="o">&amp;</span><span class="nv">file</span><span class="o">-</span><span class="p">&gt;</span><span class="nv">f_pos</span><span class="p">);</span> <span class="c1">// 内核代码可以调用write()函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">set_fs</span><span class="p">(</span><span class="nv">old_fs</span><span class="p">);</span> <span class="c1">// 使用完后及时恢复原来用户空间地址限制值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">...</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过上述代码，可以了解到最为关键的就是操作完成后，要及时恢复地址校验功能。否则SMEP/PXN安全机制就会失效，使得许多漏洞的利用变得很容易。</p>
+<p><strong>【错误代码示例】</strong></p>
+<p>在程序错误处理分支，未通过set_fs()恢复地址校验功能。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">oldfs = get_fs();
+</span></span><span class="line"><span class="cl">set_fs(KERNEL_DS);
+</span></span><span class="line"><span class="cl">/* 在时间戳目录下面创建done文件 */
+</span></span><span class="line"><span class="cl">fd = sys_open(path, O_CREAT | O_WRONLY, FILE_LIMIT);
+</span></span><span class="line"><span class="cl">if (fd &lt; 0) {
+</span></span><span class="line"><span class="cl">	BB_PRINT_ERR(&#34;sys_mkdir[%s] error, fd is[%d]\n&#34;, path, fd);
+</span></span><span class="line"><span class="cl">	return; // 错误：在错误处理程序分支未恢复地址校验机制
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sys_close(fd);
+</span></span><span class="line"><span class="cl">set_fs(oldfs);
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>【正确代码示例】</strong></p>
+<p>在错误处理程序中恢复地址校验功能。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">oldfs = get_fs();
+</span></span><span class="line"><span class="cl">set_fs(KERNEL_DS);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/* 在时间戳目录下面创建done文件 */
+</span></span><span class="line"><span class="cl">fd = sys_open(path, O_CREAT | O_WRONLY, FILE_LIMIT);
+</span></span><span class="line"><span class="cl">if (fd &lt; 0) {
+</span></span><span class="line"><span class="cl">	BB_PRINT_ERR(&#34;sys_mkdir[%s] error, fd is[%d] \n&#34;, path, fd);
+</span></span><span class="line"><span class="cl">	set_fs(oldfs); // 修改：在错误处理程序分支中恢复地址校验机制
+</span></span><span class="line"><span class="cl">	return;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sys_close(fd);
+</span></span><span class="line"><span class="cl">set_fs(oldfs);
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=0001-01-01&#32;00:00:00>更新于 0001-01-01&nbsp;</span>
+      </div><div class="post-info-license">
+          <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+        </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/securecoding/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog-12x.pages.dev/securecoding/" data-title=""><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog-12x.pages.dev/securecoding/"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://blog-12x.pages.dev/securecoding/" data-title="" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog-12x.pages.dev/securecoding/" data-title=""><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog-12x.pages.dev/securecoding/" data-title=""><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://blog-12x.pages.dev/securecoding/" data-title="" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://blog-12x.pages.dev/securecoding/" data-title="" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://blog-12x.pages.dev/securecoding/" data-title=""><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav">
+      <a href="/hugo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/" class="post-nav-item" rel="next" title="Hugo静态博客部署">Hugo静态博客部署<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.104.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-RC"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
+              <a href="/">技术小窝</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

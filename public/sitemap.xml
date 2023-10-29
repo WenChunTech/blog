@@ -2,14 +2,33 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   ><url>
-      <loc>https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc><lastmod>2023-07-09T11:31:11&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://blog-12x.pages.dev/posts/</loc><lastmod>2023-07-09T11:31:11&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://blog-12x.pages.dev/</loc><lastmod>2023-07-09T11:31:11&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/linux/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/linux/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/perf/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://blog-12x.pages.dev/perf%E6%80%A7%E8%83%BDprofiling/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://blog-12x.pages.dev/posts/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://blog-12x.pages.dev/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://blog-12x.pages.dev/ip%E8%B7%AF%E7%94%B1%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</loc><lastmod>2023-10-12T23:37:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/route/</loc><lastmod>2023-10-12T23:37:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/tun/</loc><lastmod>2023-10-12T23:37:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/docker/</loc><lastmod>2023-09-13T19:34:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/docker/</loc><lastmod>2023-09-13T19:34:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/docker%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</loc><lastmod>2023-09-13T19:34:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/docker%E5%9F%BA%E7%9F%B3-networknamespace/</loc><lastmod>2023-08-31T21:40:12&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/veth/</loc><lastmod>2023-08-31T21:40:12&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/pytorch/</loc><lastmod>2023-07-23T23:38:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/pytorch/</loc><lastmod>2023-07-23T23:38:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/torch.fx/</loc><lastmod>2023-07-23T23:38:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/torch.fx%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/</loc><lastmod>2023-07-23T23:38:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/matplotlib/</loc><lastmod>2023-07-13T22:06:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/matplotlib%E4%BD%BF%E7%94%A8/</loc><lastmod>2023-07-13T22:06:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/python/</loc><lastmod>2023-07-13T22:06:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/python/</loc><lastmod>2023-07-13T22:06:27&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc><lastmod>2023-07-09T11:31:11&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/async/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/asyncio%E4%BD%BF%E7%94%A8/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/categories/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/categories/python/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/tags/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/draft/</loc><lastmod>2023-05-07T11:38:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/categories/draft/</loc><lastmod>2023-05-07T11:38:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/selfattention%E5%92%8Cmultiheadattention%E6%B5%81%E7%A8%8B%E7%AE%80%E8%BF%B0/</loc><lastmod>2023-05-07T11:38:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -37,7 +56,6 @@
       <loc>https://blog-12x.pages.dev/opencv%E6%8A%A0%E5%9B%BE%E5%92%8C%E8%A3%81%E5%89%AA%E5%9B%BE%E7%89%87/</loc><lastmod>2022-12-04T19:19:06&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/rust%E4%BD%BF%E7%94%A8opencv/</loc><lastmod>2022-12-04T13:30:26&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/ipc/</loc><lastmod>2022-11-20T11:50:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/categories/linux/</loc><lastmod>2022-11-20T11:50:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</loc><lastmod>2022-11-20T11:50:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/pandas/</loc><lastmod>2022-11-12T21:12:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/pandas%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</loc><lastmod>2022-11-12T21:12:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -56,6 +74,7 @@
       <loc>https://blog-12x.pages.dev/tags/cloudflare/</loc><lastmod>2022-10-22T12:41:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/hugo/</loc><lastmod>2022-10-22T12:41:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/hugo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/</loc><lastmod>2022-10-22T12:41:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/securecoding/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/c/c&#43;&#43;/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/categories/c/c&#43;&#43;/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/categories/c/cpp/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>

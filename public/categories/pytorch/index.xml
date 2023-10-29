@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>pytorch - 分类 - 技术小窝</title>
+    <link>https://blog-12x.pages.dev/categories/pytorch/</link>
+    <description>pytorch - 分类 - 技术小窝</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 23 Jul 2023 23:38:09 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/pytorch/" rel="self" type="application/rss+xml" /><item>
+  <title>Torch.fx模块的使用</title>
+  <link>https://blog-12x.pages.dev/torch.fx%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+  <pubDate>Sun, 23 Jul 2023 23:38:09 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/torch.fx%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+  <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

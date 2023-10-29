@@ -3,7 +3,15 @@
     <title>python - 分类 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/categories/python/</link>
     <description>python - 分类 - 技术小窝</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 28 May 2023 18:33:40 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/python/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Jul 2023 22:06:27 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/python/" rel="self" type="application/rss+xml" /><item>
+  <title>Matplotlib使用</title>
+  <link>https://blog-12x.pages.dev/matplotlib%E4%BD%BF%E7%94%A8/</link>
+  <pubDate>Thu, 13 Jul 2023 22:06:27 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/matplotlib%E4%BD%BF%E7%94%A8/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Asyncio使用</title>
   <link>https://blog-12x.pages.dev/asyncio%E4%BD%BF%E7%94%A8/</link>
   <pubDate>Sun, 28 May 2023 18:33:40 &#43;0800</pubDate>

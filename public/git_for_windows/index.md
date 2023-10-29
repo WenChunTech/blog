@@ -5,19 +5,20 @@
 
 # Git for Windows 安装 Pacman
 
-**下载:**
+## **1. 下载必要压缩包**
 
 ```bash
 curl -o pacman-6.0.1-9-x86_64.pkg.tar.zst -L https://repo.msys2.org/msys/x86_64/pacman-6.0.1-9-x86_64.pkg.tar.zst
 curl -o pacman-mirrors-20221016-1-any.pkg.tar.zst -L https://repo.msys2.org/msys/x86_64/pacman-mirrors-20221016-1-any.pkg.tar.zst
 curl -o msys2-keyring-1~20221024-1-any.pkg.tar.zst -L https://repo.msys2.org/msys/x86_64/msys2-keyring-1~20221024-1-any.pkg.tar.zst
+
 # 正常来说只需要上面三个包但是由于缺少 zstd 解压工具还需要 zstd 包
 curl -o zstd-1.5.2-2-x86_64.pkg.tar.zst -L https://repo.msys2.org/msys/x86_64/zstd-1.5.2-2-x86_64.pkg.tar.zst
 # 但是又因为 zstd 包也是 zstd 打包又需要另一个不是 zstd 打包的解压工具来解压
 curl -o zstd-v1.5.2-win64.zip -L https://github.com/facebook/zstd/releases/download/v1.5.2/zstd-v1.5.2-win64.zip
 ```
 
-**解压并安装:**
+## **2 .解压并安装:**
 
 ```bash
 unzip zstd-v1.5.2-win64.zip "zstd-v1.5.2-win64/zstd.exe" -d .
@@ -28,24 +29,31 @@ tar -xvf pacman-mirrors-20221016-1-any.pkg.tar.zst -C /
 tar -xvf pacman-6.0.1-9-x86_64.pkg.tar.zst -C /
 ```
 
-**添加密钥并更新数据库:**
+## **3. 添加密钥并更新数据库:**
 
 ```bash
 pacman-key --init && pacman-key --populate msys2
 
+pacman-db-upgrade -r /../
+
 pacman -Sy
 ```
 
-**更新元数据:**
+## **4. 更新元数据:**
 
 ```bash
-pacman -S pacman-mirrors-20221016-1 msys2-keyring-1~20221024-1 zstd-1.5.2-2
+# pacman -S pacman-mirrors-20221016-1 msys2-keyring-1~20221024-1 zstd-1.5.2-2
+# pacman -S $(cut -d ' ' -f 1 /etc/package-versions.txt)
 
-pacman -S $(cut -d ' ' -f 1 /etc/package-versions.txt)
-
-export URL=https://github.com/git-for-windows/git-sdk-64/raw/main
-
-cat /etc/package-versions.txt | while read p v; do d=/var/lib/pacman/local/$p-$v; mkdir -p $d; echo $d; for f in desc files install mtree; do curl -sSL "$URL$d/$f" -o $d/$f; done; done
+URL=https://github.com/git-for-windows/git-sdk-64/raw/main
+cat /etc/package-versions.txt | while read p v; do
+  d=/var/lib/pacman/local/$p-$v
+  mkdir -p $d
+  for f in desc files install mtree; do
+    echo "$URL$d/$f" ..... $d/$f
+    curl -sSL "$URL$d/$f" -o $d/$f
+  done
+done
 
 curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/pacman-6.0.1-9/desc -o /var/lib/pacman/local/pacman-6.0.1-9/desc
 curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/pacman-6.0.1-9/files -o /var/lib/pacman/local/pacman-6.0.1-9/files
@@ -68,6 +76,66 @@ curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/zstd-1.5.2-2/in
 curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/zstd-1.5.2-2/mtree -o /var/lib/pacman/local/zstd-1.5.2-2/mtree
 ```
 
+## **5.  安装Fish Shell**
+
+### 5.1 安装必要依赖
+
+```bash
+pacman -S gcc-libs
+```
+
+### 5.2 安装Fish Shell并启动
+
+```bash
+pacman -S fish
+```
+
+### 5.3 启动Fish Shell
+
+```bash
+# 在~/.bashrc文件中添加以下内容，设置默认shell为fish
+if [ -t 1 ]; then
+exec fish
+fi
+```
+
+### 5.4 更换Fish Shell 主题
+
+```bash
+fish_config
+```
+
+### 5. 5 Fish Shell 常用命令和基本设置
+
+```bash
+# 关闭问候语
+set -g -x fish_greeting ''
+set -U fish_greeting
+
+# 设置环境变量
+#在最后一行加入(注意目录间用空格隔开)
+set -x PATH /opt/demo/bin /home/guest/bin $PATH
+
+# 删除变量
+set -e Foo
+
+# 配置别名
+# Define alias in config file
+alias rmi="rm -i"
+
+# 切换默认shell，git for windows下不可用
+echo $SHELL
+cat /etc/shells
+chsh -s /usr/bin/fish
+
+# 命令替换
+echo (date)
+# 在bash下面
+# echo `date`
+
+
+```
+
 
 
 **参考资料:**
@@ -80,6 +148,9 @@ curl -sSL https://github.com/git-for-windows/git-sdk-64/raw/main/zstd-1.5.2-2/mt
 - [Releases · facebook/zstd (github.com)](https://github.com/facebook/zstd/releases)
 - [Windows 的终端配置(给 git-windows 添加 msys2 包管理器) - zeromake 的个人博客](https://blog.zeromake.com/pages/windows-terminal-configuration/)
 - [MSYS2 和 mintty 打造 Windows 下 Linux 工具体验 - Creaink - Build something for life](https://creaink.github.io/post/Computer/Windows/win-msys2.html)
+- [Using fish shell with git bash on windows (github.com)](https://gist.github.com/rafaelpadovezi/1cfc1026f78255458f5a2ea56291ed23)
+- [Package management in Git for Windows (Git Bash)? - Stack Overflow](https://stackoverflow.com/questions/32712133/package-management-in-git-for-windows-git-bash/65204171#comment124229393_65204171)
+- [Fish Shell | 安装配置指南 - URmyLucky - 博客园 (cnblogs.com)](https://www.cnblogs.com/Masquer/p/13920104.html)
 
 
 ---
