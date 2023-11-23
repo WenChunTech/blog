@@ -107,8 +107,8 @@ ip addr add 192.168.1.10/24 dev tun0
 # 添加走到tun0设备的路由
 ip route add 192.168
 
-# 为table 1000添加一条来自 192.168.1.10的规则
-ip rule add from 192.168.1.10 table 1000
+# 为table 100添加一条来自 192.168.1.10的规则
+ip rule add from 192.168.1.10 table 100
 
 ```
 
