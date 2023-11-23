@@ -3,7 +3,15 @@
     <title>tun - 标签 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/tags/tun/</link>
     <description>tun - 标签 - 技术小窝</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 12 Oct 2023 23:37:13 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/tun/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 05 Nov 2023 23:01:37 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/tun/" rel="self" type="application/rss+xml" /><item>
+  <title>VPN原理浅谈</title>
+  <link>https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/</link>
+  <pubDate>Sun, 05 Nov 2023 23:01:37 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Ip路由相关命令</title>
   <link>https://blog-12x.pages.dev/ip%E8%B7%AF%E7%94%B1%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</link>
   <pubDate>Thu, 12 Oct 2023 23:37:13 &#43;0800</pubDate>

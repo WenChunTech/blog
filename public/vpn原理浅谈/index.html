@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>VPN原理浅谈 - 技术小窝</title><meta name="author" content="技术小窝">
+<meta name="author-link" content="">
+<meta name="description" content="分享技术，记录技术成长过程" /><meta name="keywords" content='vpn, tun, linux' /><meta itemprop="name" content="VPN原理浅谈">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2023-11-05T23:01:37+08:00" />
+<meta itemprop="dateModified" content="2023-11-05T23:01:37+08:00" />
+<meta itemprop="wordCount" content="1583"><meta itemprop="image" content="https://blog-12x.pages.dev/logo.png"/>
+<meta itemprop="keywords" content="vpn,tun,linux," /><meta property="og:title" content="VPN原理浅谈" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/" /><meta property="og:image" content="https://blog-12x.pages.dev/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-05T23:01:37+08:00" />
+<meta property="article:modified_time" content="2023-11-05T23:01:37+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://blog-12x.pages.dev/logo.png"/>
+
+<meta name="twitter:title" content="VPN原理浅谈"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/" /><link rel="prev" href="https://blog-12x.pages.dev/perf%E6%80%A7%E8%83%BDprofiling/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "VPN原理浅谈",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/blog-12x.pages.dev\/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88\/"
+    },"genre": "posts","keywords": "vpn, tun, linux","wordcount":  1583 ,
+    "url": "https:\/\/blog-12x.pages.dev\/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88\/","datePublished": "2023-11-05T23:01:37+08:00","dateModified": "2023-11-05T23:01:37+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>VPN原理浅谈</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      </span></span>
+          <span class="post-category">收录于 <a href="/categories/linux/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> linux</a></span></div>
+      <div class="post-meta-line"><span title=2023-11-05&#32;23:01:37><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-05">2023-11-05</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 1583 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 4 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="VPN原理浅谈">
+            <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#vpn-的应用场景">VPN 的应用场景</a></li>
+    <li><a href="#vpn-的工作原理">VPN 的工作原理</a></li>
+    <li><a href="#vpn-的简单实现">VPN 的简单实现</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h1 id="vpn-原理浅谈">VPN 原理浅谈</h1>
+<h2 id="vpn-的应用场景">VPN 的应用场景</h2>
+<ol>
+<li>
+<p>保护隐私： VPN 通过加密通信，确保你的互联网连接是安全的。这对于在公共 Wi-Fi 网络上浏览互联网时尤其重要，因为公共网络通常更容易受到黑客攻击。</p>
+</li>
+<li>
+<p>绕过地理限制： 有些网站或服务在特定地区可能不可用，或者内容受到地理限制。使用 VPN 可以改变你的 IP 地址，使你能够绕过这些地理限制，访问受限制的内容。</p>
+</li>
+<li>
+<p>保护公司内部网络： 公司可以使用 VPN 来建立安全的远程访问通道，员工可以通过 VPN 连接到公司内部网络，以便在远程地点安全地访问公司资源。</p>
+</li>
+<li>
+<p>匿名上网： VPN 可以隐藏你的真实 IP 地址，提高上网的匿名性。这对于那些希望在互联网上保持相对匿名的用户来说很有用。</p>
+</li>
+<li>
+<p>绕过审查： 在一些国家，互联网审查可能会限制对特定网站或服务的访问。使用 VPN 可以绕过这些审查，让用户能够自由地访问互联网。</p>
+</li>
+<li>
+<p>安全远程办公： 对于远程工作者或分布式团队来说，VPN 提供了一个安全的通信渠道，使他们能够远程连接到公司网络并访问必要的资源。</p>
+</li>
+<li>
+<p>防止数据被窃取： 在使用不安全的网络时，VPN 可以加密你的数据流，防止敏感信息被窃取，确保通信的机密性。</p>
+</li>
+<li>
+<p>游戏加速： 一些玩家可能使用 VPN 来连接到特定地区的游戏服务器，以获得更好的游戏性能或访问特定地区的游戏内容。</p>
+</li>
+</ol>
+<h2 id="vpn-的工作原理">VPN 的工作原理</h2>
+<ol>
+<li>
+<p>涉及到的底层技术</p>
+<ul>
+<li>tun/tap: 用于创建虚拟网卡，用于接收和发送数据包, 主要的操作就是在此实现的</li>
+<li>iptables： 用于实现数据包的转发</li>
+<li>iproute2： 用于实现路由表的管理</li>
+</ul>
+</li>
+<li>
+<p>tun/tap 概述：</p>
+<ul>
+<li>
+<p>tun 设备: TUN设备是一种虚拟网络设备，用于在用户空间和内核空间之间传递网络数据。TUN代表“网络隧道”（Network TUNnel），它允许用户空间的程序通过标准的网络套接字接口发送和接收IP数据包，同时内核会处理网络协议的部分。TUN设备通常用于创建虚拟私有网络（VPN）和其他网络隧道，以在用户空间中运行的程序与内核之间传递网络流量。这对于实现网络隔离、虚拟专用网络、安全隧道等应用场景非常有用。一般来说，使用TUN设备的流程如下：</p>
+<ol>
+<li>用户空间程序通过TUN设备发送IP数据包。</li>
+<li>内核将接收到的数据包从TUN设备中读取。</li>
+<li>用户空间程序可以通过标准的套接字接口监听和处理这些数据包。</li>
+</ol>
+</li>
+<li>
+<p>tap 设备：TAP设备（Tap虚拟网卡）是一种虚拟网络设备，与TUN设备类似，也用于在用户空间和内核空间之间传递网络数据。TAP代表“网络透明适配器”（Network TAP），与TUN设备不同的是，TAP设备在数据链路层（OSI模型的第二层）工作，而TUN设备在网络层（第三层）工作。主要区别在于：</p>
+<ol>
+<li>
+<p>TAP设备：它以太网设备的形式存在，可以处理链路层的数据包。因此，TAP设备可以传输以太网帧，包括处理MAC地址等。TAP设备通常用于需要在二层进行操作的场景，比如虚拟局域网（VLAN）的实现、桥接网络、以太网隧道等。</p>
+</li>
+<li>
+<p>TUN设备：与TAP不同，TUN设备是在网络层工作的，只能传输IP数据包。TUN设备通常用于实现虚拟私有网络（VPN）等应用，它只关心IP层的数据，而不涉及链路层的细节。</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<p>在使用TAP设备时，用户空间程序可以像处理真实的网络接口一样处理TAP设备，包括发送和接收以太网帧。</p>
+<ol start="3">
+<li>iptables 简单使用:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 设置从eth0出去的数据包,动态将内部地址转为外部可访问地址</span>
+</span></span><span class="line"><span class="cl">iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置从tun0出去的数据包,动态将内部地址转为外部可访问地址</span>
+</span></span><span class="line"><span class="cl">iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置从eth0进来，状态为RELATED,ESTABLISHED 的数据包，允许进入</span>
+</span></span><span class="line"><span class="cl">iptables -A INPUT -i eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置从tun0进来，状态为RELATED,ESTABLISHED 的数据包，允许进入</span>
+</span></span><span class="line"><span class="cl">iptables -A INPUT -i tun0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+</span></span><span class="line"><span class="cl"><span class="c1"># 允许所以数据包转发</span>
+</span></span><span class="line"><span class="cl">iptables -A FORWARD -j ACCEPT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>iproute2 简单使用</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 设置tun0设备的ip为192.168.1.10/24</span>
+</span></span><span class="line"><span class="cl">ip addr add 192.168.1.10/24 dev tun0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加走到tun0设备的路由</span>
+</span></span><span class="line"><span class="cl">ip route add 192.168
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 为table 100添加一条来自 192.168.1.10的规则</span>
+</span></span><span class="line"><span class="cl">ip rule add from 192.168.1.10 table <span class="m">100</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="vpn-的简单实现">VPN 的简单实现</h2></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2023-11-05&#32;23:01:37>更新于 2023-11-05&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/" data-title="VPN原理浅谈" data-hashtags="vpn,tun,linux"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/" data-hashtag="vpn"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/" data-title="VPN原理浅谈" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/" data-title="VPN原理浅谈"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/" data-title="VPN原理浅谈"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/" data-title="VPN原理浅谈" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/" data-title="VPN原理浅谈" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/" data-title="VPN原理浅谈"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/vpn/' class="post-tag">vpn</a><a href='/tags/tun/' class="post-tag">tun</a><a href='/tags/linux/' class="post-tag">linux</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/perf%E6%80%A7%E8%83%BDprofiling/" class="post-nav-item" rel="prev" title="Perf性能Profiling"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Perf性能Profiling</a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.104.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-RC"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
+              <a href="/">技术小窝</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>
