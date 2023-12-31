@@ -2,17 +2,17 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   ><url>
-      <loc>https://blog-12x.pages.dev/categories/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-      <loc>https://blog-12x.pages.dev/tags/linux/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-      <loc>https://blog-12x.pages.dev/categories/linux/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-      <loc>https://blog-12x.pages.dev/posts/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-      <loc>https://blog-12x.pages.dev/tags/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-      <loc>https://blog-12x.pages.dev/tags/tun/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-      <loc>https://blog-12x.pages.dev/tags/vpn/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-      <loc>https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-      <loc>https://blog-12x.pages.dev/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-      <loc>https://blog-12x.pages.dev/tags/perf/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-      <loc>https://blog-12x.pages.dev/perf%E6%80%A7%E8%83%BDprofiling/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/linux/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/linux/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/posts/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/tun/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/vpn/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/perf/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/perf%E6%80%A7%E8%83%BDprofiling/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/ip%E8%B7%AF%E7%94%B1%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</loc><lastmod>2023-10-12T23:37:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/route/</loc><lastmod>2023-10-12T23:37:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/docker/</loc><lastmod>2023-09-13T19:34:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
