@@ -2,15 +2,18 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   ><url>
-      <loc>https://blog-12x.pages.dev/categories/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+      <loc>https://blog-12x.pages.dev/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</loc><lastmod>2024-01-21T22:24:28&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/</loc><lastmod>2024-01-21T22:24:28&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/draft/</loc><lastmod>2024-01-21T22:24:28&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/draft/</loc><lastmod>2024-01-21T22:24:28&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/posts/</loc><lastmod>2024-01-21T22:24:28&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/</loc><lastmod>2024-01-21T22:24:28&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/</loc><lastmod>2024-01-21T22:24:28&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/linux/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/categories/linux/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/posts/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/tags/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/tun/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/vpn/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/</loc><lastmod>2023-11-05T23:01:37&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/perf/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/perf%E6%80%A7%E8%83%BDprofiling/</loc><lastmod>2023-10-22T14:10:29&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/ip%E8%B7%AF%E7%94%B1%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</loc><lastmod>2023-10-12T23:37:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -31,8 +34,6 @@
       <loc>https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc><lastmod>2023-07-09T11:31:11&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/async/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/asyncio%E4%BD%BF%E7%94%A8/</loc><lastmod>2023-05-28T18:33:40&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/tags/draft/</loc><lastmod>2023-05-07T11:38:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/categories/draft/</loc><lastmod>2023-05-07T11:38:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/selfattention%E5%92%8Cmultiheadattention%E6%B5%81%E7%A8%8B%E7%AE%80%E8%BF%B0/</loc><lastmod>2023-05-07T11:38:09&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/deeplearning/</loc><lastmod>2023-02-28T23:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/categories/deeplearning/</loc><lastmod>2023-02-28T23:15:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

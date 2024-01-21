@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Btrfs文件系统 - 技术小窝</title><meta name="author" content="技术小窝">
+<meta name="author-link" content="">
+<meta name="description" content="分享技术，记录技术成长过程" /><meta name="keywords" content='draft' /><meta itemprop="name" content="Btrfs文件系统">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-01-21T22:24:28+08:00" />
+<meta itemprop="dateModified" content="2024-01-21T22:24:28+08:00" />
+<meta itemprop="wordCount" content="2404"><meta itemprop="image" content="https://blog-12x.pages.dev/logo.png" />
+<meta itemprop="keywords" content="draft," /><meta property="og:title" content="Btrfs文件系统" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog-12x.pages.dev/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" /><meta property="og:image" content="https://blog-12x.pages.dev/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-01-21T22:24:28+08:00" />
+<meta property="article:modified_time" content="2024-01-21T22:24:28+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://blog-12x.pages.dev/logo.png" /><meta name="twitter:title" content="Btrfs文件系统"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog-12x.pages.dev/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" /><link rel="prev" href="https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Btrfs文件系统",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/blog-12x.pages.dev\/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F\/"
+    },"genre": "posts","keywords": "draft","wordcount":  2404 ,
+    "url": "https:\/\/blog-12x.pages.dev\/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F\/","datePublished": "2024-01-21T22:24:28+08:00","dateModified": "2024-01-21T22:24:28+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Btrfs文件系统</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      </span></span>
+          <span class="post-category">收录于 <a href="/categories/draft/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> draft</a></span></div>
+      <div class="post-meta-line"><span title=2024-01-21&#32;22:24:28><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-21">2024-01-21</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 2404 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 5 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="Btrfs文件系统">
+            <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-btrfs简介">1. Btrfs简介</a></li>
+    <li><a href="#2-btrfs的特性">2. Btrfs的特性</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#扩展性相关">扩展性相关</a></li>
+            <li><a href="#数据一致性相关">数据一致性相关</a></li>
+            <li><a href="#多设备管理相关">多设备管理相关</a></li>
+            <li><a href="#其他特性">其他特性</a></li>
+          </ul>
+        </li>
+        <li><a href="#btrfs-与其它文件系统功能比较httpsarchicekylinonlineguideadvancedbtrfshtmlbtrfs-与其它文件系统功能比较">Btrfs 与其它文件系统功能比较<a href="https://arch.icekylin.online/guide/advanced/btrfs.html#btrfs-%E4%B8%8E%E5%85%B6%E5%AE%83%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD%E6%AF%94%E8%BE%83">#</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#3-barfs的简单使用">3. Barfs的简单使用</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h1 id="btrfs文件系统介绍">Btrfs文件系统介绍</h1>
+<h2 id="1-btrfs简介">1. Btrfs简介</h2>
+<p>Btrfs 是一种新型的写时复制（CoW）Linux 文件系统，已经并入内核主线。你可以读作 Better File System、B-tree File System、Butter File System 等等，都是正确的。Btrfs 在设计实现高级功能的同时，着重于容错、修复以及易于管理。它由 Oracle、Red Hat、Fujitsu、Intel、SUSE、STRATO 等企业和开发者共同开发。Btrfs 以 GNU GPL 协议授权，同时也欢迎任何人的贡献。</p>
+<h2 id="2-btrfs的特性">2. Btrfs的特性</h2>
+<h4 id="扩展性相关">扩展性相关</h4>
+<ol>
+<li>B-tree
+<ul>
+<li>Btrfs 文件系统中所有的 metadata 都由 B-tree 管理。使用 B-tree 的主要好处在于查找、插入和删除操作都很高效。可以说 B-tree 是 Btrfs 的核心</li>
+</ul>
+</li>
+<li>基于 Extent 的文件存储</li>
+<li>✅ 针对 SSD 的优化支持
+<ul>
+<li>Btrfs 的 CoW 技术从根本上避免了对同一个物理单元的反复写操作。如果用户打开了 SSD 优化选项，Btrfs 将在底层的块空间分配策略上进行优化：将多次磁盘空间分配请求聚合成一个大小为 2M 的连续的块。大块连续地址的 IO 能够让固化在 SSD 内部的微代码更好的进行读写优化，从而提高 I/O 性能</li>
+</ul>
+</li>
+<li>动态 Inode 分配</li>
+<li>支持非常大的单个文件大小</li>
+</ol>
+<h4 id="数据一致性相关">数据一致性相关</h4>
+<ol>
+<li>✅ 写时复制（CoW）
+<ul>
+<li>比就地修改的文件系统有更大的好处，详细的说明见下文</li>
+</ul>
+</li>
+<li>校验和（Checksum）
+<ul>
+<li>保证了数据的可靠性：由于硬件原因，从磁盘上读出的数据会出错。比如 block A 中存放的数据为 0x55，但读取出来的数据变成了 0x54，因为读取操作并未报错，所以这种错误不能被上层软件所察觉。解决这个问题的方法是保存数据的校验和，在读取数据后检查校验和。如果不符合，便知道数据出现了错误。如果最终从磁盘读取出来的数据和 checksum 不相同，Btrfs 会首先尝试读取数据的镜像备份，如果数据没有镜像备份，Btrfs 将返回错误。写入磁盘数据之前，Btrfs 计算数据的 checksum。然后将 checksum 和数据同时写入磁盘。</li>
+</ul>
+</li>
+</ol>
+<h4 id="多设备管理相关">多设备管理相关</h4>
+<ol>
+<li>✅ 多设备管理
+<ul>
+<li>Btrfs 支持动态添加设备。用户在系统中增加新的磁盘之后，可以使用 <code>btrfs</code> 的相关命令将该设备添加到文件系统中</li>
+</ul>
+</li>
+<li>✅ 子卷（Subvolume）
+<ul>
+<li>把文件系统的一部分配置为一个完整的子文件系统</li>
+</ul>
+</li>
+<li>✅ 快照（Snapshot）和克隆（Clone）
+<ul>
+<li>支持快照</li>
+<li>支持快照的快照（增量备份）</li>
+<li>可以对单个文件进行备份</li>
+</ul>
+</li>
+<li>✅ 内置支持 RAID，支持条带或 mirror 等常见的 RAID 功能</li>
+<li>✅ 支持热移除、热添加设备</li>
+</ol>
+<h4 id="其他特性">其他特性</h4>
+<ol>
+<li>✅ 透明压缩
+<ul>
+<li>减小了文件的大小，通过减少文件写入增幅来显著延长闪存介质的寿命。在某些特定的场景下（比如单线程、重负荷的文件 I/O）还提高了性能</li>
+</ul>
+</li>
+<li>延迟分配（Delay allocation）
+<ul>
+<li>在文件系统中，小块空间频繁的分配和释放会造成碎片。延迟分配则是这样一种技术 —— 当用户需要磁盘空间时，先将数据保存在内存中。将磁盘分配需求发送给磁盘空间分配器，磁盘空间分配器并不立即分配真正的磁盘空间。只是记录下这个请求便返回。磁盘空间分配请求可能很频繁，所以在延迟分配的一段时间内，磁盘分配器可以收到很多的分配请求 —— 一些请求也许可以合并，一些请求在这段延迟期间甚至可能被取消。通过这样的“等待”，往往能够减少不必要的分配，也有可能将多个小的分配请求合并为一个大的请求，从而提高 I/O 效率</li>
+</ul>
+</li>
+<li>Inline File
+<ul>
+<li>系统中往往存在大量的小文件（几百个字节或者更小）。如果为其分配单独的数据 block，便会引起内部碎片，浪费磁盘空间。Btrfs 将小文件的内容保存在元数据中，不再额外分配存放文件数据的磁盘块。改善了内部碎片问题，也增加了文件的访问效率。得益于 Inline File 技术，Btrfs 处理小文件的效率非常高，也避免了磁盘碎片问题</li>
+</ul>
+</li>
+<li>目录索引（Directory Index）
+<ul>
+<li>当一个目录下的文件数目巨大时，目录索引可以显著提高文件搜索时间。 Btrfs 本身采用 B-tree 存储目录项，所以在给定目录下搜索文件的效率是非常高的。然而，Btrfs 使用 B-tree 管理目录项的方式无法同时满足 readdir 的需求。readdir 是 POSIX 标准 API，它要求返回指定目录下的所有文件；并且特别的，这些文件要按照 inode number 排序。而 Btrfs 目录项插入 B-tree 时的 Key 并不是 inode number，而是根据文件名计算的一个 hash 值。这种方式在查找一个特定文件时非常高效，但却不适于 readdir 。为此，Btrfs 在每次创建新的文件时，除了插入以 hash 值为 Key 的目录项外，还同时插入另外一种目录项索引，该目录项索引的 Key 以 sequence number 作为 B-tree 的键值。这个 sequence number 在每次创建新文件时线性增加。因为 Inode number 也是每次创建新文件时增加的，所以 sequence number 和 inode number 的顺序相同。以这种 sequence number 作为 Key 在 B-tree 中查找便可以方便的得到一个以 inode number 排序的文件列表</li>
+<li>另外以 sequence number 排序的文件往往在磁盘上的位置也是相邻的，所以以 sequence number 为序访问大量文件会获得更好的 I/O 效率</li>
+</ul>
+</li>
+<li>预分配
+<ul>
+<li>很多应用程序有预先分配磁盘空间的需要。他们可以通过 <code>posix_fallocate</code> 接口告诉文件系统在磁盘上预留一部分空间，但暂时并不写入数据。如果底层文件系统不支持 <code>fallocate</code>，那么应用程序只有使用 <code>write</code> 预先写一些无用信息以便为自己预留足够的磁盘空间。由文件系统来支持预留空间更加有效，而且能够减少磁盘碎片，因为所有的空间都是一次分配，因而更有可能使用连续的空间。 Btrfs 支持 <code>posix_fallocate</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="btrfs-与其它文件系统功能比较httpsarchicekylinonlineguideadvancedbtrfshtmlbtrfs-与其它文件系统功能比较">Btrfs 与其它文件系统功能比较<a href="https://arch.icekylin.online/guide/advanced/btrfs.html#btrfs-%e4%b8%8e%e5%85%b6%e5%ae%83%e6%96%87%e4%bb%b6%e7%b3%bb%e7%bb%9f%e5%8a%9f%e8%83%bd%e6%af%94%e8%be%83"target="_blank" rel="external nofollow noopener noreferrer">#</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Feature</th>
+<th style="text-align:left">Ext 2 / 3</th>
+<th style="text-align:left">Ext 4</th>
+<th style="text-align:left">ReiserFS</th>
+<th style="text-align:left">XFS</th>
+<th style="text-align:left">OCFS2</th>
+<th style="text-align:left">Btrfs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Journal (date / metadata)</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚪ / ⚫</td>
+<td style="text-align:left">⚪ / ⚫</td>
+<td style="text-align:left">⚪ / ⚫</td>
+<td style="text-align:left"><strong>N/A</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Journal (internal / external)</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚫ / ⚪</td>
+<td style="text-align:left">N/A</td>
+</tr>
+<tr>
+<td style="text-align:left">Offline extend / shrink</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚪ / ⚪</td>
+<td style="text-align:left">⚫ / ⚪</td>
+<td style="text-align:left">⚫ / ⚫</td>
+</tr>
+<tr>
+<td style="text-align:left">Online extend / shrink</td>
+<td style="text-align:left">⚫ / ⚪</td>
+<td style="text-align:left">⚫ / ⚪</td>
+<td style="text-align:left">⚫ / ⚪</td>
+<td style="text-align:left">⚫ / ⚪</td>
+<td style="text-align:left">⚫ / ⚪</td>
+<td style="text-align:left">⚫ / ⚫</td>
+</tr>
+<tr>
+<td style="text-align:left">Inode allocation map</td>
+<td style="text-align:left">table</td>
+<td style="text-align:left">table</td>
+<td style="text-align:left">B*-tree</td>
+<td style="text-align:left">B+-tree</td>
+<td style="text-align:left">table</td>
+<td style="text-align:left">B-tree</td>
+</tr>
+<tr>
+<td style="text-align:left">Sparse files</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚫</td>
+</tr>
+<tr>
+<td style="text-align:left">Tail packing</td>
+<td style="text-align:left">⚪</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚪</td>
+<td style="text-align:left">⚪</td>
+<td style="text-align:left">⚫</td>
+</tr>
+<tr>
+<td style="text-align:left">Defragmentation</td>
+<td style="text-align:left">⚪</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚪</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚪</td>
+<td style="text-align:left">⚫</td>
+</tr>
+<tr>
+<td style="text-align:left">ExtArributes / ACLs</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚫ / ⚫</td>
+<td style="text-align:left">⚫ / ⚫</td>
+</tr>
+<tr>
+<td style="text-align:left">Quotas</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">🔴</td>
+</tr>
+<tr>
+<td style="text-align:left">Dump / restore</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚪</td>
+<td style="text-align:left">⚫</td>
+<td style="text-align:left">⚪</td>
+<td style="text-align:left">⚪</td>
+</tr>
+<tr>
+<td style="text-align:left">Default block size</td>
+<td style="text-align:left">4 KiB</td>
+<td style="text-align:left">4 KiB</td>
+<td style="text-align:left">4 KiB</td>
+<td style="text-align:left">4 KiB</td>
+<td style="text-align:left">4 KiB</td>
+<td style="text-align:left">4 KiB</td>
+</tr>
+<tr>
+<td style="text-align:left">max. file system size</td>
+<td style="text-align:left">16 TiB</td>
+<td style="text-align:left">1 EiB</td>
+<td style="text-align:left">16 TiB</td>
+<td style="text-align:left">8 EiB</td>
+<td style="text-align:left">4 PiB</td>
+<td style="text-align:left"><strong>16 EiB</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">max. file size</td>
+<td style="text-align:left">2 TiB</td>
+<td style="text-align:left">1 EiB</td>
+<td style="text-align:left">1 EiB</td>
+<td style="text-align:left">8 EiB</td>
+<td style="text-align:left">4 PiB</td>
+<td style="text-align:left"><strong>16 EiB</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Support status</td>
+<td style="text-align:left">SLES</td>
+<td style="text-align:left">SLES</td>
+<td style="text-align:left">SLES</td>
+<td style="text-align:left">SLES</td>
+<td style="text-align:left">SLE HA</td>
+<td style="text-align:left">SLES</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-barfs的简单使用">3. Barfs的简单使用</h2>
+<p>3.1 创建文件系统</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkfs.btrfs -f /dev/sda1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.2 挂载文件系统</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mount /dev/sda1 /mnt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.3 创建子卷</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">btrfs subvolume create subvolume_name
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.4 删除子卷</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">btrfs subvolume delete subvolume_name
+</span></span><span class="line"><span class="cl"><span class="c1"># or</span>
+</span></span><span class="line"><span class="cl">rm -rf subvolume_name
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.5 创建快照</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">btrfs subvolume snapshot <span class="nb">source</span> destination
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.6 删除快照</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">btrfs subvolume delete snapshot_name
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.7 查看快照</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">btrfs subvolume list /mnt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.8 查看文件系统信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">btrfs filesystem show /mnt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.9 查看文件系统使用情况</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">btrfs filesystem df /mnt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.10 查看文件系统的压缩情况</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">btrfs filesystem df -c /mnt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.11 查看文件系统的压缩算法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">btrfs filesystem df -c /mnt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.12 查看子卷信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">btrfs subvolume show /mnt
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2024-01-21&#32;22:24:28>更新于 2024-01-21&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog-12x.pages.dev/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Btrfs文件系统" data-hashtags="draft"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog-12x.pages.dev/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-hashtag="draft"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://blog-12x.pages.dev/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Btrfs文件系统" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog-12x.pages.dev/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Btrfs文件系统"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog-12x.pages.dev/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Btrfs文件系统"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://blog-12x.pages.dev/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Btrfs文件系统" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://blog-12x.pages.dev/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Btrfs文件系统" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://blog-12x.pages.dev/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Btrfs文件系统"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/draft/' class="post-tag">draft</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/" class="post-nav-item" rel="prev" title="VPN原理浅谈"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>VPN原理浅谈</a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-RC"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="/">技术小窝</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

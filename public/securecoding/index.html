@@ -10,18 +10,16 @@
 <meta name="description" content="Kunpeng Compute安全编程指南 本文档基于C语言提供一些安全编程建议，用于指导开发实践。 数据类型 确保有符号整数运算不溢出 【描述】 有符号整数溢出是" /><meta name="keywords" content='Rust, DeepLearning' /><meta itemprop="name" content="">
 <meta itemprop="description" content="Kunpeng Compute安全编程指南 本文档基于C语言提供一些安全编程建议，用于指导开发实践。 数据类型 确保有符号整数运算不溢出 【描述】 有符号整数溢出是">
 
-<meta itemprop="wordCount" content="22528"><meta itemprop="image" content="https://blog-12x.pages.dev/logo.png"/>
+<meta itemprop="wordCount" content="22528"><meta itemprop="image" content="https://blog-12x.pages.dev/logo.png" />
 <meta itemprop="keywords" content="" /><meta property="og:title" content="" />
 <meta property="og:description" content="Kunpeng Compute安全编程指南 本文档基于C语言提供一些安全编程建议，用于指导开发实践。 数据类型 确保有符号整数运算不溢出 【描述】 有符号整数溢出是" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog-12x.pages.dev/securecoding/" /><meta property="og:image" content="https://blog-12x.pages.dev/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog-12x.pages.dev/securecoding/" /><meta property="og:image" content="https://blog-12x.pages.dev/logo.png" /><meta property="article:section" content="posts" />
 
 
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://blog-12x.pages.dev/logo.png"/>
-
-<meta name="twitter:title" content=""/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://blog-12x.pages.dev/logo.png" /><meta name="twitter:title" content=""/>
 <meta name="twitter:description" content="Kunpeng Compute安全编程指南 本文档基于C语言提供一些安全编程建议，用于指导开发实践。 数据类型 确保有符号整数运算不溢出 【描述】 有符号整数溢出是"/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -760,7 +758,7 @@
 </span></span><span class="line"><span class="cl">unsigned char  *buf = (unsigned char  *)malloc(width  * hight);
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【例外】</strong> 
+</div><p><strong>【例外】</strong>
 为正确执行程序，必要时无符号整数可能表现出模态（回绕）。建议将变量声明明确注释为支持模数行为，并且对该整数的每个操作也应明确注释为支持模数行为。</p>
 <p><strong>【相关软件CWE编号】</strong> CWE-190</p>
 <h2 id="确保除法和余数运算不会导致除零错误被零除">确保除法和余数运算不会导致除零错误(被零除)</h2>
@@ -883,8 +881,8 @@
 </div>
 </div><h1 id="变量">变量</h1>
 <h2 id="禁止使用未经初始化的变量">禁止使用未经初始化的变量</h2>
-<p><strong>【描述】</strong> 
-这里的变量，指的是局部动态变量，并且还包括内存堆上申请的内存块。 
+<p><strong>【描述】</strong>
+这里的变量，指的是局部动态变量，并且还包括内存堆上申请的内存块。
 因为他们的初始值都是不可预料的，所以禁止未经有效初始化就直接读取其值。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -934,12 +932,12 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="指向资源句柄或描述符的变量在资源释放后立即赋予新值">指向资源句柄或描述符的变量，在资源释放后立即赋予新值</h2>
-<p><strong>【描述】</strong> 
-指向资源句柄或描述符的变量包括指针、文件描述符、socket描述符以及其它指向资源的变量。 
-以指针为例，当指针成功申请了一段内存之后，在这段内存释放以后，如果其指针未立即设置为NULL，也未分配一个新的对象，那这个指针就是一个悬空指针。 
-如果再对悬空指针操作，可能会发生重复释放或访问已释放内存的问题，造成安全漏洞。 
+<p><strong>【描述】</strong>
+指向资源句柄或描述符的变量包括指针、文件描述符、socket描述符以及其它指向资源的变量。
+以指针为例，当指针成功申请了一段内存之后，在这段内存释放以后，如果其指针未立即设置为NULL，也未分配一个新的对象，那这个指针就是一个悬空指针。
+如果再对悬空指针操作，可能会发生重复释放或访问已释放内存的问题，造成安全漏洞。
 消减该漏洞的有效方法是将释放后的指针立即设置为一个确定的新值，例如设置为NULL。对于全局性的资源句柄或描述符，在资源释放后，应该马上设置新值，以避免使用其已释放的无效值；对于只在单个函数内使用的资源句柄或描述符，应确保资源释放后其无效值不被再次使用。</p>
-<p><strong>【错误代码示例】</strong> 
+<p><strong>【错误代码示例】</strong>
 如下代码示例中，根据消息类型处理消息，处理完后释放掉body或head指向的内存，但是释放后未将指针设置为NULL。如果还有其他函数再次处理该消息结构体时，可能出现重复释放内存或访问已释放内存的问题。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -977,7 +975,7 @@
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 如下代码示例中，立即对释放后的指针设置为NULL，避免重复放指针。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1020,7 +1018,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>当free()函数的入参为NULL时，函数不执行任何操作。</p>
-<p><strong>【错误代码示例】</strong> 
+<p><strong>【错误代码示例】</strong>
 如下代码示例中文件描述符关闭后未赋新值。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1042,7 +1040,7 @@
 </span></span><span class="line"><span class="cl">...
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 如下代码示例中，在资源释放后，对应的变量应该立即赋予新值。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1070,11 +1068,11 @@
 </div>
 </div><h1 id="指针和数组">指针和数组</h1>
 <h2 id="外部数据作为数组索引时必须确保在数组大小范围内">外部数据作为数组索引时必须确保在数组大小范围内</h2>
-<p><strong>【描述】</strong> 
-外部数据作为数组索引对内存进行访问时，必须对数据的大小进行严格的校验，确保数组索引在有效范围内，否则会导致严重的错误。 
+<p><strong>【描述】</strong>
+外部数据作为数组索引对内存进行访问时，必须对数据的大小进行严格的校验，确保数组索引在有效范围内，否则会导致严重的错误。
 当一个指针指向数组元素时，可以指向数组最后一个元素的下一个元素的位置，但是不能读写该位置的内存。</p>
-<p><strong>【错误代码示例】</strong> 
-如下代码示例中, set_dev_id()函数存在差一错误，当 index 等于 DEV_NUM 时，恰好越界写一个元素； 
+<p><strong>【错误代码示例】</strong>
+如下代码示例中, set_dev_id()函数存在差一错误，当 index 等于 DEV_NUM 时，恰好越界写一个元素；
 同样get_dev()函数也存在差一错误，虽然函数执行过程中没有问题，但是当解引用这个函数返回的指针时，行为是未定义的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1134,7 +1132,7 @@
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 如下代码示例中，修改校验索引的条件，避免差一错误。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1198,9 +1196,9 @@
 </div>
 </div><p><strong>【相关软件CWE编号】</strong> CWE-119，CWE-123，CWE-125</p>
 <h2 id="禁止通过对指针变量进行sizeof操作来获取数组大小">禁止通过对指针变量进行sizeof操作来获取数组大小</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 将指针当做数组进行sizeof操作时，会导致实际的执行结果与预期不符。例如：变量定义 char *p = array，其中array的定义为char array[LEN]，表达式sizeof(p) 得到的结果与 sizeof(char *)相同，并非array的长度。</p>
-<p><strong>【错误代码示例】</strong> 
+<p><strong>【错误代码示例】</strong>
 如下代码示例中，buffer和path分别是指针和数组，程序员想对这2个内存进行清0操作，但由于程序员的疏忽，将内存大小误写成了sizeof(buffer)，与预期不符。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1220,7 +1218,7 @@
 </span></span><span class="line"><span class="cl">(void)memset(buffer, 0, sizeof(buffer));
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 如下代码示例中，将sizeof(buffer)修改为申请的缓冲区大小：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1240,11 +1238,11 @@
 </div>
 </div><h1 id="字符串">字符串</h1>
 <h2 id="确保字符串存储有足够的空间容纳字符数据和null结束符">确保字符串存储有足够的空间容纳字符数据和null结束符</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 将数据复制到不足以容纳数据的缓冲区，会导致缓冲区溢出。缓冲区溢出经常发生在字符串操作中。为了避免这种错误，截断拷贝的数据以限制字符串的字节长度是一种防御方法，但是最好的措施是确保目标缓冲区的大小足以容纳复制数据和null结束符。当字符串存储在堆空间时， 确保分配内存时已分配了足够的空间。</p>
 <p>部分字符串处理函数由于设计时安全考虑不足，或者存在一些隐含的目的缓冲区长度要求，容易被误用，导致缓冲区写溢出。此类典型函数包括不在C标准库函数中的itoa()，realpath()函数。</p>
-<p><strong>【错误代码示例】</strong>(itoa) 
-有些函数如itoa(), realpath()需要在对传入的缓冲区指针位置进行写入操作，但函数并没有提供缓冲区长度。因此，在调用这些函数前，必须提供足够的缓冲区。 
+<p><strong>【错误代码示例】</strong>(itoa)
+有些函数如itoa(), realpath()需要在对传入的缓冲区指针位置进行写入操作，但函数并没有提供缓冲区长度。因此，在调用这些函数前，必须提供足够的缓冲区。
 如下代码示例中，试图将数字转为字符串，但是目标存储空间的预留长度不足：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1258,7 +1256,7 @@
 </span></span><span class="line"><span class="cl">itoa(num, str, 10); // 10进制整数的最大存储长度是12个字节
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 如下代码示例中，在对外部数据进行解析并将内容保存到name中，考虑了name的大小：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1331,10 +1329,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="对字符串进行存储操作确保字符串有null结束符">对字符串进行存储操作，确保字符串有null结束符</h2>
-<p><strong>【描述】</strong> 
-部分字符串处理函数操作字符串时，将截断超出指定长度的字符串，如strncpy()函数最多复制n个字符到目的缓冲区，如果源字符串长度大于n，则不会写入null结束符到目的缓冲区，目的缓冲区的内容为n个被复制的字符。使用这类函数时，可能会无意截断导致数据丢失，并在某些情况下会导致软件漏洞。 
+<p><strong>【描述】</strong>
+部分字符串处理函数操作字符串时，将截断超出指定长度的字符串，如strncpy()函数最多复制n个字符到目的缓冲区，如果源字符串长度大于n，则不会写入null结束符到目的缓冲区，目的缓冲区的内容为n个被复制的字符。使用这类函数时，可能会无意截断导致数据丢失，并在某些情况下会导致软件漏洞。
 因此，对字符串进行存储操作，必须确保字符串有null结束符，否则在后续的调用strlen等操作中，可能会导致内存越界访问漏洞。</p>
-<p><strong>【错误代码示例】</strong> 
+<p><strong>【错误代码示例】</strong>
 在如下代码示例中，使用strncpy函数复制字符串时可能会发生截断（发生条件为：strlen(name) &gt; sizeof(file_name) - 1）。当发生截断时，file_name的内容是不完整的，并且缺少 &rsquo;  0 &lsquo;结束符，后续对file_name的操作可能会导致软件漏洞：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1380,7 +1378,7 @@
 <p><strong>【相关软件CWE编号】</strong> CWE-170，CWE-464</p>
 <h1 id="断言">断言</h1>
 <h2 id="禁止用断言检测程序在运行期间可能导致的错误可能发生的错误要用错误处理代码来处理">禁止用断言检测程序在运行期间可能导致的错误，可能发生的错误要用错误处理代码来处理</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 断言主要用于调试期间，在编译Release版本时将其关闭。因此，断言应该用于防止不正确的程序员假设，而不能用在Release版本上检查程序运行过程中发生的错误。</p>
 <p>断言永远不应用于验证是否存在运行时（与逻辑相对）错误，例如</p>
 <ul>
@@ -1406,9 +1404,9 @@
 <p>无效的权限（例如，文件，内存，用户）</p>
 </li>
 </ul>
-<p>例如，防止缓冲区溢出的代码不能使用断言实现，因为该代码必须编译到Release版本的可执行文件中。 
+<p>例如，防止缓冲区溢出的代码不能使用断言实现，因为该代码必须编译到Release版本的可执行文件中。
 如果服务器程序在网运行时由恶意用户触发断言失败，会导致拒绝服务攻击。在这种情况下，更适合使用软故障模式，例如写入日志文件和拒绝请求。</p>
-<p><strong>【错误代码示例】</strong> 
+<p><strong>【错误代码示例】</strong>
 以下代码的所有ASSERT的用法是错误的。例如，错误的使用ASSERT宏来验证内存分配是否成功，因为内存的可用性取决于系统的整体状态，并且在程序运行的任何时候都可能耗尽，所以必须以具有韧性的方式来妥善处理并将程序从内存耗尽中恢复。因此，使用ASSERT宏来验证内存分配是否成功将是不合适的，因为这样做可能导致进程突然终止，从而开启了拒绝服务攻击的可能性。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1436,7 +1434,7 @@
 </span></span><span class="line"><span class="cl">ASSERT(age &gt; 0); // 错误用法：文件内容不一定符合预期
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 下面代码演示了如何重构上面的错误代码:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1489,7 +1487,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="禁止在断言内改变运行环境">禁止在断言内改变运行环境</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 在程序正式发布阶段，断言不会被编译进去，为了确保调试版和正式版的功能一致性，严禁在断言中使用任何赋值、修改变量、资源操作、内存申请等操作。</p>
 <p>例如，以下的断言方式是错误的：</p>
 <div class="highlight"><div class="chroma">
@@ -1506,9 +1504,9 @@
 </div>
 </div><h1 id="函数设计">函数设计</h1>
 <h2 id="数组作为函数参数时必须同时将其长度作为函数的参数">数组作为函数参数时，必须同时将其长度作为函数的参数</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 通过函数参数传递数组函数参数必须同时传递数组可容纳元素的个数，而不是以字节为单位的数组最大大小；同样，通过函数参数传递一块内存进行读写操作时，必须同时传递内存块大小，否则函数在访问内存偏移时，无法判断偏移的合法范围，产生越界访问的漏洞。在本规则中所说的&quot;数组&quot;不仅局限为数组类型变量，还包括字符串或指向连续内存块的指针。</p>
-<p><strong>【错误代码示例】</strong> 
+<p><strong>【错误代码示例】</strong>
 如下代码示例中，函数pars_msg不知道msg的范围，容易产生内存越界访问漏洞。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1544,7 +1542,7 @@
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 正确的做法是将msg的大小作为参数传递到parse_msg中，如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1587,7 +1585,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="函数的指针参数如果不是用于修改所指向的对象就应该声明为指向const的指针">函数的指针参数如果不是用于修改所指向的对象就应该声明为指向const的指针</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 const 指针参数，将限制函数通过该指针修改所指向对象，使代码更牢固、更安全。</p>
 <p>示例：如strncmp 的例子，指向的对象不变化的指针参数声明为const。</p>
 <div class="highlight"><div class="chroma">
@@ -1596,25 +1594,25 @@ const 指针参数，将限制函数通过该指针修改所指向对象，使�
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 正确：不变参数声明为const
-</span></span><span class="line"><span class="cl">int strncmp(const char *s1, const char *s2, size_t n);
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="err">正确：不变参数声明为</span><span class="k">const</span>
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">strncmp</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">s1</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">s2</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">n</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>注意：</p>
 <p>指针参数要不要加const取决于函数设计，而不是看函数实体内有没有发生&quot;修改对象&quot;的动作。</p>
 <h2 id="调用格式化输入输出函数时禁止format参数受外部数据控制">调用格式化输入/输出函数时，禁止format参数受外部数据控制</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 调用格式化函数时，如果format参数由外部数据提供，或由外部数据拼接而来，会造成字符串格式化漏洞。</p>
 <p>攻击者如果能够完全或者部分控制格式字符串内容，可以使被攻击的进程崩溃、查看栈内容、查看内存内容或者在任意内存位置写入数据。结果是，攻击者能够以被攻击进程的权限执行任意代码。</p>
 <p>格式化输出函数特别危险，这是因为许多程序员没有意识到它们是具有攻击能力的。比如：格式化输出函数可以使用%n转换符，向指定地址写入一个整数值。</p>
-<p>这些格式化函数有： 
-格式化输出函数: xxxprintf; 
-格式化输入函数: xxxscanf; 
-格式化错误消息函数: err(), verr(), errx(), verrx(), warn(), vwarn(), warnx(), vwarnx(), error(), error_at_line(); 
+<p>这些格式化函数有：
+格式化输出函数: xxxprintf;
+格式化输入函数: xxxscanf;
+格式化错误消息函数: err(), verr(), errx(), verrx(), warn(), vwarn(), warnx(), vwarnx(), error(), error_at_line();
 格式化日志函数: syslog(), vsyslog().</p>
-<p><strong>【错误代码示例】</strong> 
-如下代码示例中的incorrect_password()函数的功能是在身份验证无效时（指定用户没有找到或者密码不正确），显示一条错误信息。 
-该函数接受一个源自用户的字符串数据user，而user是未验证的，是外部可控的。 
+<p><strong>【错误代码示例】</strong>
+如下代码示例中的incorrect_password()函数的功能是在身份验证无效时（指定用户没有找到或者密码不正确），显示一条错误信息。
+该函数接受一个源自用户的字符串数据user，而user是未验证的，是外部可控的。
 该函数将user构造一条错误信息，然后用C语言标准函数fprintf打印到stderr。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1641,33 +1639,33 @@ const 指针参数，将限制函数通过该指针修改所指向对象，使�
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 调用者需保证入参user的长度被限制为256个字节或者更少
-</span></span><span class="line"><span class="cl">void incorrect_password(const char *user)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	int ret = -1;
-</span></span><span class="line"><span class="cl">	static const char msg_format[] = &#34;%s cannot be authenticated.\n&#34;;
-</span></span><span class="line"><span class="cl">	size_t len = strlen(user) + 1 + sizeof(msg_format);
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="err">调用者需保证入参</span><span class="n">user的长度被限制为256个字节或者更少</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">incorrect_password</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">user</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="ne">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="k">const</span> <span class="n">char</span> <span class="n">msg_format</span><span class="p">[]</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">%s</span><span class="s2"> cannot be authenticated.</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">size_t</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">msg_format</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	char *msg = (char *)malloc(len);
-</span></span><span class="line"><span class="cl">	if (msg == NULL) {
-</span></span><span class="line"><span class="cl"> 		... // 错误处理
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	<span class="n">char</span> <span class="o">*</span><span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="n">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">msg</span> <span class="o">==</span> <span class="n">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> 		<span class="o">...</span> <span class="o">//</span> <span class="err">错误处理</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	ret = snprintf(msg, msg_format, user);
-</span></span><span class="line"><span class="cl">	if (ret == -1) {
-</span></span><span class="line"><span class="cl"> 		... // 错误处理
-</span></span><span class="line"><span class="cl">	} else {
-</span></span><span class="line"><span class="cl">		fprintf(stderr, msg); // msg中有来自未验证的外部数据，存在格式化漏洞
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">snprintf</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">msg_format</span><span class="p">,</span> <span class="n">user</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> 		<span class="o">...</span> <span class="o">//</span> <span class="err">错误处理</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span> <span class="o">//</span> <span class="n">msg中有来自未验证的外部数据</span><span class="err">，存在格式化漏洞</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	free(msg);
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">	<span class="n">free</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>示例代码中首先计算了消息的长度，然后分配内存，接着利用snprintf()函数拼接了消息内容。因此消息内容中包含了msg_format的内容和用户的内容。 
-当入参user中含有用户输入的格式符（如%s,%p,%n等后，fprintf()在执行时，会将msg作为一个格式化字符串来进行解析，而不是直接输出消息内容， 
+</div><p>示例代码中首先计算了消息的长度，然后分配内存，接着利用snprintf()函数拼接了消息内容。因此消息内容中包含了msg_format的内容和用户的内容。
+当入参user中含有用户输入的格式符（如%s,%p,%n等后，fprintf()在执行时，会将msg作为一个格式化字符串来进行解析，而不是直接输出消息内容，
 也就是说此时msg中的内容不会被直接打印到stderr中，反而会将一些未知的数据打印到stderr，引发程序未定义的行为。这是一个非常严重的格式化漏洞。</p>
-<p><strong>【正确代码示例】</strong> 
+<p><strong>【正确代码示例】</strong>
 下面是第一种推荐做法，代码中使用fputs()来代替fprintf()函数，fputs()会直接将msg的内容输出到stderr中，而不会去解析它。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1695,31 +1693,31 @@ const 指针参数，将限制函数通过该指针修改所指向对象，使�
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 入参user的长度被限制为256个字节或者更少
-</span></span><span class="line"><span class="cl">void incorrect_password(const char *user)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	int ret = -1;
-</span></span><span class="line"><span class="cl">	static const char msg_format[] = &#34;%s cannot be authenticated.\n&#34;;
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="err">入参</span><span class="n">user的长度被限制为256个字节或者更少</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">incorrect_password</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">user</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="ne">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="k">const</span> <span class="n">char</span> <span class="n">msg_format</span><span class="p">[]</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">%s</span><span class="s2"> cannot be authenticated.</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	// 这里加法运算不会整数溢出，因为user有限制
-</span></span><span class="line"><span class="cl">	size_t len = strlen(user) + 1 + sizeof(msg_format);
-</span></span><span class="line"><span class="cl">	char *msg = (char *)malloc(len);
-</span></span><span class="line"><span class="cl">	if (msg == NULL) {
-</span></span><span class="line"><span class="cl"> 		... // 错误处理
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="err">这里加法运算不会整数溢出，因为</span><span class="n">user有限制</span>
+</span></span><span class="line"><span class="cl">	<span class="n">size_t</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">msg_format</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">char</span> <span class="o">*</span><span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="n">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">msg</span> <span class="o">==</span> <span class="n">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> 		<span class="o">...</span> <span class="o">//</span> <span class="err">错误处理</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	ret = snprintf(msg, msg_format, user);
-</span></span><span class="line"><span class="cl">	if (ret == -1) {
-</span></span><span class="line"><span class="cl"> 		... // 错误处理
-</span></span><span class="line"><span class="cl">	} else {
-</span></span><span class="line"><span class="cl">		fputs(stderr, msg); // 使用fputs函数代替fprintf函数
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">snprintf</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">msg_format</span><span class="p">,</span> <span class="n">user</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> 		<span class="o">...</span> <span class="o">//</span> <span class="err">错误处理</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">fputs</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span> <span class="o">//</span> <span class="err">使用</span><span class="n">fputs函数代替fprintf函数</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	free(msg);
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">	<span class="n">free</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 下面是第二种推荐做法，代码中将不受信任的用户输入user作为fprintf()的可选参数之一，用&quot;%s&quot;将user以字符串的形式固定下来，然后输出到stderr中，而不作为格式字符串的一部分，这样就消除了格式字符串漏洞出现的可能性。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1730,14 +1728,14 @@ const 指针参数，将限制函数通过该指针修改所指向对象，使�
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void incorrect_password(const char  *user)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	static const char msg_format[] = &#34;%s cannot be authenticated.\n&#34;;
-</span></span><span class="line"><span class="cl">	fprintf(stderr, msg_format, user);
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">void</span> <span class="n">incorrect_password</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span>  <span class="o">*</span><span class="n">user</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="k">const</span> <span class="n">char</span> <span class="n">msg_format</span><span class="p">[]</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">%s</span><span class="s2"> cannot be authenticated.</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="n">msg_format</span><span class="p">,</span> <span class="n">user</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【错误代码示例】</strong> 
+</div><p><strong>【错误代码示例】</strong>
 如下代码示例中，使用了POSIX函数syslog()，但是syslog()函数也可能出现格式字符串漏洞。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1759,7 +1757,7 @@ const 指针参数，将限制函数通过该指针修改所指向对象，使�
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 下面是推荐做法，代码中将不受信任的用户输入msg作为syslog()的可选参数之一，用&quot;%s&quot;将msg以字符串的形式固定下来，然后输出到系统日志中，而不作为格式字符串的一部分，这样就消除了格式字符串漏洞出现的可能性。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1772,13 +1770,13 @@ const 指针参数，将限制函数通过该指针修改所指向对象，使�
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void foo(void)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	static const char msg_format[] =  &#34;%s cannot be authenticated.\n&#34;;
-</span></span><span class="line"><span class="cl">	char  *msg = get_msg();
-</span></span><span class="line"><span class="cl">	...
-</span></span><span class="line"><span class="cl">	syslog(LOG_INFO, msg_format, msg); // 这里没有格式化漏洞
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">void</span> <span class="n">foo</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="k">const</span> <span class="n">char</span> <span class="n">msg_format</span><span class="p">[]</span> <span class="o">=</span>  <span class="s2">&#34;</span><span class="si">%s</span><span class="s2"> cannot be authenticated.</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">char</span>  <span class="o">*</span><span class="n">msg</span> <span class="o">=</span> <span class="n">get_msg</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl">	<span class="n">syslog</span><span class="p">(</span><span class="n">LOG_INFO</span><span class="p">,</span> <span class="n">msg_format</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span> <span class="o">//</span> <span class="err">这里没有格式化漏洞</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="函数使用">函数使用</h1>
@@ -1808,7 +1806,7 @@ const 指针参数，将限制函数通过该指针修改所指向对象，使�
 </ul>
 <p>不要为格式化输入/输出函数提供未知的或者无效的转换规格，以及标志字符、精度、长度修饰符、转换指示符的无效组合。同样，不要提供与格式化字符串中的转换指示符类型不匹配的实参。这可能会使程序产生未定义行为。</p>
 <p><strong>【错误代码示例】</strong></p>
-<p>如下代码示例中，printf()的实参infoLevel类型与对应的转换指示符 &rsquo;s &lsquo;不匹配，正确的转换指示符要使用 &rsquo;d &lsquo;。同样，实参infoMsg类型与对应的转换指示符 &rsquo;d &lsquo;不匹配，正确的转换指示符要使用 &rsquo;s &lsquo;。 
+<p>如下代码示例中，printf()的实参infoLevel类型与对应的转换指示符 &rsquo;s &lsquo;不匹配，正确的转换指示符要使用 &rsquo;d &lsquo;。同样，实参infoMsg类型与对应的转换指示符 &rsquo;d &lsquo;不匹配，正确的转换指示符要使用 &rsquo;s &lsquo;。
 这些用法会使程序产生未定义行为，比如：printf()将把infoLevel实参解释为指针，试图从infoLevel包含的地址中读取一个字符串，从而发生非法访问。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1822,14 +1820,14 @@ const 指针参数，将限制函数通过该指针修改所指向对象，使�
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void foo(void)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	const char *info_msg = &#34;Information seed to user.&#34;;
-</span></span><span class="line"><span class="cl">	int info_level = 3;
-</span></span><span class="line"><span class="cl">	...
-</span></span><span class="line"><span class="cl">	printf(&#34;infoLevel: %s, infoMsg: %d\n&#34;, info_level, info_msg);
-</span></span><span class="line"><span class="cl">	...
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">void</span> <span class="n">foo</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">info_msg</span> <span class="o">=</span> <span class="s2">&#34;Information seed to user.&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="ne">int</span> <span class="n">info_level</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl">	<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;infoLevel: </span><span class="si">%s</span><span class="s2">, infoMsg: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">info_level</span><span class="p">,</span> <span class="n">info_msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>【正确代码示例】</strong></p>
@@ -1847,27 +1845,27 @@ const 指针参数，将限制函数通过该指针修改所指向对象，使�
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void foo(void)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	const char *info_msg = &#34;Information seed to user.&#34;;
-</span></span><span class="line"><span class="cl">	int info_level = 3;
-</span></span><span class="line"><span class="cl">	...
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">void</span> <span class="n">foo</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">info_msg</span> <span class="o">=</span> <span class="s2">&#34;Information seed to user.&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="ne">int</span> <span class="n">info_level</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	printf(&#34;infoLevel: %d, infoMsg: %s\n&#34;, info_level, info_msg);
-</span></span><span class="line"><span class="cl">	...
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">	<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;infoLevel: </span><span class="si">%d</span><span class="s2">, infoMsg: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">info_level</span><span class="p">,</span> <span class="n">info_msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>【影响】</strong></p>
 <p>错误的格式串可能造成内存破坏或者程序异常终止。</p>
 <h2 id="禁止使用alloca函数申请栈上内存">禁止使用alloca()函数申请栈上内存</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 POSIX和C99均未定义alloca()的行为，在有些平台下不支持该函数，使用alloca会降低程序的兼容性和可移植性，该函数在栈帧里申请内存，申请的大小很可能超过栈的边界，影响后续的代码执行。</p>
 <p>请使用malloc从堆中动态分配内存。</p>
 <p>【影响】</p>
 <p>程序栈的大小非常有限，如果分配导致栈溢出，则程序产生未定义行</p>
 <h2 id="禁止使用realloc函数">禁止使用realloc()函数</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 realloc()是一个非常特殊的函数，原型如下：</p>
 <p>void *realloc(void *ptr, size_t size);</p>
 <p>随着参数的不同，其行为也是不同：</p>
@@ -1883,8 +1881,8 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </li>
 </ul>
 <p>由此可见，一个简单的C函数，却被赋予了3种行为，这不是一个设计良好的函数。虽然在编程中提供了一些便利性，如果认识不足，使用不当，是却极易引发各种bug。</p>
-<p><strong>【错误代码示例】</strong> 
-如下代码示例中，使用realloc不当导致内存泄漏。 
+<p><strong>【错误代码示例】</strong>
+如下代码示例中，使用realloc不当导致内存泄漏。
 代码中希望对ptr的空间进行扩充，当realloc()分配失败的时候，会返回NULL。但是参数中的ptr的内存是没有被释放的，如果直接将realloc()的返回值赋给ptr，那么ptr原来指向的内存就会丢失，造成内存泄漏。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1902,7 +1900,7 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 使用malloc()函数代替realloc()函数。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1929,12 +1927,12 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </div><p><strong>【影响】</strong></p>
 <p>使用不当容易造成内存泄漏和双重释放问题。不正确的内存对齐可能导致对象访问异常。</p>
 <h2 id="禁止外部可控数据作为进程启动函数的参数">禁止外部可控数据作为进程启动函数的参数</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 本条款中进程启动函数包括system、popen、execl、execlp、execle、execv、execvp等。</p>
 <p>system()、popen()等函数会创建一个新的进程，如果外部可控数据作为这些函数的参数，会导致注入漏洞。</p>
 <p>使用execl()、execlp()等函数执行新进程时，如果使用shell启动的新进程，则同样存在命令注入风险。</p>
 <p>因此，总是优先考虑使用C标准函数实现需要的功能。如果确实需要使用这些函数，请使用白名单机制确保这些函数的参数不受任何外来数据的影响。</p>
-<p><strong>【错误代码示例】</strong> 
+<p><strong>【错误代码示例】</strong>
 如下代码示例中，使用 system() 函数执行 cmd 命令串来自外部，攻击者可以执行任意命令：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1993,11 +1991,11 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int execl(const char *path, const char *arg,  ...);
-</span></span><span class="line"><span class="cl">int execlp(const char *file, const char *arg,  ...);
-</span></span><span class="line"><span class="cl">int execle(const char *path, const char *arg,  ..., char * const envp[]);
-</span></span><span class="line"><span class="cl">int execv(const char *path, char *const argv[]);
-</span></span><span class="line"><span class="cl">int execvp(const char *file, char *const argv[]);
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">execl</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">arg</span><span class="p">,</span>  <span class="o">...</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">execlp</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">file</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">arg</span><span class="p">,</span>  <span class="o">...</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">execle</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">arg</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span> <span class="k">const</span> <span class="n">envp</span><span class="p">[]);</span>
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">execv</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="k">const</span> <span class="n">argv</span><span class="p">[]);</span>
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">execvp</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">file</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="k">const</span> <span class="n">argv</span><span class="p">[]);</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>例如，禁止如下使用方式：</p>
@@ -2059,48 +2057,48 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">static int OutputFileInfo(const char *file_name)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	const char priv[] = {&#39;x&#39;, &#39;w&#39;, &#39;r&#39;};
-</span></span><span class="line"><span class="cl">	ASSERT(file_name != NULL);
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">static</span> <span class="ne">int</span> <span class="n">OutputFileInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">file_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="n">char</span> <span class="n">priv</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ASSERT</span><span class="p">(</span><span class="n">file_name</span> <span class="o">!=</span> <span class="n">NULL</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	struct stat st;
-</span></span><span class="line"><span class="cl">	int ret = stat(file_name, &amp;st);
-</span></span><span class="line"><span class="cl">	if (ret == -1) {
-</span></span><span class="line"><span class="cl">		return -1;
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	<span class="n">struct</span> <span class="n">stat</span> <span class="n">st</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="ne">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">stat</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">st</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	const struct passwd *pw = getpwuid(st.st_uid);
-</span></span><span class="line"><span class="cl">	if (pw == NULL) {
-</span></span><span class="line"><span class="cl">		return -1;
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="n">struct</span> <span class="n">passwd</span> <span class="o">*</span><span class="n">pw</span> <span class="o">=</span> <span class="n">getpwuid</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">st_uid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">pw</span> <span class="o">==</span> <span class="n">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	const struct group *gp = getgrgid(st.st_gid);
-</span></span><span class="line"><span class="cl">	if (gp == NULL) {
-</span></span><span class="line"><span class="cl">		return -1;
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="n">struct</span> <span class="n">group</span> <span class="o">*</span><span class="n">gp</span> <span class="o">=</span> <span class="n">getgrgid</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">st_gid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">gp</span> <span class="o">==</span> <span class="n">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	if (S_ISREG(st.st_mode)) {
-</span></span><span class="line"><span class="cl">		printf(&#34;-&#34;);
-</span></span><span class="line"><span class="cl">	} else if (S_ISDIR(st.st_mode)) {
-</span></span><span class="line"><span class="cl">		printf(&#34;d&#34;);
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">S_ISREG</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">st_mode</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;-&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">S_ISDIR</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">st_mode</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;d&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	for (int i = 8; i &gt;= 0; i --) {
-</span></span><span class="line"><span class="cl">		if ((st.st_mode &amp; (1 &lt; &lt; i)) != 0) {
-</span></span><span class="line"><span class="cl">			printf(&#34;%c&#34;, priv[i % 3]);
-</span></span><span class="line"><span class="cl">		} else {
-</span></span><span class="line"><span class="cl">			printf(&#34;-&#34;);
-</span></span><span class="line"><span class="cl">		}
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="ne">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">((</span><span class="n">st</span><span class="o">.</span><span class="n">st_mode</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%c</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">priv</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;-&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	printf(&#34;%s %s %ld %s\n&#34;,
-</span></span><span class="line"><span class="cl">	pw-&gt;pw_name,
-</span></span><span class="line"><span class="cl">	gp-&gt;gr_name,
-</span></span><span class="line"><span class="cl">	st.st_size,
-</span></span><span class="line"><span class="cl">	file_name);
-</span></span><span class="line"><span class="cl">	return 0;
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">	<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> </span><span class="si">%ld</span><span class="s2"> </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="n">pw</span><span class="o">-&gt;</span><span class="n">pw_name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="n">gp</span><span class="o">-&gt;</span><span class="n">gr_name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="n">st</span><span class="o">.</span><span class="n">st_size</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="n">file_name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>【正确代码示例】</strong> (使用exec系列函数)</p>
@@ -2130,27 +2128,27 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pid_t pid;
-</span></span><span class="line"><span class="cl">char * const envp[] = { NULL };
-</span></span><span class="line"><span class="cl">...
-</span></span><span class="line"><span class="cl">char *file_name = get_dir_name_from_remote();
-</span></span><span class="line"><span class="cl">if (file_name == NULL) {
-</span></span><span class="line"><span class="cl">	... // 处理错误
-</span></span><span class="line"><span class="cl">}
-</span></span><span class="line"><span class="cl">...
-</span></span><span class="line"><span class="cl">if ((pid = fork()) &lt; 0) {
-</span></span><span class="line"><span class="cl">	...
-</span></span><span class="line"><span class="cl">} else if (pid == 0) {
-</span></span><span class="line"><span class="cl">	// 使用some_tool对指定文件进行加工
-</span></span><span class="line"><span class="cl">	execle( &#34;/bin/some_tool&#34;, &#34;some_tool&#34;, file_name, NULL, envp);
-</span></span><span class="line"><span class="cl">	_Exit(-1);
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">pid_t</span> <span class="n">pid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">char</span> <span class="o">*</span> <span class="k">const</span> <span class="n">envp</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="n">NULL</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">char</span> <span class="o">*</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">get_dir_name_from_remote</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">file_name</span> <span class="o">==</span> <span class="n">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span> <span class="o">//</span> <span class="err">处理错误</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">((</span><span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">())</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="err">使用</span><span class="n">some_tool对指定文件进行加工</span>
+</span></span><span class="line"><span class="cl">	<span class="n">execle</span><span class="p">(</span> <span class="s2">&#34;/bin/some_tool&#34;</span><span class="p">,</span> <span class="s2">&#34;some_tool&#34;</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">envp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">_Exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">...
-</span></span><span class="line"><span class="cl">int status;
-</span></span><span class="line"><span class="cl">waitpid(pid, &amp;status, 0);
-</span></span><span class="line"><span class="cl">FILE *fp = fopen(file_name, &#34;r&#34;);
-</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">status</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">waitpid</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">status</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>此时，外部输入的file_name仅作为some_tool命令的参数，没有命令注入的风险。</p>
@@ -2172,26 +2170,26 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">char *cmd = get_cmd_from_remote();
-</span></span><span class="line"><span class="cl">if (cmd == NULL) {
-</span></span><span class="line"><span class="cl">	... // 处理错误
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">char</span> <span class="o">*</span><span class="n">cmd</span> <span class="o">=</span> <span class="n">get_cmd_from_remote</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">cmd</span> <span class="o">==</span> <span class="n">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span> <span class="o">//</span> <span class="err">处理错误</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">// 使用白名单检查命令是否合法，仅允许 &#34;some_tool_a&#34;, &#34;some_tool_b&#34;命令，外部无法随意控制
-</span></span><span class="line"><span class="cl">if (!is_valid_cmd(cmd)) {
-</span></span><span class="line"><span class="cl">	... // 处理错误
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">使用白名单检查命令是否合法，仅允许</span> <span class="s2">&#34;some_tool_a&#34;</span><span class="p">,</span> <span class="s2">&#34;some_tool_b&#34;</span><span class="err">命令，外部无法随意控制</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">is_valid_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span> <span class="o">//</span> <span class="err">处理错误</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">system(cmd);
-</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl"><span class="n">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>【相关软件CWE编号】</strong> CWE-676，CWE-88</p>
 <h2 id="禁止在信号处理例程中调用非异步安全函数">禁止在信号处理例程中调用非异步安全函数</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 在信号处理程序中只调用异步安全函数。</p>
 <p>除了C语言标准函数以外，其他系统函数也提供了一些的异步安全函数，在信号处理程序中使用这些函数之前，应确保调用的函数在所有可能的执行环境下均是异步安全的。</p>
-<p><strong>【错误代码示例】</strong> 
+<p><strong>【错误代码示例】</strong>
 如下代码示例中，信号处理函数中调用了非异步安全函数printf()：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2214,26 +2212,26 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void handler(int num)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	printf(&#34;receive signal = %d \n&#34;, SIGINT);
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">void</span> <span class="n">handler</span><span class="p">(</span><span class="ne">int</span> <span class="n">num</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;receive signal = </span><span class="si">%d</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">SIGINT</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">int main(int argc, char **argv)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	if (signal(SIGINT, handler) == SIG_ERR) {
-</span></span><span class="line"><span class="cl"> 		... // 错误处理
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">main</span><span class="p">(</span><span class="ne">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="k">signal</span><span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span> <span class="n">handler</span><span class="p">)</span> <span class="o">==</span> <span class="n">SIG_ERR</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> 		<span class="o">...</span> <span class="o">//</span> <span class="err">错误处理</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	while (true) {
-</span></span><span class="line"><span class="cl"> 		... // 程序主循环代码
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="bp">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> 		<span class="o">...</span> <span class="o">//</span> <span class="err">程序主循环代码</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	return 0;
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 如下代码示例中，尽量不在信号处理函数中调用其他函数，仅在信号处理程序中修改volatile sig_atomic_t类型的变量：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2262,37 +2260,37 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">static volatile sig_atomic_t g_flag = 0;
-</span></span><span class="line"><span class="cl">void handler(int num)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	g_flag = 1;
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">static</span> <span class="n">volatile</span> <span class="n">sig_atomic_t</span> <span class="n">g_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">handler</span><span class="p">(</span><span class="ne">int</span> <span class="n">num</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">g_flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">int main(int argc, char **argv)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	if (signal(SIGINT, handler) == SIG_ERR) {
-</span></span><span class="line"><span class="cl">	... // 错误处理
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">main</span><span class="p">(</span><span class="ne">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="k">signal</span><span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span> <span class="n">handler</span><span class="p">)</span> <span class="o">==</span> <span class="n">SIG_ERR</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span> <span class="o">//</span> <span class="err">错误处理</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	while (true) {
-</span></span><span class="line"><span class="cl">		if (g_flag != 0) {
-</span></span><span class="line"><span class="cl">			printf(&#34;receive signal = %d\n&#34;, SIGINT);
-</span></span><span class="line"><span class="cl">		}
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="bp">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">g_flag</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;receive signal = </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">SIGINT</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">		... // 程序主循环代码
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">		<span class="o">...</span> <span class="o">//</span> <span class="err">程序主循环代码</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	...
-</span></span><span class="line"><span class="cl">	return 0;
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>【相关软件CWE编号】</strong> CWE-479</p>
 <h1 id="内存">内存</h1>
 <h2 id="内存分配后必须判断是否成功">内存分配后必须判断是否成功</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 内存分配一旦失败，那么后续的操作会存在未定义的行为风险。比如malloc申请失败返回了空指针，对空指针的解引用是一种未定义行为。</p>
-<p><strong>【错误代码示例】</strong> 
+<p><strong>【错误代码示例】</strong>
 如下代码示例中，调用malloc分配内存之后，没有判断是否成功，直接引用了p。如果malloc失败，它将返回一个空指针并传递给p。当如下代码在内存拷贝中解引用了该空指针p时，程序会出现未定义行为。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2316,7 +2314,7 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 如下代码示例中，在malloc分配内存之后，立即判断其是否成功，消除了上述的风险。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2347,10 +2345,10 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="外部输入作为内存操作相关函数的复制长度时需要校验其合法性">外部输入作为内存操作相关函数的复制长度时，需要校验其合法性</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 将数据复制到容量不足以容纳该数据的内存中会导致缓冲区溢出。为了防止此类错误，必须根据目标容量的大小限制被复制的数据大小，或者必须确保目标容量足够大以容纳要复制的数据。</p>
-<p><strong>【错误代码示例】</strong> 
-外部输入的数据不一定会直接作为内存复制长度使用，还可能会间接参与内存复制操作。 
+<p><strong>【错误代码示例】</strong>
+外部输入的数据不一定会直接作为内存复制长度使用，还可能会间接参与内存复制操作。
 如下代码示例中，inputTable-&gt;count来自外部报文，虽然没有直接作为内存复制长度使用，而是作为for循环体的上限使用，间接参与了内存复制操作。由于没有校验其大小，可造成缓冲区溢出：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2370,23 +2368,23 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">typedef struct {
-</span></span><span class="line"><span class="cl">	size_t count;
-</span></span><span class="line"><span class="cl">	int val[MAX_num_bERS];
-</span></span><span class="line"><span class="cl">} ValueTable;
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">typedef</span> <span class="n">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">size_t</span> <span class="n">count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="ne">int</span> <span class="n">val</span><span class="p">[</span><span class="n">MAX_num_bERS</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">ValueTable</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ValueTable *value_table_dup(const ValueTable *input_table)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	ValueTable *output_table = ... // 分配内存
-</span></span><span class="line"><span class="cl">	...
-</span></span><span class="line"><span class="cl">	for (size_t i = 0; i  &lt; input_table-&gt;count; i++) {
-</span></span><span class="line"><span class="cl">		output_table-&gt;val[i] = input_table-&gt;val[i];
-</span></span><span class="line"><span class="cl">	}
-</span></span><span class="line"><span class="cl"> 	...
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl"><span class="n">ValueTable</span> <span class="o">*</span><span class="n">value_table_dup</span><span class="p">(</span><span class="k">const</span> <span class="n">ValueTable</span> <span class="o">*</span><span class="n">input_table</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ValueTable</span> <span class="o">*</span><span class="n">output_table</span> <span class="o">=</span> <span class="o">...</span> <span class="o">//</span> <span class="err">分配内存</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span>  <span class="o">&lt;</span> <span class="n">input_table</span><span class="o">-&gt;</span><span class="n">count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">output_table</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_table</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 	<span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 如下代码示例中，对input_table-&gt;count做了校验。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2416,34 +2414,34 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">typedef struct {
-</span></span><span class="line"><span class="cl">size_t count;
-</span></span><span class="line"><span class="cl">int val[MAX_num_bERS];
-</span></span><span class="line"><span class="cl">}ValueTable;
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">typedef</span> <span class="n">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="n">size_t</span> <span class="n">count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">val</span><span class="p">[</span><span class="n">MAX_num_bERS</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">ValueTable</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">ValueTable *value_table_dup(const ValueTable *input_table)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	ValueTable *output_table = ... // 分配内存
-</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl"><span class="n">ValueTable</span> <span class="o">*</span><span class="n">value_table_dup</span><span class="p">(</span><span class="k">const</span> <span class="n">ValueTable</span> <span class="o">*</span><span class="n">input_table</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ValueTable</span> <span class="o">*</span><span class="n">output_table</span> <span class="o">=</span> <span class="o">...</span> <span class="o">//</span> <span class="err">分配内存</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	/ *
-</span></span><span class="line"><span class="cl">	- 根据应用场景，对来自外部报文的循环长度input_table-&gt;count
-</span></span><span class="line"><span class="cl">	- 与output_table-&gt;val数组大小做校验，避免造成缓冲区溢出
-</span></span><span class="line"><span class="cl">	*/
-</span></span><span class="line"><span class="cl">	if (input_table-&gt;count  &gt; sizeof(output_table-&gt;val) / sizeof(output_table-&gt;val[0]){
-</span></span><span class="line"><span class="cl">		return NULL;
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	<span class="o">/</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">	<span class="o">-</span> <span class="err">根据应用场景，对来自外部报文的循环长度</span><span class="n">input_table</span><span class="o">-&gt;</span><span class="n">count</span>
+</span></span><span class="line"><span class="cl">	<span class="o">-</span> <span class="err">与</span><span class="n">output_table</span><span class="o">-&gt;</span><span class="n">val数组大小做校验</span><span class="err">，避免造成缓冲区溢出</span>
+</span></span><span class="line"><span class="cl">	<span class="o">*/</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">input_table</span><span class="o">-&gt;</span><span class="n">count</span>  <span class="o">&gt;</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">output_table</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">/</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">output_table</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]){</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="n">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	for (size_t i = 0; i  &lt; input_table-&gt;count; i++) {
-</span></span><span class="line"><span class="cl">		output_table-&gt;val[i] = input_table-&gt;val[i];
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span>  <span class="o">&lt;</span> <span class="n">input_table</span><span class="o">-&gt;</span><span class="n">count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">output_table</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_table</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	...
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="内存中的敏感信息使用完毕后立即清0">内存中的敏感信息使用完毕后立即清0</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 内存中的口令、密钥等敏感信息使用完毕后立即清0，避免被攻击者获取或者无意间泄漏给低权限用户。这里所说的内存包括但不限于：</p>
 <ul>
 <li>
@@ -2462,8 +2460,8 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 <p>磁盘缓存</p>
 </li>
 </ul>
-<p><strong>【错误代码示例】</strong> 
-通常内存在释放前不需要清除内存数据，因为这样在运行时会增加额外开销，所以在这段内存被释放之后，之前的数据还是会保留在其中。如果这段内存中的数据包含敏感信息，则可能会意外泄漏敏感信息。为了防止敏感信息泄漏，必须先清除内存中的敏感信息，然后再释放。 
+<p><strong>【错误代码示例】</strong>
+通常内存在释放前不需要清除内存数据，因为这样在运行时会增加额外开销，所以在这段内存被释放之后，之前的数据还是会保留在其中。如果这段内存中的数据包含敏感信息，则可能会意外泄漏敏感信息。为了防止敏感信息泄漏，必须先清除内存中的敏感信息，然后再释放。
 在如下代码示例中，存储在所引用的动态内存中的敏感信息secret被复制到新动态分配的缓冲区newSecret，最终通过free()释放。因为释放前未清除这块内存数据，这块内存可能被重新分配到程序的另一部分，之前存储在newSecret中的敏感信息可能会无意中被泄露。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2509,7 +2507,7 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span></span><span class="line"><span class="cl">...
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 如下代码示例中，为了防止信息泄漏，应先清除包含敏感信息的动态内存（用 &rsquo;  0 &lsquo;字符填充空间），然后再释放它。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2553,7 +2551,7 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span></span><span class="line"><span class="cl">...
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 下面是另外一个涉及敏感信息清理的场景，在代码获取到密码后，将密码保存到password中，进行密码验证，使用完毕后，通过memset对password清0。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2593,10 +2591,10 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </div>
 </div><h1 id="文件">文件</h1>
 <h2 id="创建文件时必须显式指定合适的文件访问权限">创建文件时必须显式指定合适的文件访问权限</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 创建文件时，如果不显式指定合适访问权限，可能会让未经授权的用户访问该文件，造成信息泄露，文件数据被篡改，文件中被注入恶意代码等风险。</p>
 <p>虽然文件的访问权限也依赖于文件系统，但是当前许多文件创建函数（例如POSIX open函数）都具有设置（或影响）文件访问权限的功能，所以当使用这些函数创建文件时，必须显式指定合适的文件访问权限，以防止意外访问。</p>
-<p><strong>【错误代码示例】</strong> 
+<p><strong>【错误代码示例】</strong>
 使用POSIX open()函数创建文件但未显示指定该文件的访问权限，可能会导致文件创建时具有过高的访问权限，这可能会导致漏洞。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2626,7 +2624,7 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 应该在open的第三个参数中显式指定新创建文件的访问权限。可以根据文件实际的应用情况设置何种访问权限。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2659,15 +2657,15 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="必须对文件路径进行规范化后再使用">必须对文件路径进行规范化后再使用</h2>
-<p><strong>【描述】</strong> 
-当文件路径来自外部数据时，必须对其做合法性校验，如果不校验，可能造成系统文件的被任意访问。但是禁止直接对其进行校验，正确做法是在校验之前必须对其进行路径规范化处理，因为： 
+<p><strong>【描述】</strong>
+当文件路径来自外部数据时，必须对其做合法性校验，如果不校验，可能造成系统文件的被任意访问。但是禁止直接对其进行校验，正确做法是在校验之前必须对其进行路径规范化处理，因为：
 同一个文件可以通过多种形式的路径来描述和引用，例如既可以是绝对路径，也可以是相对路径；而且路径名、目录名和文件名可能包含使校验变得困难和不准确的字符（如：&quot;.&quot;、&quot;..&quot;）。此外，文件还可以是符号链接，这进一步模糊了文件的实际位置或标识，增加了校验的难度和校验准确性。所以必须先将文件路径规范化，从而更容易校验其路径、目录或文件名，增加校验准确性，如使用realpath函数。</p>
 <p>一个简单的案例说明如下：</p>
 <p>当文件路径来自外部数据时，需要先将文件路径规范化，如果没有作规范化处理，攻击者就有机会通过恶意构造文件路径进行文件的越权访问。</p>
 <p>例如，攻击者可以构造&quot;../../../etc/passwd&quot;的方式进行任意文件访问。</p>
-<p><strong>【错误代码示例】</strong> 
-在此错误的示例中，argv[1]包含一个源于受污染源的文件名，并且该文件名已打开以进行写入。在使用此文件名操作之前，应该对其进行验证，以确保它引用的是预期的有效文件。 
-不幸的是，argv[1]引用的文件名可能包含特殊字符，例如目录字符，这使验证变得困难，甚至不可能。而且，argv[1]中可能包含可以指向任意文件路径的符号链接，即使该文件名通过了验证，也会导致该文件名是无效的。 
+<p><strong>【错误代码示例】</strong>
+在此错误的示例中，argv[1]包含一个源于受污染源的文件名，并且该文件名已打开以进行写入。在使用此文件名操作之前，应该对其进行验证，以确保它引用的是预期的有效文件。
+不幸的是，argv[1]引用的文件名可能包含特殊字符，例如目录字符，这使验证变得困难，甚至不可能。而且，argv[1]中可能包含可以指向任意文件路径的符号链接，即使该文件名通过了验证，也会导致该文件名是无效的。
 这种场景下，对文件名的直接验证即使被执行也是得不到预期的结果，对fopen()的调用可能会导致访问一个意外的文件。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2693,8 +2691,8 @@ realloc()是一个非常特殊的函数，原型如下：</p>
 </span></span><span class="line"><span class="cl">...
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
-规范化文件名是具有一定难度的，因为这需要了解底层文件系统。 
+</div><p><strong>【正确代码示例】</strong>
+规范化文件名是具有一定难度的，因为这需要了解底层文件系统。
 POSIX realpath()函数可以帮助将路径名转换为规范形式。</p>
 <p>对上面的错误代码示例，我们采用如下解决方案：</p>
 <div class="highlight"><div class="chroma">
@@ -2747,10 +2745,10 @@ POSIX realpath()函数可以帮助将路径名转换为规范形式。</p>
 </span></span><span class="line"><span class="cl">...
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 根据我们的实际场景，我们还可以采用的第二套解决方案，说明如下：</p>
-<p>如果PATH_MAX被定义为中的一个常量，那么使用非空的resolved_path调用realpath()也是安全的。 
-在本例中realpath()函数期望resolved_path引用一个字符数组，该字符数组足够大，可以容纳规范化的路径。 
+<p>如果PATH_MAX被定义为中的一个常量，那么使用非空的resolved_path调用realpath()也是安全的。
+在本例中realpath()函数期望resolved_path引用一个字符数组，该字符数组足够大，可以容纳规范化的路径。
 如果定义了PATH_MAX，则分配一个大小为PATH_MAX的缓冲区来保存realpath()的结果。正确代码示例如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2818,7 +2816,7 @@ POSIX realpath()函数可以帮助将路径名转换为规范形式。</p>
 </span></span><span class="line"><span class="cl">...
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【错误代码示例】</strong> 
+</div><p><strong>【错误代码示例】</strong>
 下面的代码场景是从外部获取到文件名称，拼接成文件路径后，直接对文件内容进行读取，导致攻击者可以读取到任意文件的内容：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2834,7 +2832,7 @@ POSIX realpath()函数可以帮助将路径名转换为规范形式。</p>
 </span></span><span class="line"><span class="cl">char *text = read_file_content(untrust_path);
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 正确的做法是，对路径进行规范化后，再判断路径是否是本程序所认为的合法的路径：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2897,7 +2895,7 @@ POSIX realpath()函数可以帮助将路径名转换为规范形式。</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="不要在共享目录中创建临时文件">不要在共享目录中创建临时文件</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 程序的临时文件应当是程序自身独享的，任何将自身临时文件置于共享目录的做法，将导致其他共享用户获得该程序的额外信息，产生信息泄露。因此，不要在任何共享目录创建仅由程序自身使用的临时文件。</p>
 <p>程序员通常会在共享目录中(例如在/tmp和/var/tmp创建临时文件，并且还有可能会定期清除这些临时文件(例如，每晚或重新启动期间)，但也可能不注意清理。</p>
 <p>临时文件通常用于辅助保存不能驻留在内存中的数据或存储临时的数据，也可用作进程间通信的一种手段（通过文件系统传输数据）。例如，一个进程在共享目录中创建一个临时文件，该文件名可能使用了众所周知的名称或者一个临时的名称，然后就可以通过该文件在进程间共享信息。这种通过在共享目录中创建临时文件的方法实现进程间共享的做法很危险，因为共享目录中的这些文件很容易被攻击者劫持或操纵。这里有几种缓解策略：</p>
@@ -2932,8 +2930,8 @@ POSIX realpath()函数可以帮助将路径名转换为规范形式。</p>
 </ul>
 <p>同时也需要注意到，当某个目录被开放读/写权限给多个用户或者一组用户时，该共享目录潜在的安全风险远远大于访问该目录中临时文件这个功能的本身。</p>
 <p>如果想安全地在共享目录中创建临时文件，而不受威胁是不容易的。例如，用于本地挂载的文件系统的代码在与远程挂载的文件系统一起共享使用时可能会受到攻击。而且上面的函数安全版本还受限于所使用的C运行时库、操作系统和文件系统的版本。唯一安全的解决方案是不要在共享目录中创建临时文件。</p>
-<p><strong>【错误代码示例】</strong> 
-如下代码示例，程序在Linux系统的共享目录/tmp下创建临时文件来保存临时数据，且文件名是硬编码的。 
+<p><strong>【错误代码示例】</strong>
+如下代码示例，程序在Linux系统的共享目录/tmp下创建临时文件来保存临时数据，且文件名是硬编码的。
 由于文件名是硬编码的，因此是可预测的，攻击者只需用符号链接替换文件，然后链接所引用的目标文件就会被打开并写入新内容。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2959,26 +2957,26 @@ POSIX realpath()函数可以帮助将路径名转换为规范形式。</p>
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void proc_data(const char  *file_name)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	FILE  *fp = fopen(file_name, &#34;wb+&#34;);
-</span></span><span class="line"><span class="cl">	if (fp == NULL) {
-</span></span><span class="line"><span class="cl">		... // 错误处理
-</span></span><span class="line"><span class="cl">	}
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">void</span> <span class="n">proc_data</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span>  <span class="o">*</span><span class="n">file_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">FILE</span>  <span class="o">*</span><span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&#34;wb+&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="n">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="o">...</span> <span class="o">//</span> <span class="err">错误处理</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	... // 写文件
-</span></span><span class="line"><span class="cl">	fclose(fp);
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">	<span class="o">...</span> <span class="o">//</span> <span class="err">写文件</span>
+</span></span><span class="line"><span class="cl">	<span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">int main(void)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	// 不合规：1.在系统共享目录中创建临时文件；2.临时文件名硬编码
-</span></span><span class="line"><span class="cl">	char  *real_file = &#34;/tmp/data&#34;;
-</span></span><span class="line"><span class="cl"> 	...
-</span></span><span class="line"><span class="cl">	proc_data(real_file);
-</span></span><span class="line"><span class="cl"> 	...
-</span></span><span class="line"><span class="cl">	return 0;
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="err">不合规：</span><span class="mf">1.</span><span class="err">在系统共享目录中创建临时文件；</span><span class="mf">2.</span><span class="err">临时文件名硬编码</span>
+</span></span><span class="line"><span class="cl">	<span class="n">char</span>  <span class="o">*</span><span class="n">real_file</span> <span class="o">=</span> <span class="s2">&#34;/tmp/data&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 	<span class="o">...</span>
+</span></span><span class="line"><span class="cl">	<span class="n">proc_data</span><span class="p">(</span><span class="n">real_file</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"> 	<span class="o">...</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>【正确案例】</strong></p>
@@ -2986,13 +2984,13 @@ POSIX realpath()函数可以帮助将路径名转换为规范形式。</p>
 <p>【业界典型漏洞】CVE-2004-2502</p>
 <h1 id="其它">其它</h1>
 <h2 id="不要在信号处理函数中访问共享对象">不要在信号处理函数中访问共享对象</h2>
-<p><strong>【描述】</strong> 
-在信号处理程序中访问和修改共享对象可能会造成竞争条件，使数据处于不确定的状态。 
+<p><strong>【描述】</strong>
+在信号处理程序中访问和修改共享对象可能会造成竞争条件，使数据处于不确定的状态。
 这条规则有两个不适用的场景（C11标准第5.1.2.3章节第5段）是：</p>
 <p>1） 读写不需要加锁的原子对象;</p>
 <p>2）读写volatile sig_atomic_t类型的对象，因为具有volatile sig_atomic_t类型的对象即使在出现异步中断的时候也可以作为一个原子实体访问，是异步安全的。</p>
 <p>此外，在信号处理程序中，如果要调用函数，请仅调用异步信号安全函数。</p>
-<p><strong>【错误代码示例】</strong> 
+<p><strong>【错误代码示例】</strong>
 在这个信号处理过程中，程序打算将p_msg作为共享对象，当产生SIGINT信号时更新共享对象的内容，但是该p_msg变量类型不是volatile sig_atomic_t，所以不是异步安全的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3016,27 +3014,27 @@ POSIX realpath()函数可以帮助将路径名转换为规范形式。</p>
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#define MAX_MSG_SIZE 32
-</span></span><span class="line"><span class="cl">static char g_msg_buf[MAX_MSG_SIZE] = {0};
-</span></span><span class="line"><span class="cl">static char *g_msg = g_msg_buf;
-</span></span><span class="line"><span class="cl">void signal_handler(int signum)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	// 下面代码操作g_msg不合规，因为不是异步安全的
-</span></span><span class="line"><span class="cl">	(void)memset(g_msg, 0, MAX_MSG_SIZE);
-</span></span><span class="line"><span class="cl">	strcpy(g_msg,  &#34;signal SIGINT received.&#34;);
-</span></span><span class="line"><span class="cl">	... //
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="c1">#define MAX_MSG_SIZE 32</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">char</span> <span class="n">g_msg_buf</span><span class="p">[</span><span class="n">MAX_MSG_SIZE</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">char</span> <span class="o">*</span><span class="n">g_msg</span> <span class="o">=</span> <span class="n">g_msg_buf</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">signal_handler</span><span class="p">(</span><span class="ne">int</span> <span class="n">signum</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="err">下面代码操作</span><span class="n">g_msg不合规</span><span class="err">，因为不是异步安全的</span>
+</span></span><span class="line"><span class="cl">	<span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">memset</span><span class="p">(</span><span class="n">g_msg</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MAX_MSG_SIZE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">strcpy</span><span class="p">(</span><span class="n">g_msg</span><span class="p">,</span>  <span class="s2">&#34;signal SIGINT received.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span> <span class="o">//</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">int main(void)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	strcpy(g_msg,  &#34;No msg yet.&#34;); // 初始化消息内容
-</span></span><span class="line"><span class="cl">	signal(SIGINT, signal_handler); // 设置SIGINT信号对应的处理函数
-</span></span><span class="line"><span class="cl">	... // 程序主循环代码
-</span></span><span class="line"><span class="cl">	return 0;
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">strcpy</span><span class="p">(</span><span class="n">g_msg</span><span class="p">,</span>  <span class="s2">&#34;No msg yet.&#34;</span><span class="p">);</span> <span class="o">//</span> <span class="err">初始化消息内容</span>
+</span></span><span class="line"><span class="cl">	<span class="k">signal</span><span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span> <span class="n">signal_handler</span><span class="p">);</span> <span class="o">//</span> <span class="err">设置</span><span class="n">SIGINT信号对应的处理函数</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span> <span class="o">//</span> <span class="err">程序主循环代码</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>【正确代码示例】</strong> 
+</div><p><strong>【正确代码示例】</strong>
 如下代码示例中，在信号处理函数中仅将volatile sig_atomic_t类型作为共享对象使用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3061,30 +3059,30 @@ POSIX realpath()函数可以帮助将路径名转换为规范形式。</p>
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#define MAX_MSG_SIZE 32
-</span></span><span class="line"><span class="cl">volatile sig_atomic_t g_sig_flag = 0;
-</span></span><span class="line"><span class="cl">void signal_handler(int signum)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	g_sig_flag = 1; // 合规
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="c1">#define MAX_MSG_SIZE 32</span>
+</span></span><span class="line"><span class="cl"><span class="n">volatile</span> <span class="n">sig_atomic_t</span> <span class="n">g_sig_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">signal_handler</span><span class="p">(</span><span class="ne">int</span> <span class="n">signum</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">g_sig_flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="o">//</span> <span class="err">合规</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">int main(void)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	signal(SIGINT, signal_handler);
-</span></span><span class="line"><span class="cl">	char msg_buf[MAX_MSG_SIZE];
-</span></span><span class="line"><span class="cl">	strcpy(msg_buf, &#34;No msg yet.&#34;); // 初始化消息内容
-</span></span><span class="line"><span class="cl">	... // 程序主循环代码
-</span></span><span class="line"><span class="cl">	if (g_sig_flag == 1) { // 在退出主循环之后，根据sigFlag状态再刷新消息内容
-</span></span><span class="line"><span class="cl">		strcpy(msgBuf, &#34;signal SIGINT received.&#34;);
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">main</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">signal</span><span class="p">(</span><span class="n">SIGINT</span><span class="p">,</span> <span class="n">signal_handler</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">char</span> <span class="n">msg_buf</span><span class="p">[</span><span class="n">MAX_MSG_SIZE</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="n">strcpy</span><span class="p">(</span><span class="n">msg_buf</span><span class="p">,</span> <span class="s2">&#34;No msg yet.&#34;</span><span class="p">);</span> <span class="o">//</span> <span class="err">初始化消息内容</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span> <span class="o">//</span> <span class="err">程序主循环代码</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">g_sig_flag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="o">//</span> <span class="err">在退出主循环之后，根据</span><span class="n">sigFlag状态再刷新消息内容</span>
+</span></span><span class="line"><span class="cl">		<span class="n">strcpy</span><span class="p">(</span><span class="n">msgBuf</span><span class="p">,</span> <span class="s2">&#34;signal SIGINT received.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	return 0;
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>【相关软件CWE编号】</strong> CWE-662，CWE-828</p>
 <h2 id="禁用rand函数产生用于安全用途的伪随机数">禁用rand函数产生用于安全用途的伪随机数</h2>
-<p><strong>【描述】</strong> 
+<p><strong>【描述】</strong>
 C语言标准库rand()函数生成的是伪随机数，所以不能保证其产生的随机数序列质量。所以禁止使用rand()函数产生的随机数用于安全用途，必须使用安全的随机数产生方式，如： /dev/random文件。</p>
 <p>典型的安全用途场景包括(但不限于)以下几种：</p>
 <ul>
@@ -3101,9 +3099,9 @@ C语言标准库rand()函数生成的是伪随机数，所以不能保证其产�
 <p>用于密码算法用途（例如用于生成IV、盐值、密钥等）的随机数生成。</p>
 </li>
 </ul>
-<p><strong>【错误代码示例】</strong> 
+<p><strong>【错误代码示例】</strong>
 程序员期望生成一个唯一的不可被猜测的HTTP会话ID，但该ID是通过调用rand()函数产生的数字随机数，它的ID是可猜测的，并且随机性有限。</p>
-<p><strong>【正确代码示例】(POSIX)</strong> 
+<p><strong>【正确代码示例】(POSIX)</strong>
 可以使用/dev/random文件得到随机数。</p>
 <p><strong>【影响】</strong></p>
 <p>使用rand()函数可能造成可预测的随机数。</p>
@@ -3267,16 +3265,16 @@ C语言标准库rand()函数生成的是伪随机数，所以不能保证其产�
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">size_t incorrect_write(struct file  *file, const char __user  *user_buf, size_t count, loff_t  *ppos)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	...
-</span></span><span class="line"><span class="cl">	char buf [128] = {0};
-</span></span><span class="line"><span class="cl">	int buf_size = 0;
-</span></span><span class="line"><span class="cl">	buf_size = min(count, (sizeof(buf)-1));
-</span></span><span class="line"><span class="cl">	// 错误：直接引用用户态传入指针，如果user_buf为NULL，则可导致内核崩溃
-</span></span><span class="line"><span class="cl">	(void)memcpy(buf, user_buf, buf_size); 
-</span></span><span class="line"><span class="cl">	...
-</span></span><span class="line"><span class="cl">}
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">size_t</span> <span class="n">incorrect_write</span><span class="p">(</span><span class="n">struct</span> <span class="n">file</span>  <span class="o">*</span><span class="n">file</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="n">__user</span>  <span class="o">*</span><span class="n">user_buf</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">loff_t</span>  <span class="o">*</span><span class="n">ppos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl">	<span class="n">char</span> <span class="n">buf</span> <span class="p">[</span><span class="mi">128</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="ne">int</span> <span class="n">buf_size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">buf_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="p">(</span><span class="n">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="err">错误：直接引用用户态传入指针，如果</span><span class="n">user_buf为NULL</span><span class="err">，则可导致内核崩溃</span>
+</span></span><span class="line"><span class="cl">	<span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">memcpy</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">user_buf</span><span class="p">,</span> <span class="n">buf_size</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>【正确代码示例】</strong></p>
@@ -3299,20 +3297,20 @@ C语言标准库rand()函数生成的是伪随机数，所以不能保证其产�
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ssize_t correct_write(struct file *file, const char __user *user_buf, size_t count, loff_t *ppos)
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">	...
-</span></span><span class="line"><span class="cl">	char buf[128] = {0};
-</span></span><span class="line"><span class="cl">	int buf_size = 0;
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">ssize_t</span> <span class="n">correct_write</span><span class="p">(</span><span class="n">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">file</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="n">__user</span> <span class="o">*</span><span class="n">user_buf</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="n">ppos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl">	<span class="n">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">128</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="ne">int</span> <span class="n">buf_size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	buf_size = min(count, (sizeof(buf)-1));
-</span></span><span class="line"><span class="cl">	// 修改：使用专用函数copy_from_user()将数据写入到内核态buf，并注意防止缓冲区溢出
-</span></span><span class="line"><span class="cl">	if (copy_from_user(buf, user_buf, buf_size)) { 
-</span></span><span class="line"><span class="cl">		return EFAULT;
-</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	<span class="n">buf_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="p">(</span><span class="n">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="err">修改：使用专用函数</span><span class="n">copy_from_user</span><span class="p">()</span><span class="err">将数据写入到内核态</span><span class="n">buf</span><span class="err">，并注意防止缓冲区溢出</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">copy_from_user</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">user_buf</span><span class="p">,</span> <span class="n">buf_size</span><span class="p">))</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="n">EFAULT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	...
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="必须对copy_from_user拷贝长度进行校验防止缓冲区溢出">必须对copy_from_user()拷贝长度进行校验，防止缓冲区溢出</h2>
@@ -3669,25 +3667,25 @@ C语言标准库rand()函数生成的是伪随机数，所以不能保证其产�
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="nv">mmegment_t</span> <span class="nv">old_fs</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nf">printk</span><span class="p">(</span><span class="s2">&#34;Hello, I&#39;m the module that intends to write message to file.</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">file</span> <span class="o">==</span> <span class="nc">NULL</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nv">file</span> <span class="o">=</span> <span class="nf">filp_open</span><span class="p">(</span><span class="nc">MY_FILE</span><span class="p">,</span> <span class="nc">O_RDWR</span> <span class="o">|</span> <span class="nc">O_APPEND</span> <span class="o">|</span> <span class="nc">O_CREAT</span><span class="p">,</span> <span class="mi">0664</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">mmegment_t old_fs;
+</span></span><span class="line"><span class="cl">printk(&#34;Hello, I&#39;m the module that intends to write message to file.\n&#34;);
+</span></span><span class="line"><span class="cl">if (file == NULL) {
+</span></span><span class="line"><span class="cl">	file = filp_open(MY_FILE, O_RDWR | O_APPEND | O_CREAT, 0664);
+</span></span><span class="line"><span class="cl">}
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nc">IS_ERR</span><span class="p">(</span><span class="nv">file</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nf">printk</span><span class="p">(</span><span class="s2">&#34;Error occured while opening file %s, exiting ...</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="nc">MY_FILE</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">if (IS_ERR(file)) {
+</span></span><span class="line"><span class="cl">	printk(&#34;Error occured while opening file %s, exiting ...\n&#34;, MY_FILE);
+</span></span><span class="line"><span class="cl">	return 0;
+</span></span><span class="line"><span class="cl">}
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nf">sprintf</span><span class="p">(</span><span class="nv">buf</span><span class="p">,</span> <span class="s2">&#34;%s&#34;</span><span class="p">,</span> <span class="s2">&#34;The Message.&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="nv">old_fs</span> <span class="o">=</span> <span class="nf">get_fs</span><span class="p">();</span> <span class="c1">// get_fs()的作用是获取用户空间地址上限值  
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                   <span class="c1">// #define get_fs() (current-&gt;addr_limit
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">set_fs</span><span class="p">(</span><span class="nc">KERNEL_DS</span><span class="p">);</span> <span class="c1">// set_fs的作用是将地址空间上限扩大到KERNEL_DS，这样内核代码可以调用系统函数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">file</span><span class="o">-</span><span class="p">&gt;</span><span class="nv">f_op</span><span class="o">-</span><span class="p">&gt;</span><span class="nf">write</span><span class="p">(</span><span class="nv">file</span><span class="p">,</span> <span class="p">(</span><span class="nv">char</span> <span class="o">*</span><span class="p">)</span><span class="nv">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="nv">buf</span><span class="p">),</span> <span class="o">&amp;</span><span class="nv">file</span><span class="o">-</span><span class="p">&gt;</span><span class="nv">f_pos</span><span class="p">);</span> <span class="c1">// 内核代码可以调用write()函数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">set_fs</span><span class="p">(</span><span class="nv">old_fs</span><span class="p">);</span> <span class="c1">// 使用完后及时恢复原来用户空间地址限制值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">...</span>
+</span></span><span class="line"><span class="cl">sprintf(buf, &#34;%s&#34;, &#34;The Message.&#34;);
+</span></span><span class="line"><span class="cl">old_fs = get_fs(); // get_fs()的作用是获取用户空间地址上限值  
+</span></span><span class="line"><span class="cl">                   // #define get_fs() (current-&gt;addr_limit
+</span></span><span class="line"><span class="cl">set_fs(KERNEL_DS); // set_fs的作用是将地址空间上限扩大到KERNEL_DS，这样内核代码可以调用系统函数
+</span></span><span class="line"><span class="cl">file-&gt;f_op-&gt;write(file, (char *)buf, sizeof(buf), &amp;file-&gt;f_pos); // 内核代码可以调用write()函数
+</span></span><span class="line"><span class="cl">set_fs(old_fs); // 使用完后及时恢复原来用户空间地址限制值
+</span></span><span class="line"><span class="cl">...
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过上述代码，可以了解到最为关键的就是操作完成后，要及时恢复地址校验功能。否则SMEP/PXN安全机制就会失效，使得许多漏洞的利用变得很容易。</p>
@@ -3798,9 +3796,9 @@ C语言标准库rand()函数生成的是伪随机数，所以不能保证其产�
       <a href="/hugo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2/" class="post-nav-item" rel="next" title="Hugo静态博客部署">Hugo静态博客部署<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.104.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-RC"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-RC"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
-            <span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="/">技术小窝</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
