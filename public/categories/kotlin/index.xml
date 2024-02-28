@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>kotlin - 分类 - 技术小窝</title>
+    <link>https://blog-12x.pages.dev/categories/kotlin/</link>
+    <description>kotlin - 分类 - 技术小窝</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 28 Feb 2024 22:54:24 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/kotlin/" rel="self" type="application/rss+xml" /><item>
+  <title>Kotlin学习</title>
+  <link>https://blog-12x.pages.dev/kotlin%E5%AD%A6%E4%B9%A0/</link>
+  <pubDate>Wed, 28 Feb 2024 22:54:24 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/kotlin%E5%AD%A6%E4%B9%A0/</guid>
+  <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

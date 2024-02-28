@@ -3,7 +3,23 @@
     <title>Tags - 标签 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/tags/</link>
     <description>Tags - 标签 - 技术小窝</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 21 Jan 2024 22:24:28 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 28 Feb 2024 22:54:24 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/" rel="self" type="application/rss+xml" /><item>
+  <title>android</title>
+  <link>https://blog-12x.pages.dev/tags/android/</link>
+  <pubDate>Wed, 28 Feb 2024 22:54:24 &#43;0800</pubDate>
+  <author>技术小窝</author>
+  <guid>https://blog-12x.pages.dev/tags/android/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>kotlin</title>
+  <link>https://blog-12x.pages.dev/tags/kotlin/</link>
+  <pubDate>Wed, 28 Feb 2024 22:54:24 &#43;0800</pubDate>
+  <author>技术小窝</author>
+  <guid>https://blog-12x.pages.dev/tags/kotlin/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>draft</title>
   <link>https://blog-12x.pages.dev/tags/draft/</link>
   <pubDate>Sun, 21 Jan 2024 22:24:28 &#43;0800</pubDate>
@@ -65,22 +81,6 @@
   <pubDate>Thu, 31 Aug 2023 21:40:12 &#43;0800</pubDate>
   <author>技术小窝</author>
   <guid>https://blog-12x.pages.dev/tags/veth/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>pytorch</title>
-  <link>https://blog-12x.pages.dev/tags/pytorch/</link>
-  <pubDate>Sun, 23 Jul 2023 23:38:09 &#43;0800</pubDate>
-  <author>技术小窝</author>
-  <guid>https://blog-12x.pages.dev/tags/pytorch/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>torch.fx</title>
-  <link>https://blog-12x.pages.dev/tags/torch.fx/</link>
-  <pubDate>Sun, 23 Jul 2023 23:38:09 &#43;0800</pubDate>
-  <author>技术小窝</author>
-  <guid>https://blog-12x.pages.dev/tags/torch.fx/</guid>
   <description><![CDATA[]]></description>
 </item>
 </channel>
