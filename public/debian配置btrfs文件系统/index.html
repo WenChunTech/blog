@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Debian配置Btrfs文件系统 - 技术小窝</title><meta name="author" content="技术小窝">
+<meta name="author-link" content="">
+<meta name="description" content="Debian Sid配置Btrfs文件系统 安装Debian Testing 安装时选择Advanced options -&gt; Expert install 当提示“设置用户和密码”时，不允许以 root 身份登录。这样我们的" /><meta name="keywords" content='btrfs' /><meta itemprop="name" content="Debian配置Btrfs文件系统">
+<meta itemprop="description" content="Debian Sid配置Btrfs文件系统 安装Debian Testing 安装时选择Advanced options -&gt; Expert install 当提示“设置用户和密码”时，不允许以 root 身份登录。这样我们的"><meta itemprop="datePublished" content="2024-03-30T15:01:09+08:00" />
+<meta itemprop="dateModified" content="2024-03-30T15:01:09+08:00" />
+<meta itemprop="wordCount" content="2215"><meta itemprop="image" content="https://blog-12x.pages.dev/logo.png" />
+<meta itemprop="keywords" content="btrfs," /><meta property="og:title" content="Debian配置Btrfs文件系统" />
+<meta property="og:description" content="Debian Sid配置Btrfs文件系统 安装Debian Testing 安装时选择Advanced options -&gt; Expert install 当提示“设置用户和密码”时，不允许以 root 身份登录。这样我们的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" /><meta property="og:image" content="https://blog-12x.pages.dev/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-30T15:01:09+08:00" />
+<meta property="article:modified_time" content="2024-03-30T15:01:09+08:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://blog-12x.pages.dev/logo.png" /><meta name="twitter:title" content="Debian配置Btrfs文件系统"/>
+<meta name="twitter:description" content="Debian Sid配置Btrfs文件系统 安装Debian Testing 安装时选择Advanced options -&gt; Expert install 当提示“设置用户和密码”时，不允许以 root 身份登录。这样我们的"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" /><link rel="prev" href="https://blog-12x.pages.dev/kotlin%E5%AD%A6%E4%B9%A0/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Debian配置Btrfs文件系统",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/blog-12x.pages.dev\/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F\/"
+    },"genre": "posts","keywords": "btrfs","wordcount":  2215 ,
+    "url": "https:\/\/blog-12x.pages.dev\/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F\/","datePublished": "2024-03-30T15:01:09+08:00","dateModified": "2024-03-30T15:01:09+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Debian配置Btrfs文件系统</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      </span></span>
+          <span class="post-category">收录于 <a href="/categories/debian/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Debian</a>&ensp;<a href="/categories/btrfs/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Btrfs</a></span></div>
+      <div class="post-meta-line"><span title=2024-03-30&#32;15:01:09><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-30">2024-03-30</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 2215 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 5 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="Debian配置Btrfs文件系统">
+            <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装debian-testing">安装Debian Testing</a></li>
+    <li><a href="#配置zram">配置ZRAM</a></li>
+    <li><a href="#配置snapper">配置Snapper</a></li>
+    <li><a href="#安装gnome桌面">安装Gnome桌面</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h1 id="debian-sid配置btrfs文件系统">Debian Sid配置Btrfs文件系统</h1>
+<h2 id="安装debian-testing">安装Debian Testing</h2>
+<ol>
+<li>安装时选择Advanced options -&gt; Expert install</li>
+</ol>
+<blockquote>
+<p>当提示“设置用户和密码”时，不允许以 root 身份登录。这样我们的用户将被自动设置在“sudo”组中。</p>
+</blockquote>
+<ol start="2">
+<li>其他选择和正常安装一样，直到到达Partition disks(磁盘分区)界面，选择手动分区</li>
+<li>选择gpt</li>
+<li>创建一个EFI分区，大小为512M，文件系统为EFI System Partition</li>
+<li>创建一个/boot分区，大小为1024M，文件系统为ext4（如果需要加密则创建此分区）</li>
+<li>剩下的空间创建一个根分区，文件系统为btrfs，分区完成。</li>
+</ol>
+<blockquote>
+<p>当询问是否要返回并创建 SWAP 分区时，选择“否”，我们不需要磁盘上的 SWAP 分区，因为我们将使用 ZRAM 进行 SWAP</p>
+</blockquote>
+<ol start="7">
+<li>在选择Install the base system之前，按alt+ctrl+F2(笔记本可能是： alt+ctrl+fn+F2)切换到tty2，执行以下命令</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">df
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">umount /target/boot/efi/
+</span></span><span class="line"><span class="cl"><span class="c1"># 可选</span>
+</span></span><span class="line"><span class="cl">umount /target/boot/
+</span></span><span class="line"><span class="cl">umount /target/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 根据df命令选择对应的分区</span>
+</span></span><span class="line"><span class="cl">mount /dev/sda2 /mnt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /mnt
+</span></span><span class="line"><span class="cl">mv @rootfs @
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建其他子卷</span>
+</span></span><span class="line"><span class="cl">btrfs su cr @snapshots
+</span></span><span class="line"><span class="cl">btrfs su cr @home
+</span></span><span class="line"><span class="cl">btrfs su cr @opt
+</span></span><span class="line"><span class="cl">btrfs su cr @log
+</span></span><span class="line"><span class="cl">btrfs su cr @cache
+</span></span><span class="line"><span class="cl">btrfs su cr @crash
+</span></span><span class="line"><span class="cl">btrfs su cr @tmp
+</span></span><span class="line"><span class="cl">btrfs su cr @spool
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">btrfs su cr @images
+</span></span><span class="line"><span class="cl">btrfs su cr @containers
+</span></span><span class="line"><span class="cl"><span class="c1"># GNOME related subvolumes，如果不使用GNOME则不需要，在安装gnome桌面前不能挂载此2个子卷，否则会出现fstab挂载错误</span>
+</span></span><span class="line"><span class="cl">btrfs su cr @AccountsService
+</span></span><span class="line"><span class="cl">btrfs su cr @gdm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 挂载子卷</span>
+</span></span><span class="line"><span class="cl">mount -o noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@ /dev/mapper/sda2 /target
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建其他子卷挂载目录</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /target
+</span></span><span class="line"><span class="cl">mkdir -p .snapshots
+</span></span><span class="line"><span class="cl">mkdir -p home
+</span></span><span class="line"><span class="cl">mkdir -p opt
+</span></span><span class="line"><span class="cl">mkdir -p var/log
+</span></span><span class="line"><span class="cl">mkdir -p var/cache
+</span></span><span class="line"><span class="cl">mkdir -p var/crash
+</span></span><span class="line"><span class="cl">mkdir -p var/tmp
+</span></span><span class="line"><span class="cl">mkdir -p var/spool
+</span></span><span class="line"><span class="cl">mkdir -p var/lib/libvirt/images
+</span></span><span class="line"><span class="cl">mkdir -p var/lib/containers
+</span></span><span class="line"><span class="cl"><span class="c1"># 如果不安装GNOME则不需要此步骤</span>
+</span></span><span class="line"><span class="cl">mkdir -p var/lib/AccountsService
+</span></span><span class="line"><span class="cl">mkdir -p var/lib/gdm3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 挂载子卷到指定目录</span>
+</span></span><span class="line"><span class="cl">mount -o noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@snapshots /dev/mapper/sda2 /target/.snapshots
+</span></span><span class="line"><span class="cl">mount -o noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@home /dev/mapper/sda2 /target/home
+</span></span><span class="line"><span class="cl">mount -o noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@home /dev/mapper/sda2 /target/opt
+</span></span><span class="line"><span class="cl">mount -o noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@log /dev/mapper/sda2 /target/var/log
+</span></span><span class="line"><span class="cl">mount -o noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@cache /dev/mapper/sda2 /target/var/cache
+</span></span><span class="line"><span class="cl">mount -o noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@crash /dev/mapper/sda2 /target/var/crash
+</span></span><span class="line"><span class="cl">mount -o noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@tmp /dev/mapper/sda2 /target/var/tmp
+</span></span><span class="line"><span class="cl">mount -o noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@spool /dev/mapper/sda2 /target/var/spool
+</span></span><span class="line"><span class="cl">mount -o noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@images /dev/mapper/sda2 /target/var/lib/libvirt/images
+</span></span><span class="line"><span class="cl">mount -o noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@containers /dev/mapper/sda2 /target/var/lib/containers
+</span></span><span class="line"><span class="cl"><span class="c1"># 下面两个步骤先不执行，等安装GNOME桌面后再执行</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># mount -o noatime,space_cache=v2,compress=zstd:1,ssd,discard=async,subvol=@AccountsService /dev/mapper/sda2 /target/var/lib/AccountsService</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># mount -o noatime,space_cache=v2,compress=zstd:1,ssd,discard=async,subvol=@gdm /dev/mapper/sda2 /target/var/lib/gdm3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 再挂载BOOT分区，EFI分区</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># mount /dev/sda2 boot</span>
+</span></span><span class="line"><span class="cl">mount /dev/sda1 boot/efi
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 持久化挂载</span>
+</span></span><span class="line"><span class="cl">nano etc/fstab
+</span></span><span class="line"><span class="cl">/dev/mapper/<span class="nv">$VOLUME_GROUP</span> /                        btrfs  noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@                   <span class="m">0</span>    <span class="m">0</span>
+</span></span><span class="line"><span class="cl">/dev/mapper/<span class="nv">$VOLUME_GROUP</span> /.snapshots              btrfs  noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@snapshots          <span class="m">0</span>    <span class="m">0</span>
+</span></span><span class="line"><span class="cl">/dev/mapper/<span class="nv">$VOLUME_GROUP</span> /home                    btrfs  noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@home               <span class="m">0</span>    <span class="m">0</span>
+</span></span><span class="line"><span class="cl">/dev/mapper/<span class="nv">$VOLUME_GROUP</span> /opt                     btrfs  noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@opt                <span class="m">0</span>    <span class="m">0</span>
+</span></span><span class="line"><span class="cl">/dev/mapper/<span class="nv">$VOLUME_GROUP</span> /var/log                 btrfs  noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@log                <span class="m">0</span>    <span class="m">0</span>
+</span></span><span class="line"><span class="cl">/dev/mapper/<span class="nv">$VOLUME_GROUP</span> /var/cache               btrfs  noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@cache              <span class="m">0</span>    <span class="m">0</span>
+</span></span><span class="line"><span class="cl">/dev/mapper/<span class="nv">$VOLUME_GROUP</span> /var/crash               btrfs  noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@crash              <span class="m">0</span>    <span class="m">0</span>
+</span></span><span class="line"><span class="cl">/dev/mapper/<span class="nv">$VOLUME_GROUP</span> /var/tmp                 btrfs  noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@tmp                <span class="m">0</span>    <span class="m">0</span>
+</span></span><span class="line"><span class="cl">/dev/mapper/<span class="nv">$VOLUME_GROUP</span> /var/spool               btrfs  noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@spool              <span class="m">0</span>    <span class="m">0</span>
+</span></span><span class="line"><span class="cl">/dev/mapper/<span class="nv">$VOLUME_GROUP</span> /var/lib/libvirt/images  btrfs  noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@images             <span class="m">0</span>    <span class="m">0</span>
+</span></span><span class="line"><span class="cl">/dev/mapper/<span class="nv">$VOLUME_GROUP</span> /var/lib/containers      btrfs  noatime,space_cache<span class="o">=</span>v2,compress<span class="o">=</span>zstd:1,ssd,discard<span class="o">=</span>async,subvol<span class="o">=</span>@containers         <span class="m">0</span>    <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># /dev/mapper/$VOLUME_GROUP /var/lib/AccountsService btrfs  noatime,space_cache=v2,compress=zstd:1,ssd,discard=async,subvol=@AccountsService    0    0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># /dev/mapper/$VOLUME_GROUP /var/lib/gdm3            btrfs  noatime,space_cache=v2,compress=zstd:1,ssd,discard=async,subvol=@gdm                0    0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 卸载挂载</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /
+</span></span><span class="line"><span class="cl">umount /mnt
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="8">
+<li>按ctrl+alt+F1(笔记本可能是ctrl+alt+Fn+F1)回到tty1，选择Install the base system</li>
+<li>软件选择时，取消基本桌面环境,Gnome,只选择&quot;standard system utilities&quot; 即可</li>
+<li>其他步骤按照正常执行即可,最后重启系统执行以下步骤</li>
+</ol>
+<h2 id="配置zram">配置ZRAM</h2>
+<p><strong>执行命令安装zram</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update <span class="o">&amp;&amp;</span> sudo apt upgrade
+</span></span><span class="line"><span class="cl">sudo apt install zram-tools
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>更改配置文件<code>sudo nano /etc/default/zramswap</code>将<code>ALGORITHM</code>改为zstd，将<code>SIZE</code>改为8192(即8GB)的内存大小</p>
+<h2 id="配置snapper">配置Snapper</h2>
+<p><strong>安装工具</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install snapper inotify-tools git make
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>执行配置</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 因为snapper创建配置时会在当前执行目录下面一个.snapshots子卷和.snapshots目录，而我们希望将/.snapshots挂载到@shapshots子卷，所以需要先卸载@shapshots子卷</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span>
+</span></span><span class="line"><span class="cl">sudo umount /.snapshots
+</span></span><span class="line"><span class="cl">sudo rm -rf .snapshots
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建配置</span>
+</span></span><span class="line"><span class="cl">sudo snapper -c root create-config /
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除snapper自己创建/.snapshots子卷,并将/.snapshots挂载到@snapshots子卷</span>
+</span></span><span class="line"><span class="cl">sudo btrfs subvolume delete /.snapshots
+</span></span><span class="line"><span class="cl">sudo mkdir /.snapshots
+</span></span><span class="line"><span class="cl">sudo mount -av
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>配置Snapper自动快照</strong></p>
+<ol>
+<li>关闭开机快照</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl disable snapper-boot.timer
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>关闭timeline快照</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo snapper -c root set-config <span class="s1">&#39;TIMELINE_CREATE=no&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>开启apt pre/post快照,并优化打印信息
+snapper会自动开启apt pre/post快照，但是默认打印命令不够详细，可以通过以下命令优化</li>
+</ol>
+<ul>
+<li>3.1 修改<code>/etc/apt/apt.conf.d/80snapper</code>文件内容为</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># https://gist.github.com/imthenachoman/f722f6d08dfb404fed2a3b2d83263118</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=770938</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">DPkg::Pre-Invoke <span class="o">{</span> <span class="s2">&#34;/path/to/dpkg-pre-post-snapper.sh pre&#34;</span><span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">DPkg::Post-Invoke <span class="o">{</span> <span class="s2">&#34;/path/to/dpkg-pre-post-snapper.sh post&#34;</span><span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>3.2 创建<code>/path/to/dpkg-pre-post-snapper.sh</code>文件内容为</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1"># this script is an enhancement of https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=770938</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># we need to work up the process tree to find the apt command that triggered the call to this script</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># get the initial PID</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">PID</span><span class="o">=</span><span class="nv">$$</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># find the apt command by working up the process tree</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># loop until</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - PID is empty</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - PID is 1</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - or PID command is apt</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="o">[[</span> -n <span class="s2">&#34;</span><span class="nv">$PID</span><span class="s2">&#34;</span> <span class="o">&amp;&amp;</span> <span class="s2">&#34;</span><span class="nv">$PID</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s2">&#34;1&#34;</span> <span class="o">&amp;&amp;</span> <span class="s2">&#34;</span><span class="k">$(</span>ps -ho comm <span class="s2">&#34;</span><span class="si">${</span><span class="nv">PID</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s2">&#34;apt&#34;</span> <span class="o">]]</span> <span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># the current PID is not the apt command so go up one by getting the parent PID of hte current PID</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">PID</span><span class="o">=</span><span class="k">$(</span>ps -ho ppid <span class="s2">&#34;</span><span class="nv">$PID</span><span class="s2">&#34;</span> <span class="p">|</span> xargs<span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">SNAPPER_DESCRIPTION</span><span class="o">=</span><span class="s2">&#34;apt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># assuming we found the apt command, get the full args</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="k">$(</span>ps -ho comm <span class="s2">&#34;</span><span class="si">${</span><span class="nv">PID</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;apt&#34;</span> <span class="o">]]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">SNAPPER_DESCRIPTION</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>ps -ho args <span class="s2">&#34;</span><span class="si">${</span><span class="nv">PID</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># main event</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># source /etc/default/snapper if it exists</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> -e /etc/default/snapper <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    . /etc/default/snapper
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># what action are we taking</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;pre&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># pre, so take a pre snapshot</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># if snapper is installed</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># and if snapper snapshots are not being disabled using the DISABLE_APT_SNAPSHOT variable</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># and if /etc/snapper/configs/root exists</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> -x /usr/bin/snapper <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> ! x<span class="nv">$DISABLE_APT_SNAPSHOT</span> <span class="o">=</span> <span class="s1">&#39;xyes&#39;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -e /etc/snapper/configs/root <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># delete any lingering temp files</span>
+</span></span><span class="line"><span class="cl">        rm -f /var/tmp/snapper-apt <span class="o">||</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># create a snapshot</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># and save the snapshot number for reference later</span>
+</span></span><span class="line"><span class="cl">        snapper create -d <span class="s2">&#34;</span><span class="si">${</span><span class="nv">SNAPPER_DESCRIPTION</span><span class="si">}</span><span class="s2">&#34;</span> -c number -t pre -p &gt; /var/tmp/snapper-apt <span class="o">||</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># clean up snapper</span>
+</span></span><span class="line"><span class="cl">        snapper cleanup number <span class="o">||</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;post&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># post, so take a post snapshot</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># if snapper is installed</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># and if snapper snapshots are not being disabled using the DISABLE_APT_SNAPSHOT variable</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># and if the temp file with the snapshot number from the pre snapshot exists</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[</span> -x /usr/bin/snapper <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> ! x<span class="nv">$DISABLE_APT_SNAPSHOT</span> <span class="o">=</span> <span class="s1">&#39;xyes&#39;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -e /var/tmp/snapper-apt <span class="o">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># take a post snapshot and link it to the # of the pre snapshot</span>
+</span></span><span class="line"><span class="cl">        snapper create -d <span class="s2">&#34;</span><span class="si">${</span><span class="nv">SNAPPER_DESCRIPTION</span><span class="si">}</span><span class="s2">&#34;</span> -c number -t post --pre-number<span class="o">=</span><span class="sb">`</span>cat /var/tmp/snapper-apt<span class="sb">`</span> <span class="o">||</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># clean up snapper</span>
+</span></span><span class="line"><span class="cl">        snapper cleanup number <span class="o">||</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">    <span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>配置sudo使用snapper使用权限</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo snapper -c root set-config <span class="s1">&#39;ALLOW_GROUPS=sudo&#39;</span> <span class="s1">&#39;SYNC_ACL=yes&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>配置GRUB-BTRFS</li>
+</ol>
+<ul>
+<li>5.1 安装
+GRUB-BTRFS在Debian上不可用,所以需要编译安装</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/Antynea/grub-btrfs.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> grub-btrfs
+</span></span><span class="line"><span class="cl">sudo make install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>5.2 配置</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># To start the daemon run:</span>
+</span></span><span class="line"><span class="cl">sudo systemctl start grub-btrfsd
+</span></span><span class="line"><span class="cl"><span class="c1"># To activate it during system startup, run:</span>
+</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> grub-btrfsd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>5.3 下载的grub-btrfs代码可以清除了</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl">sudo rm -rf grub-btrfs/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>grub-btrfs可以在GRUB中显示当前系统中的所有快照,如果系统出问题了,可以从grub选择之前正常的快照回滚到可以正常启动的系统</p>
+</blockquote>
+<h2 id="安装gnome桌面">安装Gnome桌面</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install gnome-core
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2024-03-30&#32;15:01:09>更新于 2024-03-30&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Debian配置Btrfs文件系统" data-hashtags="btrfs"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-hashtag="btrfs"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Debian配置Btrfs文件系统" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Debian配置Btrfs文件系统"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Debian配置Btrfs文件系统"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Debian配置Btrfs文件系统" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Debian配置Btrfs文件系统" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" data-title="Debian配置Btrfs文件系统"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/btrfs/' class="post-tag">Btrfs</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/kotlin%E5%AD%A6%E4%B9%A0/" class="post-nav-item" rel="prev" title="Kotlin学习"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Kotlin学习</a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.124.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-RC"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="/">技术小窝</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>ipc - 标签 - 技术小窝</title>
+    <title>Ipc - 标签 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/tags/ipc/</link>
-    <description>ipc - 标签 - 技术小窝</description>
+    <description>Ipc - 标签 - 技术小窝</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 20 Nov 2022 11:50:09 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/ipc/" rel="self" type="application/rss+xml" /><item>
   <title>Linux进程间通信</title>
   <link>https://blog-12x.pages.dev/linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</link>
   <pubDate>Sun, 20 Nov 2022 11:50:09 &#43;0800</pubDate>
   <author>作者</author>
   <guid>https://blog-12x.pages.dev/linux%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[管道 匿名管道(Pipe) 特点 半双工 只能用于具有亲缘关系进程(父子，兄弟) 可以视作特殊文件，读写可以使用write，read函数 1 2 3 4 5 6 7]]></description>
 </item>
 </channel>
 </rss>

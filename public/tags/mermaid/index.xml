@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>mermaid - 标签 - 技术小窝</title>
+    <title>Mermaid - 标签 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/tags/mermaid/</link>
-    <description>mermaid - 标签 - 技术小窝</description>
+    <description>Mermaid - 标签 - 技术小窝</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 19 Feb 2023 12:51:39 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/mermaid/" rel="self" type="application/rss+xml" /><item>
   <title>Markdown使用mermaid</title>
   <link>https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/</link>
   <pubDate>Sun, 19 Feb 2023 12:51:39 &#43;0800</pubDate>
   <author>作者</author>
   <guid>https://blog-12x.pages.dev/markdown%E4%BD%BF%E7%94%A8mermaid/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[Markdown使用mermaid 0. 符号表示 类元素的可见范围 可见范围 表示方法 private - public + protected # package ~ 类的修饰 符号 类型 &lt;&lt;Interface&gt;&gt; 接口 &lt;&lt;abstract&gt;&gt; 抽象类 &lt;&lt;Service&gt;&gt; service类]]></description>
 </item>
 </channel>
 </rss>

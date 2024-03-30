@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>perf - 标签 - 技术小窝</title>
+    <title>Perf - 标签 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/tags/perf/</link>
-    <description>perf - 标签 - 技术小窝</description>
+    <description>Perf - 标签 - 技术小窝</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 22 Oct 2023 14:10:29 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/perf/" rel="self" type="application/rss+xml" /><item>
   <title>Perf性能Profiling</title>
   <link>https://blog-12x.pages.dev/perf%E6%80%A7%E8%83%BDprofiling/</link>
   <pubDate>Sun, 22 Oct 2023 14:10:29 &#43;0800</pubDate>
   <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
   <guid>https://blog-12x.pages.dev/perf%E6%80%A7%E8%83%BDprofiling/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[性能 Profiling &ndash; 使用 Perf 命令 1. Perf 常用命令 perf top 常用参数 -e：指定性能事件 -a：显示在所有 CPU 上的性能统计信息 -C：显示在指定 CPU 上的性能统计信息 -p：指定进]]></description>
 </item>
 </channel>
 </rss>

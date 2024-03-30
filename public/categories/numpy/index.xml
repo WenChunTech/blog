@@ -9,7 +9,7 @@
   <pubDate>Sat, 05 Nov 2022 21:37:49 &#43;0800</pubDate>
   <author>作者</author>
   <guid>https://blog-12x.pages.dev/numpy%E4%BD%BF%E7%94%A8%E6%8E%92%E5%BA%8F/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[Numpy 排序函数 numpy.sort(a, axis=-1, kind=None, order=None) 参数: a : 要排序的数组； axis ： 按什么轴进行排序，默认按最后一个轴进行排序； kind ：排序方法，默认是快速排序(不稳定)，可选参数有]]></description>
 </item>
 </channel>
 </rss>

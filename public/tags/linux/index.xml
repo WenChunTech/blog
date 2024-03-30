@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>linux - 标签 - 技术小窝</title>
+    <title>Linux - 标签 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/tags/linux/</link>
-    <description>linux - 标签 - 技术小窝</description>
+    <description>Linux - 标签 - 技术小窝</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 05 Nov 2023 23:01:37 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/linux/" rel="self" type="application/rss+xml" /><item>
   <title>VPN原理浅谈</title>
   <link>https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/</link>
   <pubDate>Sun, 05 Nov 2023 23:01:37 &#43;0800</pubDate>
   <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
   <guid>https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[VPN 原理浅谈 VPN 的应用场景 保护隐私： VPN 通过加密通信，确保你的互联网连接是安全的。这对于在公共 Wi-Fi 网络上浏览互联网时尤其重要，因为公共网络通常更容易]]></description>
 </item>
 <item>
   <title>Perf性能Profiling</title>
@@ -17,7 +17,7 @@
   <pubDate>Sun, 22 Oct 2023 14:10:29 &#43;0800</pubDate>
   <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
   <guid>https://blog-12x.pages.dev/perf%E6%80%A7%E8%83%BDprofiling/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[性能 Profiling &ndash; 使用 Perf 命令 1. Perf 常用命令 perf top 常用参数 -e：指定性能事件 -a：显示在所有 CPU 上的性能统计信息 -C：显示在指定 CPU 上的性能统计信息 -p：指定进]]></description>
 </item>
 <item>
   <title>Ip路由相关命令</title>
@@ -25,7 +25,7 @@
   <pubDate>Thu, 12 Oct 2023 23:37:13 &#43;0800</pubDate>
   <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
   <guid>https://blog-12x.pages.dev/ip%E8%B7%AF%E7%94%B1%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[IP 路由相关命令总结 一，路由策略（使用ip rule命令操作路由策略数据库） 基于策略的路由比传统路由在功能上更强大，使用更灵活，它使网络管理员不]]></description>
 </item>
 </channel>
 </rss>

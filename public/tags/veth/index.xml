@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>veth - 标签 - 技术小窝</title>
+    <title>Veth - 标签 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/tags/veth/</link>
-    <description>veth - 标签 - 技术小窝</description>
+    <description>Veth - 标签 - 技术小窝</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 31 Aug 2023 21:40:12 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/veth/" rel="self" type="application/rss+xml" /><item>
   <title>Docker基石 NetworkNamespace</title>
   <link>https://blog-12x.pages.dev/docker%E5%9F%BA%E7%9F%B3-networknamespace/</link>
   <pubDate>Thu, 31 Aug 2023 21:40:12 &#43;0800</pubDate>
   <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
   <guid>https://blog-12x.pages.dev/docker%E5%9F%BA%E7%9F%B3-networknamespace/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[Docker 基石-NetworkNamespace 1. veth-pair 是什么 veth-pair 是一对虚拟网卡，通过 veth-pair 可以将两个网络命名空间连接起来，从而实现两个网络命名空间之间的通信]]></description>
 </item>
 </channel>
 </rss>

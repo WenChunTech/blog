@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>openssl - 标签 - 技术小窝</title>
+    <title>Openssl - 标签 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/tags/openssl/</link>
-    <description>openssl - 标签 - 技术小窝</description>
+    <description>Openssl - 标签 - 技术小窝</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 31 Oct 2022 23:06:19 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/openssl/" rel="self" type="application/rss+xml" /><item>
   <title>Rust使用openssl加密算法</title>
   <link>https://blog-12x.pages.dev/rust%E4%BD%BF%E7%94%A8openssl%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
   <pubDate>Mon, 31 Oct 2022 23:06:19 &#43;0800</pubDate>
   <author>作者</author>
   <guid>https://blog-12x.pages.dev/rust%E4%BD%BF%E7%94%A8openssl%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[AES 加密算法 AES(Advanced Encryption Standard)，全称：高级加密标准，是一种最常见的对称加密算法 配置 Rust Toml 文件 1 2 [dependencies] openssl = { version = &#34;0.10&#34;, features = [&#34;vendored&#34;] } 示例代码 1 2 3 4 5 6 7]]></description>
 </item>
 </channel>
 </rss>

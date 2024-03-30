@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>python - 分类 - 技术小窝</title>
+    <title>Python - 分类 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/categories/python/</link>
-    <description>python - 分类 - 技术小窝</description>
+    <description>Python - 分类 - 技术小窝</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Jul 2023 22:06:27 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/python/" rel="self" type="application/rss+xml" /><item>
   <title>Matplotlib使用</title>
   <link>https://blog-12x.pages.dev/matplotlib%E4%BD%BF%E7%94%A8/</link>
   <pubDate>Thu, 13 Jul 2023 22:06:27 &#43;0800</pubDate>
   <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
   <guid>https://blog-12x.pages.dev/matplotlib%E4%BD%BF%E7%94%A8/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[matplotlib的简单使用 matplotlib结构 1. fig,ax,plt 三者的基本概念 fig Figure，就是图的外框，也叫画布，可以包括1-无穷个内框Axe]]></description>
 </item>
 <item>
   <title>Asyncio使用</title>
@@ -17,7 +17,7 @@
   <pubDate>Sun, 28 May 2023 18:33:40 &#43;0800</pubDate>
   <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
   <guid>https://blog-12x.pages.dev/asyncio%E4%BD%BF%E7%94%A8/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[介绍 异步IO：就是发起一个IO操作（如：网络请求，文件读写等），这些操作一般是比较耗时的，不用等待它结束，可以继续做其他事情，结束时会发来通]]></description>
 </item>
 <item>
   <title>强大的GAN网络</title>
@@ -25,7 +25,7 @@
   <pubDate>Sat, 25 Feb 2023 22:54:43 &#43;0800</pubDate>
   <author>作者</author>
   <guid>https://blog-12x.pages.dev/%E5%BC%BA%E5%A4%A7%E7%9A%84gan%E7%BD%91%E7%BB%9C/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[强大的GAN网络 1. 概要 ​ GAN网络全称generative adversarial network,翻译为生成式对抗网络,是一种非监督式学习机器学习方法。由Ian J,Goodfello]]></description>
 </item>
 <item>
   <title>Opencv抠图和裁剪图片</title>
@@ -33,7 +33,7 @@
   <pubDate>Sun, 04 Dec 2022 19:19:06 &#43;0800</pubDate>
   <author>作者</author>
   <guid>https://blog-12x.pages.dev/opencv%E6%8A%A0%E5%9B%BE%E5%92%8C%E8%A3%81%E5%89%AA%E5%9B%BE%E7%89%87/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[opencv实现抠图和裁剪 1. 抠图 步骤: 加载图像 转换图像格式(BGR &ndash;&gt; HSV) 设置阈值 通过阈值提取部分区域 显示图片 关于HSV可参考：HSL和HSV色]]></description>
 </item>
 <item>
   <title>Pandas使用小结</title>
@@ -41,7 +41,7 @@
   <pubDate>Sat, 12 Nov 2022 21:12:01 &#43;0800</pubDate>
   <author>作者</author>
   <guid>https://blog-12x.pages.dev/pandas%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[索引 1 2 3 4 5 6 7 8 9 10 11 12 13 import pandas as pd import numpy as np df = pd.DataFrame(np.arange(50).reshape(-1, 5), columns=list(&#39;abcde&#39;)) # 根据列标签索引 df[&#39;a&#39;] # 或者 df.loc[:,&#39;a&#39;] # 根据列索引 df.iloc[:, 0] # df[&#39;a&#39;] == df.loc[:,&#39;a&#39;] == df.iloc[:, 0] 计算 1 2 3 4 5 6 7 8 9 10 11 12]]></description>
 </item>
 <item>
   <title>Numpy使用排序</title>
@@ -49,7 +49,7 @@
   <pubDate>Sat, 05 Nov 2022 21:37:49 &#43;0800</pubDate>
   <author>作者</author>
   <guid>https://blog-12x.pages.dev/numpy%E4%BD%BF%E7%94%A8%E6%8E%92%E5%BA%8F/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[Numpy 排序函数 numpy.sort(a, axis=-1, kind=None, order=None) 参数: a : 要排序的数组； axis ： 按什么轴进行排序，默认按最后一个轴进行排序； kind ：排序方法，默认是快速排序(不稳定)，可选参数有]]></description>
 </item>
 </channel>
 </rss>

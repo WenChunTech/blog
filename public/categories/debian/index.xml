@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Debian - 分类 - 技术小窝</title>
+    <link>https://blog-12x.pages.dev/categories/debian/</link>
+    <description>Debian - 分类 - 技术小窝</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 30 Mar 2024 15:01:09 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/debian/" rel="self" type="application/rss+xml" /><item>
+  <title>Debian配置Btrfs文件系统</title>
+  <link>https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</link>
+  <pubDate>Sat, 30 Mar 2024 15:01:09 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</guid>
+  <description><![CDATA[Debian Sid配置Btrfs文件系统 安装Debian Testing 安装时选择Advanced options -&gt; Expert install 当提示“设置用户和密码”时，不允许以 root 身份登录。这样我们的]]></description>
+</item>
+</channel>
+</rss>

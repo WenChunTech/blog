@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>c/c&#43;&#43; - 分类 - 技术小窝</title>
+    <title>C/C&#43;&#43; - 分类 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/categories/c/c&#43;&#43;/</link>
-    <description>c/c&#43;&#43; - 分类 - 技术小窝</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><atom:link href="https://blog-12x.pages.dev/categories/c/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
+    <description>C/C&#43;&#43; - 分类 - 技术小窝</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 10 Dec 2022 23:01:51 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/c/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
   <title>Cmake简易教程</title>
   <link>https://blog-12x.pages.dev/cmake%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B/</link>
   <pubDate>Sat, 10 Dec 2022 23:01:51 &#43;0800</pubDate>
   <author>作者</author>
   <guid>https://blog-12x.pages.dev/cmake%E7%AE%80%E6%98%93%E6%95%99%E7%A8%8B/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[cmake简易教程 1. 添加头文件目录INCLUDE_DIRECTORIES 它相当于g++选项中的-I参数的作用，也相当于环境变量中增加路径到C]]></description>
 </item>
 </channel>
 </rss>

@@ -7,20 +7,19 @@
     <meta name="robots" content="noodp" />
     <title>VPN原理浅谈 - 技术小窝</title><meta name="author" content="技术小窝">
 <meta name="author-link" content="">
-<meta name="description" content="分享技术，记录技术成长过程" /><meta name="keywords" content='vpn, tun, linux' /><meta itemprop="name" content="VPN原理浅谈">
-<meta itemprop="description" content=""><meta itemprop="datePublished" content="2023-11-05T23:01:37+08:00" />
+<meta name="description" content="VPN 原理浅谈 VPN 的应用场景 保护隐私： VPN 通过加密通信，确保你的互联网连接是安全的。这对于在公共 Wi-Fi 网络上浏览互联网时尤其重要，因为公共网络通常更容易" /><meta name="keywords" content='vpn, tun, linux' /><meta itemprop="name" content="VPN原理浅谈">
+<meta itemprop="description" content="VPN 原理浅谈 VPN 的应用场景 保护隐私： VPN 通过加密通信，确保你的互联网连接是安全的。这对于在公共 Wi-Fi 网络上浏览互联网时尤其重要，因为公共网络通常更容易"><meta itemprop="datePublished" content="2023-11-05T23:01:37+08:00" />
 <meta itemprop="dateModified" content="2023-11-05T23:01:37+08:00" />
 <meta itemprop="wordCount" content="1583"><meta itemprop="image" content="https://blog-12x.pages.dev/logo.png" />
 <meta itemprop="keywords" content="vpn,tun,linux," /><meta property="og:title" content="VPN原理浅谈" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="VPN 原理浅谈 VPN 的应用场景 保护隐私： VPN 通过加密通信，确保你的互联网连接是安全的。这对于在公共 Wi-Fi 网络上浏览互联网时尤其重要，因为公共网络通常更容易" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog-12x.pages.dev/vpn%E5%8E%9F%E7%90%86%E6%B5%85%E8%B0%88/" /><meta property="og:image" content="https://blog-12x.pages.dev/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-05T23:01:37+08:00" />
 <meta property="article:modified_time" content="2023-11-05T23:01:37+08:00" />
-
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://blog-12x.pages.dev/logo.png" /><meta name="twitter:title" content="VPN原理浅谈"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="VPN 原理浅谈 VPN 的应用场景 保护隐私： VPN 通过加密通信，确保你的互联网连接是安全的。这对于在公共 Wi-Fi 网络上浏览互联网时尤其重要，因为公共网络通常更容易"/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -148,7 +147,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
       </span></span>
-          <span class="post-category">收录于 <a href="/categories/linux/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> linux</a></span></div>
+          <span class="post-category">收录于 <a href="/categories/linux/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a></span></div>
       <div class="post-meta-line"><span title=2023-11-05&#32;23:01:37><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-05">2023-11-05</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 1583 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 4 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="VPN原理浅谈">
             <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
           </span>&nbsp;</div>
@@ -305,7 +304,7 @@
   </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/vpn/' class="post-tag">vpn</a><a href='/tags/tun/' class="post-tag">tun</a><a href='/tags/linux/' class="post-tag">linux</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/vpn/' class="post-tag">Vpn</a><a href='/tags/tun/' class="post-tag">Tun</a><a href='/tags/linux/' class="post-tag">Linux</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -315,7 +314,7 @@
       <a href="/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="post-nav-item" rel="next" title="Btrfs文件系统">Btrfs文件系统<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-RC"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.124.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-RC"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="/">技术小窝</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

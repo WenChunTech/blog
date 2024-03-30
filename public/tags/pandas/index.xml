@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>pandas - 标签 - 技术小窝</title>
+    <title>Pandas - 标签 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/tags/pandas/</link>
-    <description>pandas - 标签 - 技术小窝</description>
+    <description>Pandas - 标签 - 技术小窝</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 12 Nov 2022 21:12:01 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/pandas/" rel="self" type="application/rss+xml" /><item>
   <title>Pandas使用小结</title>
   <link>https://blog-12x.pages.dev/pandas%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</link>
   <pubDate>Sat, 12 Nov 2022 21:12:01 &#43;0800</pubDate>
   <author>作者</author>
   <guid>https://blog-12x.pages.dev/pandas%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[索引 1 2 3 4 5 6 7 8 9 10 11 12 13 import pandas as pd import numpy as np df = pd.DataFrame(np.arange(50).reshape(-1, 5), columns=list(&#39;abcde&#39;)) # 根据列标签索引 df[&#39;a&#39;] # 或者 df.loc[:,&#39;a&#39;] # 根据列索引 df.iloc[:, 0] # df[&#39;a&#39;] == df.loc[:,&#39;a&#39;] == df.iloc[:, 0] 计算 1 2 3 4 5 6 7 8 9 10 11 12]]></description>
 </item>
 </channel>
 </rss>

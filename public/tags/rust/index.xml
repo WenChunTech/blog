@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>rust - 标签 - 技术小窝</title>
+    <title>Rust - 标签 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/tags/rust/</link>
-    <description>rust - 标签 - 技术小窝</description>
+    <description>Rust - 标签 - 技术小窝</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 13 Dec 2022 17:41:57 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/rust/" rel="self" type="application/rss+xml" /><item>
   <title>Rust偏僻知识点</title>
   <link>https://blog-12x.pages.dev/rust%E5%81%8F%E5%83%BB%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
   <pubDate>Tue, 13 Dec 2022 17:41:57 &#43;0800</pubDate>
   <author>作者</author>
   <guid>https://blog-12x.pages.dev/rust%E5%81%8F%E5%83%BB%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[Rust偏僻知识点 Cow(Clone on Write) 两个可选值： Borrowed，用于包裹对象的引用（通用引用）； Owned，用于包裹对象的所有者； Cow 提供 对此对象的不可]]></description>
 </item>
 <item>
   <title>Rust使用openssl加密算法</title>
@@ -17,7 +17,7 @@
   <pubDate>Mon, 31 Oct 2022 23:06:19 &#43;0800</pubDate>
   <author>作者</author>
   <guid>https://blog-12x.pages.dev/rust%E4%BD%BF%E7%94%A8openssl%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[AES 加密算法 AES(Advanced Encryption Standard)，全称：高级加密标准，是一种最常见的对称加密算法 配置 Rust Toml 文件 1 2 [dependencies] openssl = { version = &#34;0.10&#34;, features = [&#34;vendored&#34;] } 示例代码 1 2 3 4 5 6 7]]></description>
 </item>
 </channel>
 </rss>
