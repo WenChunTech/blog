@@ -1,41 +1,5 @@
----
-title: Golang内存模型
-subtitle:
-date: 2024-04-18T20:07:25+08:00
-draft: false
-author:
-  name:
-  link:
-  email:
-  avatar:
-description:
-keywords:
-license:
-comment: false
-weight: 0
-tags:
-  - 内存模型
-categories:
-  - Golang
-hiddenFromHomePage: false
-hiddenFromSearch: false
-summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
-toc: true
-math: false
-lightgallery: false
-password:
-message:
-repost:
-  enable: true
-  url:
+# Golang内存模型
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content/#front-matter
----
 
 <!--more-->
 
@@ -101,3 +65,10 @@ func main() {
 3. https://research.swtch.com/plmm
 4. https://go.dev/ref/mem
 5. https://golang.design/under-the-hood/zh-cn/part1basic/ch05sync/mem/
+
+
+---
+
+> 作者: map[avatar:<nil> email:<nil> link:<nil> name:<nil>]  
+> URL: https://blog-12x.pages.dev/golang%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/  
+

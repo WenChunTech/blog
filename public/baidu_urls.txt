@@ -1,3 +1,4 @@
+https://blog-12x.pages.dev/golang%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/
 https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/
 https://blog-12x.pages.dev/kotlin%E5%AD%A6%E4%B9%A0/
 https://blog-12x.pages.dev/btrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/

@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Golang - 分类 - 技术小窝</title>
+    <link>https://blog-12x.pages.dev/categories/golang/</link>
+    <description>Golang - 分类 - 技术小窝</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 18 Apr 2024 20:07:25 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/golang/" rel="self" type="application/rss+xml" /><item>
+  <title>Golang内存模型</title>
+  <link>https://blog-12x.pages.dev/golang%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</link>
+  <pubDate>Thu, 18 Apr 2024 20:07:25 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/golang%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</guid>
+  <description><![CDATA[Golang内存模型 介绍 Golang内存模型是Golang程序员必须了解的一个重要概念，它定义了Golang程序中的内存访问规则，保证了Go]]></description>
+</item>
+</channel>
+</rss>

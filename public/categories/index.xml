@@ -3,7 +3,15 @@
     <title>Categories - 分类 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/categories/</link>
     <description>Categories - 分类 - 技术小窝</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 30 Mar 2024 15:01:09 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 18 Apr 2024 20:07:25 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/" rel="self" type="application/rss+xml" /><item>
+  <title>Golang</title>
+  <link>https://blog-12x.pages.dev/categories/golang/</link>
+  <pubDate>Thu, 18 Apr 2024 20:07:25 &#43;0800</pubDate>
+  <author>技术小窝</author>
+  <guid>https://blog-12x.pages.dev/categories/golang/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Btrfs</title>
   <link>https://blog-12x.pages.dev/categories/btrfs/</link>
   <pubDate>Sat, 30 Mar 2024 15:01:09 &#43;0800</pubDate>
@@ -73,14 +81,6 @@
   <pubDate>Sun, 09 Jul 2023 11:31:11 &#43;0800</pubDate>
   <author>技术小窝</author>
   <guid>https://blog-12x.pages.dev/categories/c/cpp/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>DeepLearning</title>
-  <link>https://blog-12x.pages.dev/categories/deeplearning/</link>
-  <pubDate>Tue, 28 Feb 2023 23:15:49 &#43;0800</pubDate>
-  <author>技术小窝</author>
-  <guid>https://blog-12x.pages.dev/categories/deeplearning/</guid>
   <description><![CDATA[]]></description>
 </item>
 </channel>

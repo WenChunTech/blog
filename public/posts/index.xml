@@ -3,7 +3,15 @@
     <title>所有文章 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/posts/</link>
     <description>所有文章 | 技术小窝</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 30 Mar 2024 15:01:09 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/posts/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 23 Apr 2024 21:44:05 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/posts/" rel="self" type="application/rss+xml" /><item>
+  <title>Golang内存模型</title>
+  <link>https://blog-12x.pages.dev/golang%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</link>
+  <pubDate>Thu, 18 Apr 2024 20:07:25 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/golang%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</guid>
+  <description><![CDATA[Golang内存模型 介绍 Golang内存模型是Golang程序员必须了解的一个重要概念，它定义了Golang程序中的内存访问规则，保证了Go]]></description>
+</item>
+<item>
   <title>Debian配置Btrfs文件系统</title>
   <link>https://blog-12x.pages.dev/debian%E9%85%8D%E7%BD%AEbtrfs%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</link>
   <pubDate>Sat, 30 Mar 2024 15:01:09 &#43;0800</pubDate>
@@ -74,14 +82,6 @@
   <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
   <guid>https://blog-12x.pages.dev/torch.fx%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
   <description><![CDATA[torch.fx模块的使用 torch.fx主要有3个组件： 符号追踪器（symbolic tracer) 中间表示（intermediate representation) Python代码]]></description>
-</item>
-<item>
-  <title>Matplotlib使用</title>
-  <link>https://blog-12x.pages.dev/matplotlib%E4%BD%BF%E7%94%A8/</link>
-  <pubDate>Thu, 13 Jul 2023 22:06:27 &#43;0800</pubDate>
-  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
-  <guid>https://blog-12x.pages.dev/matplotlib%E4%BD%BF%E7%94%A8/</guid>
-  <description><![CDATA[matplotlib的简单使用 matplotlib结构 1. fig,ax,plt 三者的基本概念 fig Figure，就是图的外框，也叫画布，可以包括1-无穷个内框Axe]]></description>
 </item>
 </channel>
 </rss>
