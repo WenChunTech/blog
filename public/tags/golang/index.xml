@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Golang - 标签 - 技术小窝</title>
+    <link>https://blog-12x.pages.dev/tags/golang/</link>
+    <description>Golang - 标签 - 技术小窝</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Jun 2024 22:27:50 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/golang/" rel="self" type="application/rss+xml" /><item>
+  <title>Golang标准库例子</title>
+  <link>https://blog-12x.pages.dev/golang%E6%A0%87%E5%87%86%E5%BA%93%E4%BE%8B%E5%AD%90/</link>
+  <pubDate>Thu, 13 Jun 2024 22:27:50 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/golang%E6%A0%87%E5%87%86%E5%BA%93%E4%BE%8B%E5%AD%90/</guid>
+  <description><![CDATA[Goang标准库例子 第一章 输入输出 (Input/Output) 一般的，计算机程序是：输入 (Input) 经过算法处理产生输出 (Output)。各种语言一般都会提供IO库供开发者使用]]></description>
+</item>
+</channel>
+</rss>

@@ -14,9 +14,9 @@ license:
 comment: false
 weight: 0
 tags:
-  - draft
+  - golang
 categories:
-  - draft
+  - golang
 hiddenFromHomePage: false
 hiddenFromSearch: false
 summary:

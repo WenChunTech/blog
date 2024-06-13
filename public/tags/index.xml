@@ -4,11 +4,11 @@
     <link>https://blog-12x.pages.dev/tags/</link>
     <description>Tags - 标签 - 技术小窝</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Jun 2024 22:27:50 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/" rel="self" type="application/rss+xml" /><item>
-  <title>Draft</title>
-  <link>https://blog-12x.pages.dev/tags/draft/</link>
+  <title>Golang</title>
+  <link>https://blog-12x.pages.dev/tags/golang/</link>
   <pubDate>Thu, 13 Jun 2024 22:27:50 &#43;0800</pubDate>
   <author>技术小窝</author>
-  <guid>https://blog-12x.pages.dev/tags/draft/</guid>
+  <guid>https://blog-12x.pages.dev/tags/golang/</guid>
   <description><![CDATA[]]></description>
 </item>
 <item>
@@ -52,6 +52,14 @@
   <description><![CDATA[]]></description>
 </item>
 <item>
+  <title>Draft</title>
+  <link>https://blog-12x.pages.dev/tags/draft/</link>
+  <pubDate>Sun, 21 Jan 2024 22:24:28 &#43;0800</pubDate>
+  <author>技术小窝</author>
+  <guid>https://blog-12x.pages.dev/tags/draft/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Linux</title>
   <link>https://blog-12x.pages.dev/tags/linux/</link>
   <pubDate>Sun, 05 Nov 2023 23:01:37 &#43;0800</pubDate>
@@ -73,14 +81,6 @@
   <pubDate>Sun, 05 Nov 2023 23:01:37 &#43;0800</pubDate>
   <author>技术小窝</author>
   <guid>https://blog-12x.pages.dev/tags/vpn/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>Perf</title>
-  <link>https://blog-12x.pages.dev/tags/perf/</link>
-  <pubDate>Sun, 22 Oct 2023 14:10:29 &#43;0800</pubDate>
-  <author>技术小窝</author>
-  <guid>https://blog-12x.pages.dev/tags/perf/</guid>
   <description><![CDATA[]]></description>
 </item>
 </channel>
