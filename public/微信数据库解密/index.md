@@ -1,41 +1,5 @@
----
-title: 微信数据库解密
-subtitle:
-date: 2024-04-23T21:44:05+08:00
-draft: false
-author:
-  name:
-  link:
-  email:
-  avatar:
-description:
-keywords:
-license:
-comment: false
-weight: 0
-tags:
-  - WeChat
-categories:
-  - WeChat
-hiddenFromHomePage: false
-hiddenFromSearch: false
-summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
-toc: true
-math: false
-lightgallery: false
-password:
-message:
-repost:
-  enable: true
-  url:
+# 微信数据库解密
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content/#front-matter
----
 
 <!--more-->
 
@@ -91,3 +55,10 @@ repost:
 | 10000      | 0               | 系统通知（居中出现的那种灰色文字）                                                           |
 | 10000      | 4               | 拍一拍                                                                                       |
 | 10000      | 8000            | 系统通知（特别包含你邀请别人加入群聊）                                                       |
+
+
+---
+
+> 作者: map[avatar:<nil> email:<nil> link:<nil> name:<nil>]  
+> URL: https://blog-12x.pages.dev/%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A7%A3%E5%AF%86/  
+

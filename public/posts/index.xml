@@ -3,7 +3,23 @@
     <title>所有文章 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/posts/</link>
     <description>所有文章 | 技术小窝</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 23 Apr 2024 21:44:05 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/posts/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Jun 2024 22:27:50 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/posts/" rel="self" type="application/rss+xml" /><item>
+  <title>Golang标准库例子</title>
+  <link>https://blog-12x.pages.dev/golang%E6%A0%87%E5%87%86%E5%BA%93%E4%BE%8B%E5%AD%90/</link>
+  <pubDate>Thu, 13 Jun 2024 22:27:50 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/golang%E6%A0%87%E5%87%86%E5%BA%93%E4%BE%8B%E5%AD%90/</guid>
+  <description><![CDATA[Goang标准库例子 第一章 输入输出 (Input/Output) 一般的，计算机程序是：输入 (Input) 经过算法处理产生输出 (Output)。各种语言一般都会提供IO库供开发者使用]]></description>
+</item>
+<item>
+  <title>微信数据库解密</title>
+  <link>https://blog-12x.pages.dev/%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A7%A3%E5%AF%86/</link>
+  <pubDate>Tue, 23 Apr 2024 21:44:05 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A7%A3%E5%AF%86/</guid>
+  <description><![CDATA[微信数据库解密 介绍 微信数据库采用的加密算法是256位的AES-CBC。数据库的默认的页大小是4096字节即4KB，其中每一个页都是被单独加解]]></description>
+</item>
+<item>
   <title>Golang内存模型</title>
   <link>https://blog-12x.pages.dev/golang%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</link>
   <pubDate>Thu, 18 Apr 2024 20:07:25 &#43;0800</pubDate>
@@ -66,22 +82,6 @@
   <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
   <guid>https://blog-12x.pages.dev/docker%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</guid>
   <description><![CDATA[Docker 基本命令 1. 使用镜像 1 docker pull [选项] [Docker Registry 地址[:端口号]/]仓库名[:标签] Docker 镜像仓库地址：地址的格式一般是 &lt;域名/IP&gt;[:端口]]></description>
-</item>
-<item>
-  <title>Docker基石 NetworkNamespace</title>
-  <link>https://blog-12x.pages.dev/docker%E5%9F%BA%E7%9F%B3-networknamespace/</link>
-  <pubDate>Thu, 31 Aug 2023 21:40:12 &#43;0800</pubDate>
-  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
-  <guid>https://blog-12x.pages.dev/docker%E5%9F%BA%E7%9F%B3-networknamespace/</guid>
-  <description><![CDATA[Docker 基石-NetworkNamespace 1. veth-pair 是什么 veth-pair 是一对虚拟网卡，通过 veth-pair 可以将两个网络命名空间连接起来，从而实现两个网络命名空间之间的通信]]></description>
-</item>
-<item>
-  <title>Torch.fx模块的使用</title>
-  <link>https://blog-12x.pages.dev/torch.fx%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
-  <pubDate>Sun, 23 Jul 2023 23:38:09 &#43;0800</pubDate>
-  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
-  <guid>https://blog-12x.pages.dev/torch.fx%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-  <description><![CDATA[torch.fx模块的使用 torch.fx主要有3个组件： 符号追踪器（symbolic tracer) 中间表示（intermediate representation) Python代码]]></description>
 </item>
 </channel>
 </rss>

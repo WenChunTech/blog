@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>WeChat - 分类 - 技术小窝</title>
+    <link>https://blog-12x.pages.dev/categories/wechat/</link>
+    <description>WeChat - 分类 - 技术小窝</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 23 Apr 2024 21:44:05 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/wechat/" rel="self" type="application/rss+xml" /><item>
+  <title>微信数据库解密</title>
+  <link>https://blog-12x.pages.dev/%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A7%A3%E5%AF%86/</link>
+  <pubDate>Tue, 23 Apr 2024 21:44:05 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A7%A3%E5%AF%86/</guid>
+  <description><![CDATA[微信数据库解密 介绍 微信数据库采用的加密算法是256位的AES-CBC。数据库的默认的页大小是4096字节即4KB，其中每一个页都是被单独加解]]></description>
+</item>
+</channel>
+</rss>
