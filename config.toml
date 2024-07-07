@@ -511,13 +511,13 @@ theme = "FixIt"
         login = "enable"
         wordLimit = 0
         pageSize = 10
-        imageUploader = false # 
-        highlighter = false # 
-        comment = false # 
-        texRenderer = false # 
-        search = false # 
-        recaptchaV3Key = "" # 
-        reaction = false # 
+        imageUploader = false #
+        highlighter = false #
+        comment = false #
+        texRenderer = false #
+        search = false #
+        recaptchaV3Key = "" #
+        reaction = false #
       # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]
         enable = false
@@ -616,7 +616,7 @@ theme = "FixIt"
   [params.pangu]
     # 适用于中文写作用户
     enable = false
-    selector = "article" # 
+    selector = "article" #
 
   #  水印配置
   # 详细参数见 https://github.com/Lruihao/watermark#readme
@@ -803,7 +803,7 @@ theme = "FixIt"
   name = "技术小窝"
   email = ""
   link = ""
-  avatar = "mstile-150x150.png" # 
+  avatar = "mstile-150x150.png" #
 
 # 网站地图配置
 [sitemap]
@@ -852,7 +852,6 @@ theme = "FixIt"
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
-  taxonomyTerm = ["HTML"]
 
 [menu]
   [[menu.main]]

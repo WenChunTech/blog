@@ -2,13 +2,16 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   ><url>
-      <loc>https://blog-12x.pages.dev/posts/</loc><lastmod>2024-06-15T13:28:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://blog-12x.pages.dev/</loc><lastmod>2024-06-15T13:28:03&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://blog-12x.pages.dev/categories/</loc><lastmod>2024-06-13T22:27:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://blog-12x.pages.dev/tags/golang/</loc><lastmod>2024-06-13T22:27:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://blog-12x.pages.dev/categories/golang/</loc><lastmod>2024-06-13T22:27:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://blog-12x.pages.dev/golang%E6%A0%87%E5%87%86%E5%BA%93%E4%BE%8B%E5%AD%90/</loc><lastmod>2024-06-13T22:27:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://blog-12x.pages.dev/tags/</loc><lastmod>2024-06-13T22:27:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/</loc><lastmod>2024-06-20T23:35:24&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/github-action/</loc><lastmod>2024-06-20T23:35:24&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+      <loc>https://blog-12x.pages.dev/posts/</loc><lastmod>2024-06-20T23:35:24&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/rust/</loc><lastmod>2024-06-20T23:35:24&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+      <loc>https://blog-12x.pages.dev/rust%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AEgithub-action/</loc><lastmod>2024-06-20T23:35:24&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/</loc><lastmod>2024-06-20T23:35:24&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+      <loc>https://blog-12x.pages.dev/</loc><lastmod>2024-06-20T23:35:24&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+      <loc>https://blog-12x.pages.dev/tags/golang/</loc><lastmod>2024-06-13T22:27:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+      <loc>https://blog-12x.pages.dev/categories/golang/</loc><lastmod>2024-06-13T22:27:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+      <loc>https://blog-12x.pages.dev/golang%E6%A0%87%E5%87%86%E5%BA%93%E4%BE%8B%E5%AD%90/</loc><lastmod>2024-06-13T22:27:50&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/wechat/</loc><lastmod>2024-04-23T21:44:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/categories/wechat/</loc><lastmod>2024-04-23T21:44:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A7%A3%E5%AF%86/</loc><lastmod>2024-04-23T21:44:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -69,7 +72,6 @@
       <loc>https://blog-12x.pages.dev/tags/pacman/</loc><lastmod>2022-12-24T18:30:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/categories/windows/</loc><lastmod>2022-12-24T18:30:33&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/rust/</loc><lastmod>2022-12-13T17:41:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://blog-12x.pages.dev/categories/rust/</loc><lastmod>2022-12-13T17:41:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/rust%E5%81%8F%E5%83%BB%E7%9F%A5%E8%AF%86%E7%82%B9/</loc><lastmod>2022-12-13T17:41:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/categories/c/c&#43;&#43;/</loc><lastmod>2022-12-10T23:01:51&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://blog-12x.pages.dev/tags/cmake/</loc><lastmod>2022-12-10T23:01:51&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

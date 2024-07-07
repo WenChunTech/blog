@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Github Action - 标签 - 技术小窝</title>
+    <link>https://blog-12x.pages.dev/tags/github-action/</link>
+    <description>Github Action - 标签 - 技术小窝</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 20 Jun 2024 23:35:24 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/github-action/" rel="self" type="application/rss+xml" /><item>
+  <title>Rust项目配置Github Action</title>
+  <link>https://blog-12x.pages.dev/rust%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AEgithub-action/</link>
+  <pubDate>Thu, 20 Jun 2024 23:35:24 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/rust%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AEgithub-action/</guid>
+  <description><![CDATA[Rust 项目配置 Github Action 多平台编译的几种方式 1. 在多个平台上分别编译 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42]]></description>
+</item>
+</channel>
+</rss>

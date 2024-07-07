@@ -1,41 +1,5 @@
----
-title: Rust项目配置Github Action
-subtitle:
-date: 2024-06-20T23:35:24+08:00
-draft: false
-author:
-  name:
-  link:
-  email:
-  avatar:
-description:
-keywords:
-license:
-comment: false
-weight: 0
-tags:
-  - Github Action
-categories:
-  - Rust
-hiddenFromHomePage: false
-hiddenFromSearch: false
-summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
-toc: true
-math: false
-lightgallery: false
-password:
-message:
-repost:
-  enable: true
-  url:
+# Rust项目配置Github Action
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content/#front-matter
----
 
 <!--more-->
 # Rust 项目配置 Github Action
@@ -119,3 +83,9 @@ jobs:
           name: ${{ matrix.name }}
           path: ./*.tar.gz
 ```
+
+---
+
+> 作者: map[avatar:<nil> email:<nil> link:<nil> name:<nil>]  
+> URL: https://blog-12x.pages.dev/rust%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AEgithub-action/  
+
