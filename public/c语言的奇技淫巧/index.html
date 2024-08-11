@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>C语言的奇技淫巧 - 技术小窝</title><meta name="author" content="技术小窝">
+<meta name="author-link" content="">
+<meta name="description" content="C语言中的奇技淫巧 01. 宏定义用do{}while(0) 如果定义的宏函数后面有多条语句，使用这样的方式会有问题： 1 2 3 #define FUNC() func1(); func2() if(bRunF) FUNC(); 展开宏定义后会" /><meta name="keywords" content='C/C&#43;&#43;' /><meta itemprop="name" content="C语言的奇技淫巧">
+<meta itemprop="description" content="C语言中的奇技淫巧 01. 宏定义用do{}while(0) 如果定义的宏函数后面有多条语句，使用这样的方式会有问题： 1 2 3 #define FUNC() func1(); func2() if(bRunF) FUNC(); 展开宏定义后会"><meta itemprop="datePublished" content="2024-08-11T21:30:41+08:00" />
+<meta itemprop="dateModified" content="2024-08-11T21:30:41+08:00" />
+<meta itemprop="wordCount" content="5653"><meta itemprop="image" content="https://blog-12x.pages.dev/logo.png" />
+<meta itemprop="keywords" content="C/C&#43;&#43;," /><meta property="og:title" content="C语言的奇技淫巧" />
+<meta property="og:description" content="C语言中的奇技淫巧 01. 宏定义用do{}while(0) 如果定义的宏函数后面有多条语句，使用这样的方式会有问题： 1 2 3 #define FUNC() func1(); func2() if(bRunF) FUNC(); 展开宏定义后会" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/" /><meta property="og:image" content="https://blog-12x.pages.dev/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-08-11T21:30:41+08:00" />
+<meta property="article:modified_time" content="2024-08-11T21:30:41+08:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://blog-12x.pages.dev/logo.png" /><meta name="twitter:title" content="C语言的奇技淫巧"/>
+<meta name="twitter:description" content="C语言中的奇技淫巧 01. 宏定义用do{}while(0) 如果定义的宏函数后面有多条语句，使用这样的方式会有问题： 1 2 3 #define FUNC() func1(); func2() if(bRunF) FUNC(); 展开宏定义后会"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/" /><link rel="prev" href="https://blog-12x.pages.dev/rust%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AEgithub-action/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "C语言的奇技淫巧",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/blog-12x.pages.dev\/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7\/"
+    },"genre": "posts","keywords": "C\/C\u002b\u002b","wordcount":  5653 ,
+    "url": "https:\/\/blog-12x.pages.dev\/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7\/","datePublished": "2024-08-11T21:30:41+08:00","dateModified": "2024-08-11T21:30:41+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>C语言的奇技淫巧</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      </span></span>
+          <span class="post-category">收录于 <a href="/categories/c/c++/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C/C++</a></span></div>
+      <div class="post-meta-line"><span title=2024-08-11&#32;21:30:41><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-08-11">2024-08-11</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 5653 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 12 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="C语言的奇技淫巧">
+            <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#01-宏定义用dowhile0">01. 宏定义用<code>do{}while(0)</code></a></li>
+    <li><a href="#02-数组的初始化">02. 数组的初始化</a></li>
+    <li><a href="#03-数组的访问">03. 数组的访问</a></li>
+    <li><a href="#04-结构体的初始化">04. 结构体的初始化</a></li>
+    <li><a href="#05-用include的方式初始化大数组">05. 用<code>include</code>的方式初始化大数组</a></li>
+    <li><a href="#06-debug时输出文件名函数名行号等">06. Debug时输出文件名、函数名、行号等</a></li>
+    <li><a href="#07-c语言有--趋向于操作符">07. C语言有<code>--&gt;</code>“趋向于…”操作符？</a></li>
+    <li><a href="#08-获得任意类型数组的元素数目">08. 获得任意类型数组的元素数目</a></li>
+    <li><a href="#09-判断运行环境的大小端">09. 判断运行环境的大小端</a></li>
+    <li><a href="#10-编译时做条件检查">10. 编译时做条件检查</a></li>
+    <li><a href="#11-用异或运算实现数据交换">11. 用异或运算实现数据交换</a></li>
+    <li><a href="#12-判断语句中把const数值放在前面">12. 判断语句中把<code>const</code>数值放在前面</a></li>
+    <li><a href="#13-用冒号表达式替代ifelse语句">13. 用冒号表达式替代<code>if...else...</code>语句</a></li>
+    <li><a href="#14-判断一个整数是否为2的幂">14. 判断一个整数是否为2的幂</a></li>
+    <li><a href="#15-静态链表">15. 静态链表</a></li>
+    <li><a href="#16-柔性数组">16. 柔性数组</a></li>
+    <li><a href="#17-数组之间直接赋值">17. 数组之间直接赋值</a></li>
+    <li><a href="#18-include的不一定是要h文件">18. <code>#include</code>的不一定是要<code>.h</code>文件</a></li>
+    <li><a href="#19-自动获取变量类型">19. 自动获取变量类型</a></li>
+    <li><a href="#20-宏定义函数minxy的终极做法">20. 宏定义函数<code>MIN(x,y)</code>的终极做法</a></li>
+    <li><a href="#21-行控制line">21. 行控制<code>#line</code></a></li>
+    <li><a href="#22-c和c代码混合编译">22. C和C++代码混合编译</a></li>
+    <li><a href="#23-用查表法实现hex2str">23. 用查表法实现hex2str</a></li>
+    <li><a href="#24-用sprintf实现hex2str">24. 用sprintf实现hex2str</a></li>
+    <li><a href="#25-将变量名变字符串">25. 将变量名变字符串</a></li>
+    <li><a href="#26-获取结构体元素的偏移">26. 获取结构体元素的偏移</a></li>
+    <li><a href="#27-根据结构体成员获取结构体变量指针">27. 根据结构体成员获取结构体变量指针</a></li>
+    <li><a href="#28-scanf高级玩法">28. <code>scanf</code>高级玩法</a></li>
+    <li><a href="#29-两个数相加可以不用号">29. 两个数相加可以不用<code>+</code>号？</a></li>
+    <li><a href="#30-调试的时候打印数组">30. 调试的时候打印数组</a></li>
+    <li><a href="#31-感受下这个0x5f3759df">31. 感受下这个<code>0x5F3759DF</code></a></li>
+    <li><a href="#32-switch-case的特殊玩法">32. <code>switch-case</code>的特殊玩法</a></li>
+    <li><a href="#33-防止头文件重复包含导致问题">33. 防止头文件重复包含导致问题</a></li>
+    <li><a href="#34-2的n次幂roundup">34. 2的N次幂ROUNDUP</a></li>
+    <li><a href="#35-某整数的roundup">35. 某整数的ROUNDUP</a></li>
+    <li><a href="#36-万能的void">36. 万能的<code>void*</code></a></li>
+    <li><a href="#37-sizeof空">37. <code>sizeof(空)</code></a></li>
+    <li><a href="#38-布尔变量的判断">38. 布尔变量的判断</a></li>
+    <li><a href="#39-感受下的用法">39. 感受下<code>##</code>的用法</a></li>
+    <li><a href="#40-传值和传址">40. 传值和传址</a></li>
+    <li><a href="#41-形参到底传值好还是传址好">41. 形参到底传值好还是传址好</a></li>
+    <li><a href="#42-bit翻转的几个方法">42. bit翻转的几个方法</a></li>
+    <li><a href="#43-bool判断">43. BOOL判断</a></li>
+    <li><a href="#44-goto的使用">44. goto的使用</a></li>
+    <li><a href="#45-类型定义">45. 类型定义</a></li>
+    <li><a href="#46-输出预编译信息">46. 输出预编译信息</a></li>
+    <li><a href="#47-输出指针地址">47. 输出指针地址</a></li>
+    <li><a href="#48-数组元素赋值">48. 数组元素赋值</a></li>
+    <li><a href="#49-likely与unlikely">49. <code>likely()</code>与<code>unlikely</code></a></li>
+    <li><a href="#50-解放ifelse和switchcase">50. 解放<code>if/else</code>和<code>switch/case</code></a></li>
+    <li><a href="#参考连接">参考连接</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h1 id="c语言中的奇技淫巧">C语言中的奇技淫巧</h1>
+<h2 id="01-宏定义用dowhile0">01. 宏定义用<code>do{}while(0)</code></h2>
+<p>如果定义的宏函数后面有多条语句，使用这样的方式会有问题：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define FUNC()  func1(); func2()
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">if</span><span class="p">(</span><span class="n">bRunF</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">FUNC</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>展开宏定义后会变成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">bRunF</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">func1</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">func2</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>逻辑就不对了。可以用这一的方式解决，非常好用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define FUNC()  do{func1(); func2();}while(0)
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="02-数组的初始化">02. 数组的初始化</h2>
+<p>假如给arr的第2~6元素初始化为5，也许你会</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在告诉你C99可以这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{[</span><span class="mf">1.</span><span class="p">..</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="03-数组的访问">03. 数组的访问</h2>
+<p>你想取数组的第6个元素（下标为5），教科书教你这样做：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n1</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n2</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">arr</span><span class="o">+</span><span class="mi">5</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其实你可以：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">[</span><span class="n">arr</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也不会有错，实际上
+arr[5]对应<code>*(arr+5)</code>，而5[arr]对应<code>*(5+arr)</code>，没多大区别。</p>
+<h2 id="04-结构体的初始化">04. 结构体的初始化</h2>
+<p>结构体的初始化，传统的做法是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">z</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">short</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">S</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">S</span> <span class="n">s</span> <span class="o">=</span> <span class="p">{</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="sc">&#39;A&#39;</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于C99，其实你可以：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">z</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">short</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">S</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">S</span> <span class="n">s</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="sc">&#39;A&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">c</span> <span class="o">=</span> <span class="mh">0x12</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="05-用include的方式初始化大数组">05. 用<code>include</code>的方式初始化大数组</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">array</span><span class="p">[</span><span class="n">SIZE</span><span class="p">][</span><span class="n">SIZE</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">#include</span> <span class="cpf">&#34;float_values.txt&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="06-debug时输出文件名函数名行号等">06. Debug时输出文件名、函数名、行号等</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define DEBUG_INFO() fprintf(stderr,&#34;[DEBUG]%s:%d %s\n&#34;, __FILE__, __LINE__, __FUNCTION__);
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="07-c语言有--趋向于操作符">07. C语言有<code>--&gt;</code>“趋向于…”操作符？</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">n</span> <span class="o">--&gt;</span> <span class="mi">0</span> <span class="p">)</span> <span class="c1">// n goes to 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">                <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d &#34;</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>实际上C语言没有这个<code>--&gt;</code>操作符，是<code>--</code>和<code>&gt;</code>的组合而已</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span> <span class="n">n</span><span class="o">--</span>  <span class="o">&gt;</span>  <span class="mi">0</span> <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="08-获得任意类型数组的元素数目">08. 获得任意类型数组的元素数目</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#define NUM_OF(arr) (sizeof (arr) / sizeof (*arr))
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="09-判断运行环境的大小端">09. 判断运行环境的大小端</h2>
+<p>Linux有以下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">union</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">        <span class="kt">char</span> <span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span> 
+</span></span><span class="line"><span class="cl">        <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">l</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">endian_test</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span> <span class="sc">&#39;l&#39;</span><span class="p">,</span> <span class="sc">&#39;?&#39;</span><span class="p">,</span> <span class="sc">&#39;?&#39;</span><span class="p">,</span> <span class="sc">&#39;b&#39;</span> <span class="p">}</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">#define ENDIANNESS ((char)endian_test.l)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;ENDIANNESS: %c</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ENDIANNESS</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="10-编译时做条件检查">10. 编译时做条件检查</h2>
+<p>Linux Kernel有以下代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Force a compilation error if condition is true */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define BUILD_BUG_ON(condition) ((void)sizeof(char[1 - 2*!!(condition)]))
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>例如，在某些平台为了防止内存对齐问题，检查一个结构体或者一个数组的大小是否为8的倍数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">BUILD_BUG_ON</span><span class="p">((</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">mystruct</span><span class="p">)</span> <span class="o">%</span> <span class="mi">8</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>除了这个，还有</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define BUILD_BUG_ON_ZERO(e)  (sizeof(struct{int : -!!(e);}))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define BUILD_BUG_ON_NULL(e)  ((void*)sizeof(struct{int : -!!(e);}))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define BUILD_BUG_ON(condition)  ((void)BUILD_BUG_ON_ZERO(condition))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define MAYBE_BUILD_BUG_ON(condition)  ((void)sizeof(char[1 - 2 * !!(condition)]))
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="11-用异或运算实现数据交换">11. 用异或运算实现数据交换</h2>
+<p>交换俩变量数据，一般做法是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 方法1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">temp</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 方法2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span><span class="o">=</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="err">；</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>方法1需要第三个变量，方法二存在数据溢出可能，可以尝试下以下方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="12-判断语句中把const数值放在前面">12. 判断语句中把<code>const</code>数值放在前面</h2>
+<p>通常条件语句写成</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span> <span class="cm">/*...*/</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是，有可能手误写成</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">){</span> <span class="cm">/*...*/</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这种错误只有机器在运行时候知道，而人不一定能发现这种bug。
+把数值放在前面就不怕了，<code>==</code>写成<code>=</code>，编译器就知道</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="n">n</span><span class="p">){</span> <span class="cm">/*...*/</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="13-用冒号表达式替代ifelse语句">13. 用冒号表达式替代<code>if...else...</code>语句</h2>
+<p>这个用法应该很普遍了，不算什么特别的技巧了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以改成以下一行代码即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="mi">10</span> <span class="o">:</span> <span class="mi">20</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="14-判断一个整数是否为2的幂">14. 判断一个整数是否为2的幂</h2>
+<p>也许你会不断地将这个数除以2，除到底，然而Linux kernel有个巧妙的办法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define is_power_of_2(n) ((n) != 0 &amp;&amp; ((n) &amp; ((n) - 1)) == 0)
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>((n) &amp; ((n) - 1)) == 0</code>这个不理解？那先想想2的X次方的值的二进制是怎样的。</p>
+<h2 id="15-静态链表">15. 静态链表</h2>
+<p>直接看代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">mylist</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">struct</span> <span class="n">mylist</span><span class="o">*</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">#define cons(x, y) (struct mylist[]){{x, y}}
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="k">struct</span> <span class="n">mylist</span> <span class="o">*</span><span class="n">list</span> <span class="o">=</span> <span class="nf">cons</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nf">cons</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nf">cons</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">mylist</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">list</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">p</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-&gt;</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="16-柔性数组">16. 柔性数组</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">line</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">length</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">line</span> <span class="o">*</span><span class="n">thisline</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">line</span> <span class="o">*</span><span class="p">)</span> <span class="nf">malloc</span> <span class="p">(</span><span class="k">sizeof</span> <span class="p">(</span><span class="k">struct</span> <span class="n">line</span><span class="p">)</span> <span class="o">+</span> <span class="n">this_length</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">thisline</span><span class="o">-&gt;</span><span class="n">length</span> <span class="o">=</span> <span class="n">this_length</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">f1</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">x</span><span class="p">;</span> <span class="kt">int</span> <span class="n">y</span><span class="p">[];</span> <span class="p">}</span> <span class="n">f1</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="p">{</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">}</span> <span class="p">};</span> 
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">f2</span> <span class="p">{</span> <span class="k">struct</span> <span class="n">f1</span> <span class="n">f1</span><span class="p">;</span> <span class="kt">int</span> <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span> <span class="p">}</span> <span class="n">f2</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span> <span class="mi">1</span> <span class="p">},</span> <span class="p">{</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">}</span> <span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>详见<a href="https://gcc.gnu.org/onlinedocs/gcc/Zero-Length.html"target="_blank" rel="external nofollow noopener noreferrer">6.18 Arrays of Length Zero</a></p>
+<h2 id="17-数组之间直接赋值">17. 数组之间直接赋值</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样是非法的，但是你可以放数组穿个马甲：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">S</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">S</span> <span class="n">a</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">}};</span>
+</span></span><span class="line"><span class="cl"><span class="n">S</span> <span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="18-include的不一定是要h文件">18. <code>#include</code>的不一定是要<code>.h</code>文件</h2>
+<p><code>#include</code>后面跟的可以是任意后缀的，但文件内容一定要是合法的。例如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;test.fxxk&#34;</span><span class="cp">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="19-自动获取变量类型">19. 自动获取变量类型</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define var(left, right) __typeof__(right) left = (right)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="nf">var</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">1LL</span><span class="p">);</span> <span class="c1">// 相当于 long long s = 1LL;
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>是不是有点像C++ 11的auto类型？</p>
+<h2 id="20-宏定义函数minxy的终极做法">20. 宏定义函数<code>MIN(x,y)</code>的终极做法</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define MIN(x, y)   x &lt; y? x : y    </span><span class="c1">// 这样给0分
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define MIN(x, y)   (x &lt; y? x : y)  </span><span class="c1">// 这样给50分
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 不信你试试这个
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="nf">MIN</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="o">?</span> <span class="mi">4</span> <span class="o">:</span> <span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#define MIN(x, y)   ((x) &lt; (y)? (x) : (y))  </span><span class="c1">// 这个给90分
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 不信你试试这个
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">double</span> <span class="n">xx</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">yy</span> <span class="o">=</span> <span class="nf">MIN</span><span class="p">(</span><span class="n">xx</span><span class="o">++</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;xx=%f, yy=%f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 以下放大招了，看看GNU的
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define MIN(A,B)	({ __typeof__(A) __a = (A); __typeof__(B) __b = (B); __a &lt; __b ? __a : __b; })
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">double</span> <span class="n">xx</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">yy</span> <span class="o">=</span> <span class="nf">MIN</span><span class="p">(</span><span class="n">xx</span><span class="o">++</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;xx=%f, yy=%f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="21-行控制line">21. 行控制<code>#line</code></h2>
+<p>也许你知道用<code>__LINE__</code>可以输出行号，然而你试下这个：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"> <span class="cp">#line 12345 &#34;abcdefg.xxxxx&#34;    
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span> <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%s line: %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">__FILE__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">);</span>    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%s line: %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">__FILE__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不单止行号被改了，文件名也被改了，是不是我们可以用这个干点啥……想想？</p>
+<h2 id="22-c和c代码混合编译">22. C和C++代码混合编译</h2>
+<p>在C的头文件上面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifdef __cplusplus
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后再头文件下面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#ifdef __cplusplus
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="23-用查表法实现hex2str">23. 用查表法实现hex2str</h2>
+<p>直接上代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">hex2str</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span> <span class="n">hex</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">char_arr</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;0123456789ABCDEF&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">str</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">char_arr</span><span class="p">[</span><span class="n">hex</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;&gt;</span><span class="mi">4</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">str</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">char_arr</span><span class="p">[</span><span class="n">hex</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&amp;</span><span class="mh">0x0F</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">str</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39; &#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="24-用sprintf实现hex2str">24. 用sprintf实现hex2str</h2>
+<p>直接上代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">hex2str</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span> <span class="n">hex</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sprintf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">str</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="p">],</span> <span class="s">&#34;%02X &#34;</span><span class="p">,</span> <span class="n">hex</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>    
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="25-将变量名变字符串">25. 将变量名变字符串</h2>
+<p>如果想打印一个变量名和它的值，也许会这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">program_flag</span> <span class="o">=</span> <span class="mh">0xAABBCCDD</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;program_flag: 0x%08X</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">program_flag</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于你有很多这样的变量要打印，建议你做个宏函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define PRINT_HEX_VAR(var)  printf(&#34;%s: 0x%08X\n&#34;, #var, var);
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">program_flag</span> <span class="o">=</span> <span class="mh">0xAABBCCDD</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">PRINT_HEX_VAR</span><span class="p">(</span><span class="n">program_flag</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="26-获取结构体元素的偏移">26. 获取结构体元素的偏移</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define offsetof(type, member) ( (size_t)&amp;((type*)0-&gt;menber) )
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span><span class="n">S</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> <span class="nf">offsetof</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="27-根据结构体成员获取结构体变量指针">27. 根据结构体成员获取结构体变量指针</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define offsetof(TYPE, MEMBER) ((size_t) &amp;((TYPE *)0)-&gt;MEMBER)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * container_of - cast a member of a structure out to the containing structure
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @ptr:        the pointer to the member.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @type:       the type of the container struct this is embedded in.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @member:     the name of the member within the struct.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define container_of(ptr, type, member) ({                      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    const typeof( ((type *)0)-&gt;member ) *__mptr = (ptr);    \ 
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="p">(</span><span class="n">type</span> <span class="o">*</span><span class="p">)(</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">__mptr</span> <span class="o">-</span> <span class="nf">offsetof</span><span class="p">(</span><span class="n">type</span><span class="p">,</span><span class="n">member</span><span class="p">)</span> <span class="p">);})</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个怎么玩？看看链表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">list_head</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">next</span><span class="err">；</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span>  <span class="o">*</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">ipstore</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">time</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">__u32</span> <span class="n">addr</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="n">list</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">container_of</span><span class="p">(</span><span class="n">ist1</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">,</span> <span class="k">struct</span> <span class="n">ipstore</span><span class="p">,</span> <span class="n">list</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="28-scanf高级玩法">28. <code>scanf</code>高级玩法</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">scanf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="p">[</span><span class="o">^</span><span class="p">,]</span><span class="err">”</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span> <span class="c1">// This doesn’t scrap the comma
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">scanf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="p">[</span><span class="o">^</span><span class="p">,],</span><span class="err">”</span><span class="p">,</span><span class="n">a</span><span class="p">);</span> <span class="c1">// This one scraps the comma
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">scanf</span><span class="p">(</span><span class="err">“</span><span class="o">%</span><span class="p">[</span><span class="o">^</span><span class="err">\</span><span class="n">n</span><span class="p">]</span><span class="err">\</span><span class="n">n</span><span class="err">”</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span> <span class="c1">// It will read until you meet  &#39;\n&#39;, then trashes the &#39;\n&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">scanf</span><span class="p">(</span><span class="err">“</span><span class="o">%*</span><span class="n">s</span> <span class="o">%</span><span class="n">s</span><span class="err">”</span><span class="p">,</span> <span class="n">last_name</span><span class="p">);</span> <span class="c1">// last_name is a variable
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这是啥意思，正则表达式先了解下？然后自己试试，理解会更深入。</p>
+<h2 id="29-两个数相加可以不用号">29. 两个数相加可以不用<code>+</code>号？</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">Add</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">else</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nf">Add</span><span class="p">(</span> <span class="n">x</span> <span class="o">^</span> <span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="30-调试的时候打印数组">30. 调试的时候打印数组</h2>
+<p>你是不是曾经为打印数组而烦恼，每次都要将元素一个个取出来？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define ARR_SIZE(arr)               (sizeof(arr)/sizeof(*arr))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define PRINT_DIGIT_ARR(arr)    do{\
+</span></span></span><span class="line"><span class="cl"><span class="cp">                                               printf(&#34;%s: &#34;, #arr); \
+</span></span></span><span class="line"><span class="cl"><span class="cp">                                               for(int i=0; i &lt; ARR_SIZE(arr); i++) \
+</span></span></span><span class="line"><span class="cl"><span class="cp">                                                   printf(&#34;%d &#34;, arr[i]);\
+</span></span></span><span class="line"><span class="cl"><span class="cp">                                               printf(&#34;\n&#34;);\
+</span></span></span><span class="line"><span class="cl"><span class="cp">                                            }while(0)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>                                
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="nf">PRINT_DIGIT_ARR</span><span class="p">(</span><span class="n">arr</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="31-感受下这个0x5f3759df">31. 感受下这个<code>0x5F3759DF</code></h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">float</span> <span class="nf">Q_rsqrt</span><span class="p">(</span> <span class="kt">float</span> <span class="n">number</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">float</span> <span class="n">threehalfs</span> <span class="o">=</span> <span class="mf">1.5F</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">x2</span> <span class="o">=</span> <span class="n">number</span> <span class="o">*</span> <span class="mf">0.5F</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span>  <span class="o">=</span> <span class="n">number</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">i</span>  <span class="o">=</span> <span class="o">*</span> <span class="p">(</span> <span class="kt">long</span> <span class="o">*</span> <span class="p">)</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">;</span>                       <span class="c1">// evil floating point bit level hacking
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">i</span>  <span class="o">=</span> <span class="mh">0x5f3759df</span> <span class="o">-</span> <span class="p">(</span> <span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="p">);</span>               <span class="c1">// what the fuck?
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">y</span>  <span class="o">=</span> <span class="o">*</span> <span class="p">(</span> <span class="kt">float</span> <span class="o">*</span> <span class="p">)</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span>  <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="p">(</span> <span class="n">threehalfs</span> <span class="o">-</span> <span class="p">(</span> <span class="n">x2</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span> <span class="p">)</span> <span class="p">);</span>   <span class="c1">// 1st iteration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//      y  = y * ( threehalfs - ( x2 * y * y ) );   // 2nd iteration, this can be removed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> 
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="32-switch-case的特殊玩法">32. <code>switch-case</code>的特殊玩法</h2>
+<p>直接看代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">send</span><span class="p">(</span><span class="n">uint8</span><span class="o">*</span> <span class="n">to</span><span class="p">,</span> <span class="n">uint8</span> <span class="n">from</span><span class="p">,</span> <span class="n">uint16</span> <span class="n">count</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">uint16</span> <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="n">count</span> <span class="o">+</span> <span class="mi">7</span><span class="p">)</span> <span class="o">/</span> <span class="mi">8</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">(</span><span class="n">count</span> <span class="o">%</span> <span class="mi">8</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">0</span><span class="o">:</span> <span class="k">do</span> <span class="p">{</span> <span class="o">*</span><span class="n">to</span> <span class="o">=</span> <span class="o">*</span><span class="n">from</span><span class="o">++</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">7</span><span class="o">:</span> <span class="o">*</span><span class="n">to</span> <span class="o">=</span> <span class="o">*</span><span class="n">from</span><span class="o">++</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">6</span><span class="o">:</span> <span class="o">*</span><span class="n">to</span> <span class="o">=</span> <span class="o">*</span><span class="n">from</span><span class="o">++</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">5</span><span class="o">:</span> <span class="o">*</span><span class="n">to</span> <span class="o">=</span> <span class="o">*</span><span class="n">from</span><span class="o">++</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">4</span><span class="o">:</span> <span class="o">*</span><span class="n">to</span> <span class="o">=</span> <span class="o">*</span><span class="n">from</span><span class="o">++</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">3</span><span class="o">:</span> <span class="o">*</span><span class="n">to</span> <span class="o">=</span> <span class="o">*</span><span class="n">from</span><span class="o">++</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">2</span><span class="o">:</span> <span class="o">*</span><span class="n">to</span> <span class="o">=</span> <span class="o">*</span><span class="n">from</span><span class="o">++</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="mi">1</span><span class="o">:</span> <span class="o">*</span><span class="n">to</span> <span class="o">=</span> <span class="o">*</span><span class="n">from</span><span class="o">++</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="o">--</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>实际上它是</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">send</span><span class="p">(</span><span class="n">uint8</span><span class="o">*</span> <span class="n">to</span><span class="p">,</span> <span class="n">uint8</span> <span class="n">from</span><span class="p">,</span> <span class="n">uint16</span> <span class="n">count</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">do</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">        <span class="o">*</span><span class="n">to</span> <span class="o">=</span> <span class="o">*</span><span class="n">from</span><span class="o">++</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="o">--</span><span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用最上面的<code>switch-case</code>的形式大大提高了运行效率。
+理解不了？汇编看看。
+还是理解不了？那就网上自行搜索“Duff’s Device”</p>
+<h2 id="33-防止头文件重复包含导致问题">33. 防止头文件重复包含导致问题</h2>
+<p>这个用法很常见了，而且非常有用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// xxx.h
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#ifndef _XXX_H_
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define _XXX_H_
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//  Header file contents...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>当然，如果你的编译器支持的话，也可以</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// xxx.h
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#pragma once
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//  Header file contents...
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>不过为了更好的兼容性，我建议你用第一种方法。</p>
+<h2 id="34-2的n次幂roundup">34. 2的N次幂ROUNDUP</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define ROUNDUP(a, size) (((a) &amp; ((size)-1)) ? (1+((a) | ((size)-1))) : (a))
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中，size是2的整数次幂，而</p>
+<ol>
+<li><code>a &amp; (2^n-1)</code>检查a的低位是否有值</li>
+<li><code>a | (2^n - 1)</code> 将a的低n位赋值为1</li>
+<li><code>1 + a | (2^n -1)</code> 为a最近的下一个2^n倍值</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">ROUNDUP</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>     <span class="c1">// 结果为16
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">ROUNDUP</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>   <span class="c1">// 结果为16
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">ROUNDUP</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">32</span><span class="p">);</span>   <span class="c1">// 结果为32
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">ROUNDUP</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>   <span class="c1">// 结果为16
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>有什么用？申请内存的时候可以按某字节对齐，减少内存碎片啊。</p>
+<h2 id="35-某整数的roundup">35. 某整数的ROUNDUP</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define VAL_ROUNDUP(size, val_size)     (((size)+val_size-1)/val_size*val_size)
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个不是按2的次幂ROUNDUP的，而是按某个整数的倍数ROUNDUP，例如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">VAL_ROUNDUP</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>     <span class="c1">// 结果为16
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">VAL_ROUNDUP</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>   <span class="c1">// 结果为16
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">VAL_ROUNDUP</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>   <span class="c1">// 结果为10
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">VAL_ROUNDUP</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>   <span class="c1">// 结果为16
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个又有什么用？EEPROM或者Flash的page大小对齐的时候就非常有意义。</p>
+<h2 id="36-万能的void">36. 万能的<code>void*</code></h2>
+<p>想想，<code>memcpy</code>函数为什么要用<code>void*</code>？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="o">*</span><span class="nf">memcpy</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">dest</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">src</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>因为，它不关心你传什么类型的指针过来，我<code>void</code>统统都接纳。</p>
+<blockquote>
+<p>无为而无不为。</p>
+</blockquote>
+<p>再看看这个：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="o">*</span><span class="n">p1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">*</span><span class="n">p2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p1</span> <span class="o">=</span> <span class="n">p2</span><span class="p">;</span> <span class="c1">// 这个没问题
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span><span class="p">;</span> <span class="c1">// 这个是错的
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>因为“空类型”可以包容“有类型”，而“有类型”则不能包容“空类型”。</p>
+</blockquote>
+<p>所以，适可而止，不要滥用哦。</p>
+<h2 id="37-sizeof空">37. <code>sizeof(空)</code></h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="k">typedef</span> <span class="k">struct</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="n">StructNull</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">sizeof</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">sizeof</span><span class="p">(</span><span class="n">StructNull</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>正所谓</p>
+<blockquote>
+<p>空即是色，色即是空。</p>
+</blockquote>
+<p>在C语言上，<code>sizeof(void);</code> 的值为1；而<code>sizeof(StructNull);</code>为0。
+C++的情况请自行验证，别瞎猜，哈哈哈。</p>
+<h2 id="38-布尔变量的判断">38. 布尔变量的判断</h2>
+<p>正确的做法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">bValue</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以下是瞎搞</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">bValue</span> <span class="o">==</span> <span class="n">TRUE</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>为啥？布尔类型中只有两个值：假和真。
+请问：假是什么，真又是什么？</p>
+<p>假是0，而真是非0。那么非0是什么？<code>-1,1,2，……</code>除了0的一切。</p>
+<p>所以再想想以下代码中的两个叹号是否可以去掉？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define BUILD_BUG_ON(condition) ((void)sizeof(char[1 - 2*!!(condition)]))
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="39-感受下的用法">39. 感受下<code>##</code>的用法</h2>
+<p>我们知道<code>##</code>是用来连接字符的，看看RTX怎么用，感受一下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">/// Create a Thread Definition with function, priority, and stack requirements.
+</span></span></span><span class="line"><span class="cl"><span class="c1">/// \param         name         name of the thread function.
+</span></span></span><span class="line"><span class="cl"><span class="c1">/// \param         priority     initial priority of the thread function.
+</span></span></span><span class="line"><span class="cl"><span class="c1">/// \param         instances    number of possible thread instances.
+</span></span></span><span class="line"><span class="cl"><span class="c1">/// \param         stacksz      stack size (in bytes) requirements for the thread function.
+</span></span></span><span class="line"><span class="cl"><span class="c1">///       macro body is implementation specific in every CMSIS-RTOS.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                         <span class="c1">// define the object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define osThreadDef(name, priority, instances, stacksz)  \
+</span></span></span><span class="line"><span class="cl"><span class="cp">const osThreadDef_t os_thread_def_##name = \
+</span></span></span><span class="line"><span class="cl"><span class="cp">{ (name), (priority), (instances), (stacksz)  }
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">/// Access a Thread definition.
+</span></span></span><span class="line"><span class="cl"><span class="c1">/// \param         name          name of the thread definition object.
+</span></span></span><span class="line"><span class="cl"><span class="c1">///       macro body is implementation specific in every CMSIS-RTOS.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define osThread(name)  \
+</span></span></span><span class="line"><span class="cl"><span class="cp">&amp;os_thread_def_##name
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>代码比较简单，我就不解释了，自行思考下。</p>
+<h2 id="40-传值和传址">40. 传值和传址</h2>
+<p>看两个例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">;</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">b</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>请问，这个<code>swap</code>可以交换<code>x, y</code>的值吗？</p>
+<p>再看看一个常见的面试题：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">GetMemory</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="nf">malloc</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Test</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">GetMemory</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">strcpy</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="s">&#34;hello world&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个程序能输出“hello world”吗？</p>
+<p>此处没有答案，为了加深理解，建议感兴趣的朋友请自行动手验证和思考。</p>
+<h2 id="41-形参到底传值好还是传址好">41. 形参到底传值好还是传址好</h2>
+<p>接着上一条，我们从另一个角度看。函数定义一个结构体类型形参，传值好还是传址好？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">func1</span><span class="p">(</span><span class="k">struct</span> <span class="n">tStructType</span> <span class="n">param</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">func2</span><span class="p">(</span><span class="k">struct</span> <span class="n">tStructType</span><span class="o">*</span> <span class="n">param</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>实际上两种方式都行，但你要明白形参实际上就是一个临时变量，不管传值还是传址都有一个复制给临时变量的过程。这个仿真汇编看看就知道了。
+很明显，如果tStructType这个类型占用空间很大，那么肯定用<code>tStructType*</code>比较合算。</p>
+<h2 id="42-bit翻转的几个方法">42. bit翻转的几个方法</h2>
+<p>bit翻转是从MSB-&gt;LSB到LSB-&gt;MSB, 所有的Bit都必须反转。例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="mi">1010</span> <span class="mo">0001</span> <span class="o">=&gt;</span> <span class="mi">1000</span> <span class="mo">0101</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>1. 运算实现32位bit翻转</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="nf">reverse</span><span class="p">(</span><span class="k">register</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">=</span> <span class="p">(((</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mh">0xaaaaaaaa</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mh">0x55555555</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">=</span> <span class="p">(((</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mh">0xcccccccc</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mh">0x33333333</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">=</span> <span class="p">(((</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mh">0xf0f0f0f0</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mh">0x0f0f0f0f</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">=</span> <span class="p">(((</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mh">0xff00ff00</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mh">0x00ff00ff</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span><span class="p">((</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>2. 查表法bit翻转</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">BitReverseTable256</span><span class="p">[]</span> <span class="o">=</span> 
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0x40</span><span class="p">,</span> <span class="mh">0xC0</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0xA0</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="mh">0xE0</span><span class="p">,</span> <span class="mh">0x10</span><span class="p">,</span> <span class="mh">0x90</span><span class="p">,</span> <span class="mh">0x50</span><span class="p">,</span> <span class="mh">0xD0</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span> <span class="mh">0xB0</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="mh">0xF0</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="mh">0x08</span><span class="p">,</span> <span class="mh">0x88</span><span class="p">,</span> <span class="mh">0x48</span><span class="p">,</span> <span class="mh">0xC8</span><span class="p">,</span> <span class="mh">0x28</span><span class="p">,</span> <span class="mh">0xA8</span><span class="p">,</span> <span class="mh">0x68</span><span class="p">,</span> <span class="mh">0xE8</span><span class="p">,</span> <span class="mh">0x18</span><span class="p">,</span> <span class="mh">0x98</span><span class="p">,</span> <span class="mh">0x58</span><span class="p">,</span> <span class="mh">0xD8</span><span class="p">,</span> <span class="mh">0x38</span><span class="p">,</span> <span class="mh">0xB8</span><span class="p">,</span> <span class="mh">0x78</span><span class="p">,</span> <span class="mh">0xF8</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x84</span><span class="p">,</span> <span class="mh">0x44</span><span class="p">,</span> <span class="mh">0xC4</span><span class="p">,</span> <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0xA4</span><span class="p">,</span> <span class="mh">0x64</span><span class="p">,</span> <span class="mh">0xE4</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x94</span><span class="p">,</span> <span class="mh">0x54</span><span class="p">,</span> <span class="mh">0xD4</span><span class="p">,</span> <span class="mh">0x34</span><span class="p">,</span> <span class="mh">0xB4</span><span class="p">,</span> <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0xF4</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="mh">0x0C</span><span class="p">,</span> <span class="mh">0x8C</span><span class="p">,</span> <span class="mh">0x4C</span><span class="p">,</span> <span class="mh">0xCC</span><span class="p">,</span> <span class="mh">0x2C</span><span class="p">,</span> <span class="mh">0xAC</span><span class="p">,</span> <span class="mh">0x6C</span><span class="p">,</span> <span class="mh">0xEC</span><span class="p">,</span> <span class="mh">0x1C</span><span class="p">,</span> <span class="mh">0x9C</span><span class="p">,</span> <span class="mh">0x5C</span><span class="p">,</span> <span class="mh">0xDC</span><span class="p">,</span> <span class="mh">0x3C</span><span class="p">,</span> <span class="mh">0xBC</span><span class="p">,</span> <span class="mh">0x7C</span><span class="p">,</span> <span class="mh">0xFC</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="mh">0x02</span><span class="p">,</span> <span class="mh">0x82</span><span class="p">,</span> <span class="mh">0x42</span><span class="p">,</span> <span class="mh">0xC2</span><span class="p">,</span> <span class="mh">0x22</span><span class="p">,</span> <span class="mh">0xA2</span><span class="p">,</span> <span class="mh">0x62</span><span class="p">,</span> <span class="mh">0xE2</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x92</span><span class="p">,</span> <span class="mh">0x52</span><span class="p">,</span> <span class="mh">0xD2</span><span class="p">,</span> <span class="mh">0x32</span><span class="p">,</span> <span class="mh">0xB2</span><span class="p">,</span> <span class="mh">0x72</span><span class="p">,</span> <span class="mh">0xF2</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="mh">0x0A</span><span class="p">,</span> <span class="mh">0x8A</span><span class="p">,</span> <span class="mh">0x4A</span><span class="p">,</span> <span class="mh">0xCA</span><span class="p">,</span> <span class="mh">0x2A</span><span class="p">,</span> <span class="mh">0xAA</span><span class="p">,</span> <span class="mh">0x6A</span><span class="p">,</span> <span class="mh">0xEA</span><span class="p">,</span> <span class="mh">0x1A</span><span class="p">,</span> <span class="mh">0x9A</span><span class="p">,</span> <span class="mh">0x5A</span><span class="p">,</span> <span class="mh">0xDA</span><span class="p">,</span> <span class="mh">0x3A</span><span class="p">,</span> <span class="mh">0xBA</span><span class="p">,</span> <span class="mh">0x7A</span><span class="p">,</span> <span class="mh">0xFA</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="mh">0x06</span><span class="p">,</span> <span class="mh">0x86</span><span class="p">,</span> <span class="mh">0x46</span><span class="p">,</span> <span class="mh">0xC6</span><span class="p">,</span> <span class="mh">0x26</span><span class="p">,</span> <span class="mh">0xA6</span><span class="p">,</span> <span class="mh">0x66</span><span class="p">,</span> <span class="mh">0xE6</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x96</span><span class="p">,</span> <span class="mh">0x56</span><span class="p">,</span> <span class="mh">0xD6</span><span class="p">,</span> <span class="mh">0x36</span><span class="p">,</span> <span class="mh">0xB6</span><span class="p">,</span> <span class="mh">0x76</span><span class="p">,</span> <span class="mh">0xF6</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="mh">0x0E</span><span class="p">,</span> <span class="mh">0x8E</span><span class="p">,</span> <span class="mh">0x4E</span><span class="p">,</span> <span class="mh">0xCE</span><span class="p">,</span> <span class="mh">0x2E</span><span class="p">,</span> <span class="mh">0xAE</span><span class="p">,</span> <span class="mh">0x6E</span><span class="p">,</span> <span class="mh">0xEE</span><span class="p">,</span> <span class="mh">0x1E</span><span class="p">,</span> <span class="mh">0x9E</span><span class="p">,</span> <span class="mh">0x5E</span><span class="p">,</span> <span class="mh">0xDE</span><span class="p">,</span> <span class="mh">0x3E</span><span class="p">,</span> <span class="mh">0xBE</span><span class="p">,</span> <span class="mh">0x7E</span><span class="p">,</span> <span class="mh">0xFE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x81</span><span class="p">,</span> <span class="mh">0x41</span><span class="p">,</span> <span class="mh">0xC1</span><span class="p">,</span> <span class="mh">0x21</span><span class="p">,</span> <span class="mh">0xA1</span><span class="p">,</span> <span class="mh">0x61</span><span class="p">,</span> <span class="mh">0xE1</span><span class="p">,</span> <span class="mh">0x11</span><span class="p">,</span> <span class="mh">0x91</span><span class="p">,</span> <span class="mh">0x51</span><span class="p">,</span> <span class="mh">0xD1</span><span class="p">,</span> <span class="mh">0x31</span><span class="p">,</span> <span class="mh">0xB1</span><span class="p">,</span> <span class="mh">0x71</span><span class="p">,</span> <span class="mh">0xF1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="mh">0x09</span><span class="p">,</span> <span class="mh">0x89</span><span class="p">,</span> <span class="mh">0x49</span><span class="p">,</span> <span class="mh">0xC9</span><span class="p">,</span> <span class="mh">0x29</span><span class="p">,</span> <span class="mh">0xA9</span><span class="p">,</span> <span class="mh">0x69</span><span class="p">,</span> <span class="mh">0xE9</span><span class="p">,</span> <span class="mh">0x19</span><span class="p">,</span> <span class="mh">0x99</span><span class="p">,</span> <span class="mh">0x59</span><span class="p">,</span> <span class="mh">0xD9</span><span class="p">,</span> <span class="mh">0x39</span><span class="p">,</span> <span class="mh">0xB9</span><span class="p">,</span> <span class="mh">0x79</span><span class="p">,</span> <span class="mh">0xF9</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="mh">0x05</span><span class="p">,</span> <span class="mh">0x85</span><span class="p">,</span> <span class="mh">0x45</span><span class="p">,</span> <span class="mh">0xC5</span><span class="p">,</span> <span class="mh">0x25</span><span class="p">,</span> <span class="mh">0xA5</span><span class="p">,</span> <span class="mh">0x65</span><span class="p">,</span> <span class="mh">0xE5</span><span class="p">,</span> <span class="mh">0x15</span><span class="p">,</span> <span class="mh">0x95</span><span class="p">,</span> <span class="mh">0x55</span><span class="p">,</span> <span class="mh">0xD5</span><span class="p">,</span> <span class="mh">0x35</span><span class="p">,</span> <span class="mh">0xB5</span><span class="p">,</span> <span class="mh">0x75</span><span class="p">,</span> <span class="mh">0xF5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="mh">0x0D</span><span class="p">,</span> <span class="mh">0x8D</span><span class="p">,</span> <span class="mh">0x4D</span><span class="p">,</span> <span class="mh">0xCD</span><span class="p">,</span> <span class="mh">0x2D</span><span class="p">,</span> <span class="mh">0xAD</span><span class="p">,</span> <span class="mh">0x6D</span><span class="p">,</span> <span class="mh">0xED</span><span class="p">,</span> <span class="mh">0x1D</span><span class="p">,</span> <span class="mh">0x9D</span><span class="p">,</span> <span class="mh">0x5D</span><span class="p">,</span> <span class="mh">0xDD</span><span class="p">,</span> <span class="mh">0x3D</span><span class="p">,</span> <span class="mh">0xBD</span><span class="p">,</span> <span class="mh">0x7D</span><span class="p">,</span> <span class="mh">0xFD</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="mh">0x03</span><span class="p">,</span> <span class="mh">0x83</span><span class="p">,</span> <span class="mh">0x43</span><span class="p">,</span> <span class="mh">0xC3</span><span class="p">,</span> <span class="mh">0x23</span><span class="p">,</span> <span class="mh">0xA3</span><span class="p">,</span> <span class="mh">0x63</span><span class="p">,</span> <span class="mh">0xE3</span><span class="p">,</span> <span class="mh">0x13</span><span class="p">,</span> <span class="mh">0x93</span><span class="p">,</span> <span class="mh">0x53</span><span class="p">,</span> <span class="mh">0xD3</span><span class="p">,</span> <span class="mh">0x33</span><span class="p">,</span> <span class="mh">0xB3</span><span class="p">,</span> <span class="mh">0x73</span><span class="p">,</span> <span class="mh">0xF3</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="mh">0x0B</span><span class="p">,</span> <span class="mh">0x8B</span><span class="p">,</span> <span class="mh">0x4B</span><span class="p">,</span> <span class="mh">0xCB</span><span class="p">,</span> <span class="mh">0x2B</span><span class="p">,</span> <span class="mh">0xAB</span><span class="p">,</span> <span class="mh">0x6B</span><span class="p">,</span> <span class="mh">0xEB</span><span class="p">,</span> <span class="mh">0x1B</span><span class="p">,</span> <span class="mh">0x9B</span><span class="p">,</span> <span class="mh">0x5B</span><span class="p">,</span> <span class="mh">0xDB</span><span class="p">,</span> <span class="mh">0x3B</span><span class="p">,</span> <span class="mh">0xBB</span><span class="p">,</span> <span class="mh">0x7B</span><span class="p">,</span> <span class="mh">0xFB</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="mh">0x07</span><span class="p">,</span> <span class="mh">0x87</span><span class="p">,</span> <span class="mh">0x47</span><span class="p">,</span> <span class="mh">0xC7</span><span class="p">,</span> <span class="mh">0x27</span><span class="p">,</span> <span class="mh">0xA7</span><span class="p">,</span> <span class="mh">0x67</span><span class="p">,</span> <span class="mh">0xE7</span><span class="p">,</span> <span class="mh">0x17</span><span class="p">,</span> <span class="mh">0x97</span><span class="p">,</span> <span class="mh">0x57</span><span class="p">,</span> <span class="mh">0xD7</span><span class="p">,</span> <span class="mh">0x37</span><span class="p">,</span> <span class="mh">0xB7</span><span class="p">,</span> <span class="mh">0x77</span><span class="p">,</span> <span class="mh">0xF7</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="mh">0x0F</span><span class="p">,</span> <span class="mh">0x8F</span><span class="p">,</span> <span class="mh">0x4F</span><span class="p">,</span> <span class="mh">0xCF</span><span class="p">,</span> <span class="mh">0x2F</span><span class="p">,</span> <span class="mh">0xAF</span><span class="p">,</span> <span class="mh">0x6F</span><span class="p">,</span> <span class="mh">0xEF</span><span class="p">,</span> <span class="mh">0x1F</span><span class="p">,</span> <span class="mh">0x9F</span><span class="p">,</span> <span class="mh">0x5F</span><span class="p">,</span> <span class="mh">0xDF</span><span class="p">,</span> <span class="mh">0x3F</span><span class="p">,</span> <span class="mh">0xBF</span><span class="p">,</span> <span class="mh">0x7F</span><span class="p">,</span> <span class="mh">0xFF</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">v</span><span class="p">;</span> <span class="c1">// reverse 32-bit value, 8 bits at time
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// c will get v reversed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Option 1:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">BitReverseTable256</span><span class="p">[</span><span class="n">v</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">)</span> <span class="o">|</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">BitReverseTable256</span><span class="p">[(</span><span class="n">v</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">|</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">BitReverseTable256</span><span class="p">[(</span><span class="n">v</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">BitReverseTable256</span><span class="p">[(</span><span class="n">v</span> <span class="o">&gt;&gt;</span> <span class="mi">24</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Option 2:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">q</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">BitReverseTable256</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]];</span> 
+</span></span><span class="line"><span class="cl"><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">BitReverseTable256</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]];</span> 
+</span></span><span class="line"><span class="cl"><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">BitReverseTable256</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]];</span> 
+</span></span><span class="line"><span class="cl"><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">BitReverseTable256</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">]];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="43-bool判断">43. BOOL判断</h2>
+<p>面试题：如何判断一个bool变量
+如果你写成<code>if(b_flag == TRUE)</code>可能会给你0分。为什么？
+因为非假即真，假是0，即非0即真。
+可以写成<code>if(b_flag)</code>或者<code>if(!b_flag)</code>
+如果是函数呢？
+例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">BOOL</span> <span class="nf">is_flag_true</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">flag</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样可以吗？也许可以，也许不可以。
+如果<code>BOOL</code>是一个<code>unsigned char</code>怎么办？
+那就这样咯：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">BOOL</span> <span class="nf">is_flag_true</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">!!</span><span class="n">flag</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="44-goto的使用">44. goto的使用</h2>
+<p>看到goto，先别慌，也忍着别吵。我们不推荐使用goto，但goto确实有它的妙用。
+不详细解释了，看看以下例子代码感受下吧：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">func</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span><span class="o">*</span> <span class="n">p1</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="nf">malloc</span> <span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">==</span> <span class="n">p1</span><span class="p">)</span> <span class="k">goto</span> <span class="n">free1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span><span class="o">*</span> <span class="n">p2</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="nf">malloc</span> <span class="p">(</span><span class="mi">200</span><span class="o">*</span><span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">==</span> <span class="n">p2</span><span class="p">)</span> <span class="k">goto</span> <span class="n">free2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span><span class="o">*</span> <span class="n">p3</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="nf">malloc</span> <span class="p">(</span><span class="mi">300</span><span class="o">*</span><span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nb">NULL</span> <span class="o">==</span> <span class="n">p3</span><span class="p">)</span> <span class="k">goto</span> <span class="n">free3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// return to system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="nl">free3</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">free</span> <span class="p">(</span><span class="n">p2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nl">free2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">free</span> <span class="p">(</span><span class="n">p1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nl">free1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="45-类型定义">45. 类型定义</h2>
+<p>这个有点老套了，但是很有用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">uint8</span> <span class="kt">unsigned</span> <span class="kt">char</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">uint16</span> <span class="kt">unsigned</span> <span class="kt">short</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">uint32</span> <span class="kt">unsigned</span> <span class="kt">int</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>用<code>uint8</code>等来定义变量比<code>unsigned char</code>这样的好多了，方便平台移植，特别是不用位数的单片机，这个很重要。</p>
+<h2 id="46-输出预编译信息">46. 输出预编译信息</h2>
+<p>当你想输出预编译过程中的某些信息，可以用<code>#pragma message(&quot;message contents&quot;)</code></p>
+<h2 id="47-输出指针地址">47. 输出指针地址</h2>
+<p>当你想输出指针地址的时候，往往想到的是</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;p: %X&#34;</span><span class="err">，</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">p</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但你还可以</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;p: %p&#34;</span><span class="err">，</span><span class="n">p</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="48-数组元素赋值">48. 数组元素赋值</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">uint8</span> <span class="n">data1</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">uint8</span> <span class="n">data2</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">memcpy</span><span class="p">(</span><span class="n">data2</span><span class="p">,</span> <span class="n">data1</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// or
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="n">data2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">data1</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"> <span class="n">data2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">data1</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"> <span class="n">data2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">data1</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"> <span class="n">data2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">data1</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"> <span class="n">data2</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">data1</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"> <span class="n">data2</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">data1</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"> <span class="n">data2</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">data1</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"> <span class="n">data2</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="n">data1</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>你也可以</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">union</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">uint64</span> <span class="n">nData</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">uint8</span> <span class="n">cData</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">uData</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">uData</span> <span class="n">data1</span><span class="p">,</span> <span class="n">data2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">data2</span><span class="p">.</span><span class="n">nData</span> <span class="o">=</span> <span class="n">data1</span><span class="p">.</span><span class="n">nData</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>还有第三种办法，详见“17. 数组之间直接赋值”
+顺便思考下并验证以下方式是否可行？（想知道答案一定要亲自试试啊，别说我坑你。）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">uint8</span> <span class="n">data1</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">uint8</span> <span class="n">data2</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span><span class="p">(</span><span class="n">uint64</span><span class="o">*</span><span class="p">)</span> <span class="n">data2</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">uint64</span><span class="o">*</span><span class="p">)</span> <span class="n">data1</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="49-likely与unlikely">49. <code>likely()</code>与<code>unlikely</code></h2>
+<p>Linux内核中有两个这样的东西：<code>likely()</code>与<code>unlikely</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define likely(x) __builtin_expect(!!(x), 1)
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define unlikely(x) __builtin_expect(!!(x), 0)
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们可以根据高概率发生的情况放在<code>if</code>分支，低概率的放在<code>else</code>分支，以提高程序运行效率。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nf">likely</span><span class="p">(</span><span class="n">XXX</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="cm">/*...*/</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="cm">/*...*/</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nf">unlikely</span><span class="p">(</span><span class="n">XXX</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="cm">/*...*/</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="cm">/*...*/</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="50-解放ifelse和switchcase">50. 解放<code>if/else</code>和<code>switch/case</code></h2>
+<p>对于多分支的程序设计，很多人通常会这样做：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">XXX_VAL_1</span> <span class="o">==</span> <span class="n">nVal</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="cm">/*...*/</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">XXX_VAL_2</span> <span class="o">==</span> <span class="n">nVal</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="cm">/*...*/</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">XXX_VAL_3</span> <span class="o">==</span> <span class="n">nVal</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="cm">/*...*/</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// ...
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">switch</span><span class="p">(</span><span class="n">nVal</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nl">XXX_VAL_1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/*...*/</span>
+</span></span><span class="line"><span class="cl">	<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nl">XXX_VAL_2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/*...*/</span>
+</span></span><span class="line"><span class="cl">	<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nl">XXX_VAL_3</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/*...*/</span>
+</span></span><span class="line"><span class="cl">	<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>几个分支还好，如果有几十个呢？尝试下这个：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="n">pFunc</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">uint32</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pFunc</span> <span class="n">func</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">tValFunc</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tValFunc</span> <span class="n">valfunc_tb</span><span class="p">[]</span> <span class="o">=</span> 
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="n">XXX_VAL_1</span><span class="p">,</span> <span class="n">func1</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="n">XXX_VAL_2</span><span class="p">,</span> <span class="n">func2</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="n">XXX_VAL_3</span><span class="p">,</span> <span class="n">func3</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="参考连接">参考连接</h2>
+<ul>
+<li><a href="https://blog.csdn.net/lianyunyouyou/article/details/117534039"target="_blank" rel="external nofollow noopener noreferrer">C语言的奇技淫巧（1-50）_技下万1dd47c-CSDN博客</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2024-08-11&#32;21:30:41>更新于 2024-08-11&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/" data-title="C语言的奇技淫巧" data-hashtags="C/C&#43;&#43;"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/" data-hashtag="C/C&#43;&#43;"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/" data-title="C语言的奇技淫巧" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/" data-title="C语言的奇技淫巧"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/" data-title="C语言的奇技淫巧"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/" data-title="C语言的奇技淫巧" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/" data-title="C语言的奇技淫巧" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/" data-title="C语言的奇技淫巧"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/c/c&#43;&#43;/' class="post-tag">C/C&#43;&#43;</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/rust%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AEgithub-action/" class="post-nav-item" rel="prev" title="Rust项目配置Github Action"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Rust项目配置Github Action</a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.124.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-RC"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="/">技术小窝</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

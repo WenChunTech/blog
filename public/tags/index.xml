@@ -3,7 +3,15 @@
     <title>Tags - 标签 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/tags/</link>
     <description>Tags - 标签 - 技术小窝</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 20 Jun 2024 23:35:24 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 11 Aug 2024 21:30:41 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/tags/" rel="self" type="application/rss+xml" /><item>
+  <title>C/C&#43;&#43;</title>
+  <link>https://blog-12x.pages.dev/tags/c/c&#43;&#43;/</link>
+  <pubDate>Sun, 11 Aug 2024 21:30:41 &#43;0800</pubDate>
+  <author>技术小窝</author>
+  <guid>https://blog-12x.pages.dev/tags/c/c&#43;&#43;/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Github Action</title>
   <link>https://blog-12x.pages.dev/tags/github-action/</link>
   <pubDate>Thu, 20 Jun 2024 23:35:24 &#43;0800</pubDate>
@@ -73,14 +81,6 @@
   <pubDate>Sun, 05 Nov 2023 23:01:37 &#43;0800</pubDate>
   <author>技术小窝</author>
   <guid>https://blog-12x.pages.dev/tags/linux/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>Tun</title>
-  <link>https://blog-12x.pages.dev/tags/tun/</link>
-  <pubDate>Sun, 05 Nov 2023 23:01:37 &#43;0800</pubDate>
-  <author>技术小窝</author>
-  <guid>https://blog-12x.pages.dev/tags/tun/</guid>
   <description><![CDATA[]]></description>
 </item>
 </channel>
