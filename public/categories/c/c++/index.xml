@@ -3,7 +3,23 @@
     <title>C/C&#43;&#43; - 分类 - 技术小窝</title>
     <link>https://blog-12x.pages.dev/categories/c/c&#43;&#43;/</link>
     <description>C/C&#43;&#43; - 分类 - 技术小窝</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 11 Aug 2024 21:30:41 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/c/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 15 Dec 2024 22:28:18 &#43;0800</lastBuildDate><atom:link href="https://blog-12x.pages.dev/categories/c/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
+  <title>Windows DXGI屏幕捕获实现</title>
+  <link>https://blog-12x.pages.dev/windows-dxgi%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E5%AE%9E%E7%8E%B0/</link>
+  <pubDate>Sun, 15 Dec 2024 22:28:18 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/windows-dxgi%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E5%AE%9E%E7%8E%B0/</guid>
+  <description><![CDATA[Windows DXGI 方式屏幕捕获实现 主要步骤 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 graph TB A[D3D11CreateDevice] --&gt; B[ID3D11Device] A[D3D11CreateDevice] --&gt; C[ID3D11DeviceContext] B -.QueryInterface.-&gt; D[IDXGIDevice] B -.GetParent.-&gt; E[IDXGIAdapter] E -.EnumOutputs.-&gt; F[IDXGIOutput] F -.QueryInterface.-&gt; G[IDXGIOutput1] G -.DuplicateOutput.-&gt; H[IDXGIOutputDuplication] H -.AcquireNextFrame.-&gt; I[IDXGIResource] H -.AcquireNextFrame.-&gt; J[DXGI_OUTDUPL_FRAME_INFO] J --&gt; K[Release/ReleaseFrame] H -.GetDesc.-&gt; L[DXGI_OUTDUPL_DESC] L -.设置]]></description>
+</item>
+<item>
+  <title>Windows屏幕捕获方案</title>
+  <link>https://blog-12x.pages.dev/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88/</link>
+  <pubDate>Sat, 30 Nov 2024 13:57:11 &#43;0800</pubDate>
+  <author>map[avatar:&lt;nil&gt; email:&lt;nil&gt; link:&lt;nil&gt; name:&lt;nil&gt;]</author>
+  <guid>https://blog-12x.pages.dev/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88/</guid>
+  <description><![CDATA[Windows 屏幕捕获方案 Windows GDI 这是 Windows 系统上兼容性最好的一套方案，从 Windows 2000 开始提供，部分接口底层支持了硬件加速功能。 Microsoft DirectX Graphics Infrastructure（DX]]></description>
+</item>
+<item>
   <title>C语言的奇技淫巧</title>
   <link>https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/</link>
   <pubDate>Sun, 11 Aug 2024 21:30:41 &#43;0800</pubDate>

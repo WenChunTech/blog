@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Windows屏幕捕获方案 - 技术小窝</title><meta name="author" content="技术小窝">
+<meta name="author-link" content="">
+<meta name="description" content="Windows 屏幕捕获方案 Windows GDI 这是 Windows 系统上兼容性最好的一套方案，从 Windows 2000 开始提供，部分接口底层支持了硬件加速功能。 Microsoft DirectX Graphics Infrastructure（DX" /><meta name="keywords" content='windows' /><meta itemprop="name" content="Windows屏幕捕获方案">
+<meta itemprop="description" content="Windows 屏幕捕获方案 Windows GDI 这是 Windows 系统上兼容性最好的一套方案，从 Windows 2000 开始提供，部分接口底层支持了硬件加速功能。 Microsoft DirectX Graphics Infrastructure（DX"><meta itemprop="datePublished" content="2024-11-30T13:57:11+08:00" />
+<meta itemprop="dateModified" content="2024-11-30T13:57:11+08:00" />
+<meta itemprop="wordCount" content="776"><meta itemprop="image" content="https://blog-12x.pages.dev/logo.png" />
+<meta itemprop="keywords" content="windows," /><meta property="og:title" content="Windows屏幕捕获方案" />
+<meta property="og:description" content="Windows 屏幕捕获方案 Windows GDI 这是 Windows 系统上兼容性最好的一套方案，从 Windows 2000 开始提供，部分接口底层支持了硬件加速功能。 Microsoft DirectX Graphics Infrastructure（DX" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog-12x.pages.dev/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88/" /><meta property="og:image" content="https://blog-12x.pages.dev/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-11-30T13:57:11+08:00" />
+<meta property="article:modified_time" content="2024-11-30T13:57:11+08:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://blog-12x.pages.dev/logo.png" /><meta name="twitter:title" content="Windows屏幕捕获方案"/>
+<meta name="twitter:description" content="Windows 屏幕捕获方案 Windows GDI 这是 Windows 系统上兼容性最好的一套方案，从 Windows 2000 开始提供，部分接口底层支持了硬件加速功能。 Microsoft DirectX Graphics Infrastructure（DX"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog-12x.pages.dev/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88/" /><link rel="prev" href="https://blog-12x.pages.dev/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/" /><link rel="next" href="https://blog-12x.pages.dev/windows-dxgi%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E5%AE%9E%E7%8E%B0/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Windows屏幕捕获方案",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/blog-12x.pages.dev\/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88\/"
+    },"genre": "posts","keywords": "windows","wordcount":  776 ,
+    "url": "https:\/\/blog-12x.pages.dev\/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88\/","datePublished": "2024-11-30T13:57:11+08:00","dateModified": "2024-11-30T13:57:11+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="技术小窝"><span class="header-title-text">我的技术小窝</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Windows屏幕捕获方案</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      </span></span>
+          <span class="post-category">收录于 <a href="/categories/c/c++/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C/C++</a>&ensp;<a href="/categories/windows/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Windows</a>&ensp;<a href="/categories/screenshot/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Screenshot</a></span></div>
+      <div class="post-meta-line"><span title=2024-11-30&#32;13:57:11><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-11-30">2024-11-30</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 776 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 2 分钟</span>&nbsp;<span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="Windows屏幕捕获方案">
+            <i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;次阅读
+          </span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#windows-gdi">Windows GDI</a></li>
+    <li><a href="#microsoft-directx-graphics-infrastructuredxgi">Microsoft DirectX Graphics Infrastructure（DXGI）</a></li>
+    <li><a href="#dwm">DWM</a></li>
+    <li><a href="#magnification-api">Magnification API</a></li>
+    <li><a href="#windows-grapics-capturewgc">Windows Grapics Capture（WGC）</a></li>
+    <li><a href="#windows-media-api-以及各种-hook-技术">Windows Media API 以及各种 hook 技术</a></li>
+    <li><a href="#各个方案对比">各个方案对比：</a>
+      <ul>
+        <li><a href="#参考链接">参考链接</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h1 id="windows-屏幕捕获方案">Windows 屏幕捕获方案</h1>
+<h2 id="windows-gdi">Windows GDI</h2>
+<p>这是 Windows 系统上兼容性最好的一套方案，从 Windows 2000 开始提供，部分接口底层支持了硬件加速功能。</p>
+<h2 id="microsoft-directx-graphics-infrastructuredxgi">Microsoft DirectX Graphics Infrastructure（DXGI）</h2>
+<p>这套 API 是为了封装不同版本 DirectX 部分接口而出现的，首次出现是在 Direct 3D 10，性能也不错。</p>
+<h2 id="dwm">DWM</h2>
+<p>这项技术是微软在 Vista 上，为了提高桌面窗口显示效果而提供的一套 API，其基本思路是：改变过去直接绘制窗口到屏幕的做法，在视频内存中开辟一块离屏渲染区域，用来做各种像素处理，之后再交给屏幕显示，以此实现 Vista 有的毛玻璃效果，以及按下窗口键 +Tab 键来做桌面窗口切换时的 3D 转化效果等。**通过这套 API 我们可以实现窗口缩略图的渲染，**在 Windows 7 上，DWM 可以通过切换系统主题来控制其打开和关闭，即 Aero 主题。从 Windows 8 开始，系统默认都是打开 DWM 。这套 API 一般可以用来获取目标窗口的缩略图（thumbnail，支持动态更新），用来分享画面的话，分辨率偏低，不太能满足需求。</p>
+<h2 id="magnification-api">Magnification API</h2>
+<p>我们姑且称之为“放大镜 API”，这个是 Windows 上预装的放大镜程序底层使用的技术，我们正好可以利用这个技术，同时还可以实现窗口过滤功能。这套 API 也是目前兼容范围较广，各类 App 使用最多的窗口显示数据抓取技术，我们后面会详细分析。</p>
+<h2 id="windows-grapics-capturewgc">Windows Grapics Capture（WGC）</h2>
+<p>微软最新提供的一套正式用来抓取屏幕数据的接口，遗憾的是最初是给 UWP 提供的，而非 Win32 App，且要求必须是 Windows 10, Update (1809) 及之后的系统才支持，但是官方提供的，我们也要予以足够的重视。</p>
+<h2 id="windows-media-api-以及各种-hook-技术">Windows Media API 以及各种 hook 技术</h2>
+<p>可用范围较窄，因此这里不讨论。</p>
+<h2 id="各个方案对比">各个方案对比：</h2>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>性能</th>
+<th>兼容性</th>
+<th>是否支持指定窗口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GDI</td>
+<td>一般</td>
+<td>Windows 2000 之后提供，兼容性最好</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>DXGI</td>
+<td>高</td>
+<td></td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>DWN</td>
+<td>低</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Magnification API</td>
+<td></td>
+<td></td>
+<td>支持</td>
+</tr>
+<tr>
+<td>WGC</td>
+<td>高</td>
+<td>支持 Windows 10， Update (1809) （时间是2018-11-13） 以及更高版本的操作系统</td>
+<td>支持</td>
+</tr>
+</tbody>
+</table>
+<h3 id="参考链接">参考链接</h3>
+<ul>
+<li><a href="https://doc-markdown-zh.zego.im/ji-zhu-fen-xiang-windowszhuo-mian-duan-lu-ping-cai-ji-shi-xian-jiao-cheng/"target="_blank" rel="external nofollow noopener noreferrer">【技术分享】Windows桌面端录屏采集实现教程</a></li>
+<li><a href="https://maimai.cn/article/detail?fid=1692948703&amp;efid=cOHX1WHd8IoUNDbp54IhUw"target="_blank" rel="external nofollow noopener noreferrer">技术干货 | 桌面端屏幕分享实践 - 脉脉</a></li>
+<li><a href="http://www.cppblog.com/weiym/archive/2016/08/11/204536.html"target="_blank" rel="external nofollow noopener noreferrer">Windows桌面共享中一些常见的抓屏技术 - 厚积薄发 - C++博客</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2024-11-30&#32;13:57:11>更新于 2024-11-30&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog-12x.pages.dev/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88/" data-title="Windows屏幕捕获方案" data-hashtags="windows"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog-12x.pages.dev/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88/" data-hashtag="windows"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://blog-12x.pages.dev/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88/" data-title="Windows屏幕捕获方案" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog-12x.pages.dev/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88/" data-title="Windows屏幕捕获方案"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog-12x.pages.dev/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88/" data-title="Windows屏幕捕获方案"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://blog-12x.pages.dev/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88/" data-title="Windows屏幕捕获方案" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://blog-12x.pages.dev/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88/" data-title="Windows屏幕捕获方案" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://blog-12x.pages.dev/windows%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E6%96%B9%E6%A1%88/" data-title="Windows屏幕捕获方案"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/windows/' class="post-tag">Windows</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/" class="post-nav-item" rel="prev" title="C语言的奇技淫巧"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>C语言的奇技淫巧</a>
+      <a href="/windows-dxgi%E5%B1%8F%E5%B9%95%E6%8D%95%E8%8E%B7%E5%AE%9E%E7%8E%B0/" class="post-nav-item" rel="next" title="Windows DXGI屏幕捕获实现">Windows DXGI屏幕捕获实现<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.124.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-RC"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="/">技术小窝</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>
